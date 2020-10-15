@@ -34,6 +34,17 @@ class TestEndpoints(unittest.TestCase):
         self.assertTrue(response)
         self.assertEqual(status_code, 200)
 
+    def test_get_hero_stats(self):
+        response, status_code = endpoints.get_hero_stats()
+        self.assertTrue(response)
+        self.assertEqual(status_code, 200)
+
+    def test_get_constants(self):
+        resource_name = well_known_data.TEST_CONSTANT_RESOURCE_NAME
+        response, status_code = endpoints.get_constant_data(resource_name)
+        self.assertTrue(response)
+        self.assertEqual(status_code, 200)
+
 
 class TestRequest(unittest.TestCase):
     def setUp(self):
