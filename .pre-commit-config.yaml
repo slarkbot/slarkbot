@@ -1,14 +1,15 @@
+files: .
 repos:
-- repo: https://github.com/psf/black
-  rev: 20.8b1
-  hooks:
-  - id: black
-- repo: local
-  hooks:
-    - id: tests
-      name: run tests
-      entry: pytest .
-      language: python
-      types: [python]
-      stages: [push]
-        
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+    - id: black
+  - repo: local
+    hooks:
+      - id: test
+        name: run tests
+        entry: pytest
+        language: python
+        types: [python]
+        stages: [push]
+          
