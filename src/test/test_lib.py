@@ -10,8 +10,7 @@ from src.lib import request
 
 
 class TestEndpoints(unittest.TestCase):
-
-    @patch('src.lib.request.requests.get')
+    @patch("src.lib.request.requests.get")
     def setUp(self, mock_get):
         load_dotenv()
         mock_get.return_value.status_code = 200
