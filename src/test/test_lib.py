@@ -14,15 +14,24 @@ class TestEndpoints(unittest.TestCase):
 
     def test_get_health_check(self):
         response, status_code = endpoints.get_health_check()
+        self.assertTrue(response)
         self.assertEqual(status_code, 200)
 
     def test_get_match_by_id(self):
         match_id = well_known_data.TEST_MATCH_ID
         response, status_code = endpoints.get_match_by_id(match_id)
+        self.assertTrue(response)
         self.assertEqual(status_code, 200)
 
     def test_get_players_by_rank(self):
         response, status_code = endpoints.get_players_by_rank()
+        self.assertTrue(response)
+        self.assertEqual(status_code, 200)
+    
+    def test_get_player_by_account_id(self):
+        account_id = well_known_data.TEST_ACCOUNT_ID
+        response, status_code = endpoints.get_player_by_account_id(account_id)
+        self.assertTrue(response)
         self.assertEqual(status_code, 200)
 
 
