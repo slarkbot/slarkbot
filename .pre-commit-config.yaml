@@ -4,6 +4,7 @@ repos:
     rev: 20.8b1
     hooks:
     - id: black
+      always_run: true
   - repo: local
     hooks:
       - id: test
@@ -12,4 +13,5 @@ repos:
         language: python
         types: [python]
         stages: [push]
+        always_run: true
           
