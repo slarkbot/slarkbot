@@ -14,4 +14,13 @@ repos:
         types: [python]
         stages: [push]
         always_run: true
+  - repo: local
+    hooks:
+      - id: format
+        name: run formatting
+        entry: black .
+        language: python
+        types: [python]
+        stages: [push]
+        always_run: true
           
