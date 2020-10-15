@@ -7,7 +7,6 @@ def get_health_check():
     returns response json and status code
     """
     uri = API_URI_ENDPOINTS.HEALTH_CHECK.value
-    print(uri)
     response = request.make_request(uri)
     return response.json(), response.status_code
 
@@ -26,5 +25,11 @@ def get_players_by_rank():
 
 def get_player_by_account_id(id):
     uri = API_URI_ENDPOINTS.PLAYERS_BY_ACCOUNT_ID.value % id
+    response = request.make_request(uri)
+    return response.json(), response.status_code
+
+
+def get_hero_stats():
+    uri = API_URI_ENDPOINTS.HERO_STATS.value
     response = request.make_request(uri)
     return response.json(), response.status_code

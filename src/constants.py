@@ -6,3 +6,4 @@ class API_URI_ENDPOINTS(Enum):
     MATCHES = "matches/%s"
     PLAYERS_BY_RANK = "playersByRank"
     PLAYERS_BY_ACCOUNT_ID = "players/%s"
+    HERO_STATS = "heroStats"
