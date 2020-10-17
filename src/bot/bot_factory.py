@@ -16,5 +16,8 @@ def create_bot():
 
     dp.add_handler(CommandHandler("status", health_check_command.run_health_check))
     dp.add_handler(CommandHandler("register", user_commands.run_register_command))
+    dp.add_handler(
+        CommandHandler("recents", user_commands.run_get_player_recents_command)
+    )
 
     return updater, logger

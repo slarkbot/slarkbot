@@ -1,5 +1,10 @@
+import json
+
 from src.bot.models.user import User
 from src.bot.models.sessions import create_session
+from src.bot.services import user_services
+from src.lib import endpoints
+from src import constants
 
 
 def save_user(user):
@@ -18,4 +23,31 @@ def run_register_command(update, context):
         save_user(new_user)
         update.message.reply_text(f"Successfully registered user {telegram_handle}")
     except (IndexError, ValueError):
-        update.message.reply_text("No account ID was given")
+        update.message.reply_text("No dota friend ID was given")
+
+
+def run_get_player_recents_command(update, context):
+    chat_id = update.message.chat_id
+    telegram_handle = update.message.from_user.username
+
+    if not context.args:
+        registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
+        account_id = registered_user.account_id
+    else:
+        account_id = context.args[0]
+
+    if not account_id:
+        update.message.reply_text(
+            "Could not find an account ID. Register your telegram handle using `/register` or give an account ID"
+        )
+
+    response, status_code = endpoints.get_player_recent_matches_by_account_id(
+        account_id
+    )
+
+    if status_code != constants.HTTP_STATUS_CODES.OK.value:
+        update.message.reply_text(
+            "Something went wrong, I didn't get a good response :("
+        )
+
+    update.message.reply_text(json.dumps(response[:5]))

@@ -42,6 +42,13 @@ class TestEndpoints(unittest.TestCase):
         response, status_code = endpoints.get_constant_data(resource_name)
         self.assertEqual(status_code, 200)
 
+    def test_get_player_recent_matches(self):
+        resource_name = well_known_data.TEST_ACCOUNT_ID
+        response, status_code = endpoints.get_player_recent_matches_by_account_id(
+            resource_name
+        )
+        self.assertEqual(status_code, 200)
+
 
 class TestRequest(unittest.TestCase):
     def setUp(self):
