@@ -3,6 +3,7 @@ from . import create_database_engine
 
 engine = None
 
+
 def create_session():
 
     # TODO: this is a hack, want engine singleton but its python ..
@@ -11,7 +12,6 @@ def create_session():
             engine = create_database_engine()
     except UnboundLocalError:
         engine = create_database_engine()
-
 
     session = sessionmaker()
     session.configure(bind=engine)

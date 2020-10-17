@@ -4,5 +4,7 @@ from src.bot.models.sessions import create_session
 
 def lookup_user_by_telegram_handle(telegram_handle):
     session = create_session()
-    bot_user = session.query(User).filter(User.telegram_handle == telegram_handle).first()
+    bot_user = (
+        session.query(User).filter(User.telegram_handle == telegram_handle).first()
+    )
     return bot_user
