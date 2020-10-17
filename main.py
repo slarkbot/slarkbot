@@ -3,9 +3,19 @@
 from dotenv import load_dotenv
 from src.lib.endpoints import get_health_check
 from src.config import check_config
+from src.bot import bot_factory
 
-if __name__ == "__main__":
+
+def main():
     load_dotenv()
     check_config()
-    response, status = get_health_check()
-    print(status)
+
+    updater = bot_factory.create_bot()
+
+    updater.start_polling()
+
+    updater.idle()
+
+
+if __name__ == "__main__":
+    main()
