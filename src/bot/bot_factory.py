@@ -3,6 +3,7 @@ from telegram.ext import Updater, CommandHandler
 
 from src.bot import logger_factory
 from src.bot.commands import health_check_command
+from src.bot.commands import register_command
 from src.constants import LOG_LEVEL_MAP
 
 
@@ -14,5 +15,6 @@ def create_bot():
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("status", health_check_command.run_health_check))
+    dp.add_handler(CommandHandler("register", register_command.run_register_command))
 
-    return updater
+    return updater, logger

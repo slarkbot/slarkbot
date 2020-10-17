@@ -29,6 +29,9 @@ Get DOTA statistics about matches, players, etc
 
 ## Running the Database
 
+Database is a dockerized PostgreSQL constainer. Requires docker desktop
+ - Run `./scripts/docker_up.sh` from root of project directory
+
 ## Testing
 Test cases uses default Python testing module `unittest` but uses `pytest` as the test runner
  - Write your unit tests
