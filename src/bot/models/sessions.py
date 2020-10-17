@@ -1,12 +1,13 @@
 from sqlalchemy.orm import sessionmaker
-from . import create_engine
+from . import create_database_engine
 
 engine = None
+
 
 def create_session():
 
     if not engine:
-        engine = create_engine()
+        engine = create_database_engine()
 
     session = sessionmaker()
     session.configure(bind=engine)
