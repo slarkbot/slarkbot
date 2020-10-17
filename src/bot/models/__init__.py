@@ -17,4 +17,4 @@ connection_string = (
 print(connection_string)
 database_engine = create_engine(connection_string)
 
-Base.metadata.create_all(database_engine)
+# Base.metadata.create_all(database_engine)
