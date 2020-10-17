@@ -1,4 +1,3 @@
-
 import os
 from telegram.ext import Updater, CommandHandler
 
@@ -8,7 +7,7 @@ from src.constants import LOG_LEVEL_MAP
 
 
 def create_bot():
-    bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
+    bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 
     logger = logger_factory.create_logger()
     updater = Updater(bot_token, use_context=True)

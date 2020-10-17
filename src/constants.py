@@ -2,7 +2,7 @@ from enum import Enum
 import logging
 
 
-DEFAULT_LOG_LEVEL = 'debug'
+DEFAULT_LOG_LEVEL = "debug"
 
 
 class API_URI_ENDPOINTS(Enum):
@@ -36,10 +36,10 @@ ENVIRONMENT_VARIABLES_CONFIG = {
     },
     "TELEGRAM_BOT_TOKEN": {
         "required": True,
-        "description": "Telegram bot token, can be used for local development"
+        "description": "Telegram bot token, can be used for local development",
     },
     "LOG_LEVEL": {
         "required": False,
-        "description": "Logging level. Defaults to `debug`"
-    }
+        "description": "Logging level. Defaults to `debug`",
+    },
 }
