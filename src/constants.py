@@ -42,4 +42,16 @@ ENVIRONMENT_VARIABLES_CONFIG = {
         "required": False,
         "description": "Logging level. Defaults to `debug`",
     },
+    "POSTGRES_PASSWORD": {
+        "required": True,
+        "description": "Password for dockerized postgres instance",
+    },
+    "POSTGRES_USER": {
+        "required": True,
+        "description": "User name for dockerized postgres instance",
+    },
+    "POSTGRES_DB": {
+        "required": True,
+        "description": "Name of dockerized postgres database",
+    },
 }

@@ -20,6 +20,11 @@ Get DOTA statistics about matches, players, etc
 
 ### Environment Variables
  - `OPEN_DOTA_API_BASE_URL` :: Base url for OpenDota API
+ - `LOG_LEVEL` :: Log level to use, defaults to `debug`. Options are info, warning, critical, error, and debug
+ - `TELEGRAM_BOT_TOKEN` :: Bot token obtained from @BotFather on telegram. Used for personal development with live testing
+ - `POSTGRES_USER` :: User name for the dockerized postgres instance
+ - `POSTGRES_PASSWORD` :: Password for the dockerized postgres instance
+ - `POSTGRES_DB` :: Name of the dockerized postgres database
 
 
 ## Testing
