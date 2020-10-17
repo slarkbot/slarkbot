@@ -30,16 +30,22 @@ def run_get_player_recents_command(update, context):
     chat_id = update.message.chat_id
     telegram_handle = update.message.from_user.username
 
-    if not context.args:
-        registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
-        account_id = registered_user.account_id
-    else:
-        account_id = context.args[0]
+    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
-    if not account_id:
+    if not registered_user:
         update.message.reply_text(
-            "Could not find an account ID. Register your telegram handle using `/register` or give an account ID"
+            "Could not find an account ID. Register your telegram handle using `/register`"
         )
+    
+    account_id = registered_user.account_id
+
+    limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
+    if context.args:
+        try:
+            limit = context.args[0]
+            limit = int(limit)
+        except ValueError:
+            update.message.reply_text('Oops, you gave me an invalid argument. Use `/recents <number>` or `/recents`')
 
     response, status_code = endpoints.get_player_recent_matches_by_account_id(
         account_id
@@ -50,4 +56,4 @@ def run_get_player_recents_command(update, context):
             "Something went wrong, I didn't get a good response :("
         )
 
-    update.message.reply_text(json.dumps(response[:5]))
+    update.message.reply_text(json.dumps(response[:limit]))

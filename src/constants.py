@@ -15,6 +15,10 @@ class API_URI_ENDPOINTS(Enum):
     PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/recentMatches"
 
 
+class QUERY_PARAMETERS(Enum):
+    RESPONSE_LIMIT = 5
+
+
 class HTTP_STATUS_CODES(Enum):
     OK = 200
     NOT_FOUND = 404
