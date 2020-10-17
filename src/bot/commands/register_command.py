@@ -1,10 +1,9 @@
 from src.bot.models.user import User
-from src.bot.models import database_engine
 from src.bot.models.sessions import create_session
 
 
 def save_user(user):
-    session = create_session(database_engine)
+    session = create_session()
     session.add(user)
     session.commit()
 
