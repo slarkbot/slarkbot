@@ -18,7 +18,7 @@ Get DOTA statistics about matches, players, etc
  - `cp .env.example .env` and change values as needed
  - `pre-commit install` adds the testing and lint hooks to pre-push (to make sure you do the right thing)
 
-### Environment Variables
+## Environment Variables
  - `OPEN_DOTA_API_BASE_URL` :: Base url for OpenDota API
  - `LOG_LEVEL` :: Log level to use, defaults to `debug`. Options are info, warning, critical, error, and debug
  - `TELEGRAM_BOT_TOKEN` :: Bot token obtained from @BotFather on telegram. Used for personal development with live testing
@@ -26,6 +26,8 @@ Get DOTA statistics about matches, players, etc
  - `POSTGRES_PASSWORD` :: Password for the dockerized postgres instance
  - `POSTGRES_DB` :: Name of the dockerized postgres database
 
+
+## Running the Database
 
 ## Testing
 Test cases uses default Python testing module `unittest` but uses `pytest` as the test runner

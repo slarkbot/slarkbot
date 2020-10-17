@@ -54,4 +54,8 @@ ENVIRONMENT_VARIABLES_CONFIG = {
         "required": True,
         "description": "Name of dockerized postgres database",
     },
+    "DATABASE_PORT": {
+        "required": False,
+        "description": "Port to use for dockerized postgres container. Defaults to 5432",
+    },
 }
