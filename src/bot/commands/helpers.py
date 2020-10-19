@@ -76,6 +76,8 @@ def create_last_match_message(match_data):
 
     result_string = get_match_result(match.player_slot, match.radiant_win)
 
-    output_message += f"{match_id} | {hero_name} | {kda} | {gpm} | {xpm} | {result_string}\n"
+    output_message += (
+        f"{match_id} | {hero_name} | {kda} | {gpm} | {xpm} | {result_string}\n"
+    )
 
     return output_message
