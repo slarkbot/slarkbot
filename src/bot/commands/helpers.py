@@ -58,7 +58,7 @@ def create_recent_matches_message(json_api_data):
     return output_message
 
 
-def create_last_match_message(match_data):
+def create_match_message(match_data):
     output_message = "MatchID | Hero | KDA | XPM | GPM | Result\n"
 
     match = MatchDto(**match_data)
@@ -81,3 +81,7 @@ def create_last_match_message(match_data):
     )
 
     return output_message
+
+
+def create_match_detail_message(match_data):
+    output_message = "Score"

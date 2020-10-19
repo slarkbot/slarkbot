@@ -22,5 +22,27 @@ def run_last_match_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_last_match_message(response[0])
+    output_message = helpers.create_match_messsage(response[0])
     update.message.reply_text(output_message)
+
+
+def run_get_match_by_match_id(update, context):
+    chat_id = update.message.chat_id
+    telegram_handle = update.message.from_user.username
+
+    if context.args:
+        try:
+            match_id = context.args[0]
+            match_id = int(match_id)
+        except ValueError:
+            update.message.reply_text(
+                "That isn't a match ID. Use `/match <match id here>`"
+            )
+
+    response, status_code = endpoints.get_match_by_id(match_id)
+
+    if status_code != constants.HTTP_STATUS_CODES.OK.value:
+        update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
+
+    # output_message = helpers.create_match_detail_message(response)
+    print("\nRESPONSE", response, "\n")
