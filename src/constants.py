@@ -5,6 +5,11 @@ import logging
 DEFAULT_LOG_LEVEL = "debug"
 
 
+USER_NOT_REGISTERED_MESSAGE = (
+    "I didn't find your telegram name.. have you register or changed your telegram @?"
+)
+
+
 HELP_TEXT = """
     *Commands*
     `\/register <your account id here>` :: Register your telegram handle to your account id for look ups\. Example :: `\/register 55678920`\n
