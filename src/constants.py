@@ -5,6 +5,15 @@ import logging
 DEFAULT_LOG_LEVEL = "debug"
 
 
+HELP_TEXT = """
+    *Commands*
+    `\/register <your account id here>` :: Register your telegram handle to your account id for look ups\. Example :: `\/register 55678920`\n
+    `\/help` :: display this help message\n
+    `\/status` :: Check to see if services are running, `OK` means everything is good to go\n
+    `\/recents <limit:optional>` :: Look up your most recent matches, defaults to 5 if limit is not defined\. Must have account id registered using `/register`\. Example :: `\/recents` or `\/recents 10` for 10 most recent matches\n
+    """
+
+
 class API_URI_ENDPOINTS(Enum):
     HEALTH_CHECK = "health"
     MATCHES = "matches/%s"

@@ -36,3 +36,10 @@ Database is a dockerized PostgreSQL constainer. Requires docker desktop
 Test cases uses default Python testing module `unittest` but uses `pytest` as the test runner
  - Write your unit tests
  - From the command line `pytest`
+
+
+## Commands
+Commands must preceed with `/` and match arguments given in the help text.
+ - `/help` :: Show a help text describing commands and usage.
+ - `/register <friend_id>` :: Register your friend ID to your telegram handle. Must be done to use some commands. Your friend ID is found on your dota profile in game.
+ - `/status` :: Check to see if everything is up and running.
