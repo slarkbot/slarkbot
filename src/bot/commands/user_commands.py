@@ -1,8 +1,7 @@
-import json
-
 from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services
+from src.bot.commands import helpers
 from src.lib import endpoints
 from src import constants
 
@@ -58,4 +57,5 @@ def run_get_player_recents_command(update, context):
             "Something went wrong, I didn't get a good response :("
         )
 
-    update.message.reply_text(json.dumps(response[:limit]))
+    output_message = helpers.create_recent_matches_message(response[:limit])
+    update.message.reply_text(output_message)

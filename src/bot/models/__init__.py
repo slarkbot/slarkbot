@@ -15,6 +15,5 @@ def create_database_engine():
     connection_string = (
         f"postgresql://{db_user}:{db_password}@localhost:{db_port}/{db_name}"
     )
-    print(connection_string)
     database_engine = create_engine(connection_string)
     return database_engine

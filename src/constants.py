@@ -34,6 +34,13 @@ LOG_LEVEL_MAP = {
 }
 
 
+JSON_CONSTANT_DATA_FILE_DIR = "src/constant_data/"
+
+
+class JSON_CONSTANT_DATA_FILE_MAPPING(Enum):
+    HERO_DATA = "heroes.json"
+
+
 ENVIRONMENT_VARIABLES_CONFIG = {
     "OPEN_DOTA_API_BASE_URL": {
         "required": True,
@@ -63,4 +70,45 @@ ENVIRONMENT_VARIABLES_CONFIG = {
         "required": False,
         "description": "Port to use for dockerized postgres container. Defaults to 5432",
     },
+}
+
+LOBBY_TYPE_MAP = {
+    0: "Normal",
+    1: "Practice",
+    2: "Tournament",
+    3: "Tutorial",
+    4: "Coop bots",
+    5: "Ranked Teams",
+    6: "Ranked Solo",
+    7: "Ranked",
+    8: "1v1 Mid",
+    9: "Battle Cup",
+}
+
+GAME_MODE_MAP = {
+    0: "Unkown",
+    1: "All Pick",
+    2: "Captains Mode",
+    3: "Random Draft",
+    4: "Single Draft",
+    5: "All Random",
+    6: "Into",
+    7: "Diretide",
+    8: "Reverse Captains Mode",
+    9: "Greeviling",
+    10: "Tutorial",
+    11: "Mid Only",
+    12: "Least Played",
+    13: "Limited Heroes",
+    14: "Compendium Matchmaking",
+    15: "Custom",
+    16: "Captains Draft",
+    17: "Balanced Draft",
+    18: "Ability Draft",
+    19: "Event",
+    20: "All Random Deathmatch",
+    21: "1v1 Mid",
+    22: "All Draft",
+    23: "Turbo",
+    24: "Mutation",
 }
