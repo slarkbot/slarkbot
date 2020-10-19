@@ -5,6 +5,7 @@ from src.bot import logger_factory
 from src.bot.commands import health_check_command
 from src.bot.commands import user_commands
 from src.bot.commands import help_command
+from src.bot.commands import match_commands
 from src.constants import LOG_LEVEL_MAP
 
 
@@ -21,5 +22,6 @@ def create_bot():
         CommandHandler("recents", user_commands.run_get_player_recents_command)
     )
     dp.add_handler(CommandHandler("help", help_command.run_help_command))
+    dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
 
     return updater, logger

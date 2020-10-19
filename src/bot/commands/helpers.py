@@ -56,3 +56,26 @@ def create_recent_matches_message(json_api_data):
         output_message += f"{match_id} | {hero_name} | {kda} | {result_string}\n"
 
     return output_message
+
+
+def create_last_match_message(match_data):
+    output_message = "MatchID | Hero | KDA | XPM | GPM | Result\n"
+
+    match = MatchDto(**match_data)
+
+    match_id = match.match_id
+
+    hero_id = match.hero_id
+    hero_data = get_hero_data(hero_id)
+    hero_name = hero_data["localized_name"]
+
+    kda = f"%s/%s/%s" % (match.kills, match.deaths, match.assists)
+
+    gpm = match.gold_per_min
+    xpm = match.xp_per_min
+
+    result_string = get_match_result(match.player_slot, match.radiant_win)
+
+    output_message += f"{match_id} | {hero_name} | {kda} | {gpm} | {xpm} | {result_string}\n"
+
+    return output_message

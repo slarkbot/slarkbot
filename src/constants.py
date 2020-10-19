@@ -10,6 +10,9 @@ USER_NOT_REGISTERED_MESSAGE = (
 )
 
 
+BAD_RESPONSE_MESSAGE = "Something went wrong, I didn't get a good response :("
+
+
 HELP_TEXT = """
     *Commands*
     `\/register <your account id here>` :: Register your telegram handle to your account id for look ups\. Example :: `\/register 55678920`\n

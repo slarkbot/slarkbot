@@ -53,9 +53,7 @@ def run_get_player_recents_command(update, context):
     )
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
-        update.message.reply_text(
-            "Something went wrong, I didn't get a good response :("
-        )
+        update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
     output_message = helpers.create_recent_matches_message(response[:limit])
     update.message.reply_text(output_message)
