@@ -1,8 +1,7 @@
 
-# Dota Bot for Telegram
+# Slark Bot
 
-A bot to be like mango byte but for telegram
-
+Telegram Bot for Dota2
 Get DOTA statistics about matches, players, etc
 
 
