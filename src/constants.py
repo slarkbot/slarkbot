@@ -19,7 +19,8 @@ HELP_TEXT = """
     `\/help` :: display this help message\n
     `\/status` :: Check to see if services are running, `OK` means everything is good to go\n
     `\/recents <limit:optional>` :: Look up your most recent matches, defaults to 5 if limit is not defined\. Must have account id registered using `/register`\. Example :: `\/recents` or `\/recents 10` for 10 most recent matches\n
-    `\/match <match_id>` :: Get detailed stats about the outcome of a match
+    `\/match <match_id>` :: Get detailed stats about the outcome of a match\n
+    `\/lastmatch` :: Gets the last match you played\. Must use register command prior to using this command
     """
 
 

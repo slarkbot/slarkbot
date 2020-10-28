@@ -22,7 +22,7 @@ def run_last_match_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_match_messsage(response[0])
+    output_message = helpers.create_match_message(response[0])
     update.message.reply_text(output_message)
 
 
