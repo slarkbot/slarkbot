@@ -101,42 +101,44 @@ def create_match_detail_message(match_data):
     game_duration = str(datetime.timedelta(seconds=match.duration))
     game_mode = constants.GAME_MODE_MAP[match.game_mode]
 
-    score = f'{match.radiant_score}/{match.dire_score}'
+    score = f"{match.radiant_score}/{match.dire_score}"
 
-    match_winner = 'Radiant' if match.radiant_win else 'Dire'
-    match_status_text = f'The {match_winner} won a(n) {game_mode} game'
-    match_general_text = f'{match.match_id} | {score} | {game_duration}'
-    player_header = f'Team | Name | Hero | KDA | CS | NW | GPM | XPM'
+    match_winner = "Radiant" if match.radiant_win else "Dire"
+    match_status_text = f"The {match_winner} won a(n) {game_mode} game"
+    match_general_text = f"{match.match_id} | {score} | {game_duration}"
+    player_header = f"Team | Name | Hero | KDA | CS | NW | GPM | XPM"
 
-    output_message = f'{match_status_text}\n{match_header}\n{match_general_text}\n{player_header}\n'
+    output_message = (
+        f"{match_status_text}\n{match_header}\n{match_general_text}\n{player_header}\n"
+    )
 
     for player in player_data:
-        team = 'R' if player.isRadiant else 'D'
+        team = "R" if player.isRadiant else "D"
 
         kills = player.kills
         deaths = player.deaths
         assists = player.assists
-        kda = f'{kills}/{deaths}/{assists}'
+        kda = f"{kills}/{deaths}/{assists}"
 
         last_hits = player.last_hits
         denies = player.denies
-        cs = f'{last_hits}/{denies}'
+        cs = f"{last_hits}/{denies}"
 
         net_worth = player.total_gold
         xpm = player.xp_per_min
         gpm = player.gold_per_min
 
-        account_id = player.account_id 
+        account_id = player.account_id
 
         hero_data = get_hero_data(player.hero_id)
-        hero_name = hero_data['localized_name']
+        hero_name = hero_data["localized_name"]
 
         try:
             response, status = get_player_by_account_id(account_id)
-            player_name = response['profile']['personaname']
+            player_name = response["profile"]["personaname"]
         except KeyError:
-            player_name = 'Anonymous'
-        
-        output_message += f'{team} | {player_name} | {hero_name} | {kda} | {cs} | {net_worth} | {gpm} | {xpm}\n'
-    
+            player_name = "Anonymous"
+
+        output_message += f"{team} | {player_name} | {hero_name} | {kda} | {cs} | {net_worth} | {gpm} | {xpm}\n"
+
     return output_message
