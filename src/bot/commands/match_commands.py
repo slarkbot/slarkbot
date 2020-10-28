@@ -44,5 +44,5 @@ def run_get_match_by_match_id(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    # output_message = helpers.create_match_detail_message(response)
-    print("\nRESPONSE", response, "\n")
+    output_message = helpers.create_match_detail_message(response)
+    update.message.reply_text(output_message)
