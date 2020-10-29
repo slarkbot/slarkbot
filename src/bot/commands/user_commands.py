@@ -47,7 +47,7 @@ def run_get_player_recents_command(update, context):
             update.message.reply_text(
                 "Oops, you gave me an invalid argument. Use `/recents <number>` or `/recents`"
             )
-    
+
     if limit > 20:
         limit = 20
 
