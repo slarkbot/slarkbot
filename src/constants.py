@@ -15,7 +15,7 @@ BAD_RESPONSE_MESSAGE = "Something went wrong, I didn't get a good response :("
 
 HELP_TEXT = """
     *Commands*
-    `\/register <your account id here>` :: Register your telegram handle to your account id for look ups\. Example :: `\/register 55678920`\n
+    `\/register <your steam friend id here>` :: Register your telegram handle to your steam friend id for look ups\. Example :: `\/register 55678920`\n
     `\/help` :: display this help message\n
     `\/status` :: Check to see if services are running, `OK` means everything is good to go\n
     `\/recents <limit:optional>` :: Look up your most recent matches, defaults to 5 if limit is not defined\. Must have account id registered using `/register`\. Example :: `\/recents` or `\/recents 10` for 10 most recent matches\n
