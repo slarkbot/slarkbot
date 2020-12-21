@@ -3,7 +3,7 @@
 cd ./scripts
 source ../.env
 
-dropdb dota_stats
+dropdb $POSTGRES_DB
 psql -U $POSTGRES_USER \
     -p $DATABASE_PORT \
     -v db_name=$POSTGRES_DB \
