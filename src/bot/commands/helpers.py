@@ -67,7 +67,9 @@ def create_recent_matches_message(json_api_data):
 
         start_time = convert_timestamp_to_datetime(match.start_time)
 
-        output_message += f"{match_id} | {hero_name} | {kda} | {result_string} | {start_time}\n"
+        output_message += (
+            f"{match_id} | {hero_name} | {kda} | {result_string} | {start_time}\n"
+        )
 
     return output_message
 
@@ -92,9 +94,7 @@ def create_match_message(match_data):
 
     start_time = convert_timestamp_to_datetime(match.start_time)
 
-    output_message += (
-        f"{match_id} | {hero_name} | {kda} | {gpm} | {xpm} | {result_string} | {start_time}\n"
-    )
+    output_message += f"{match_id} | {hero_name} | {kda} | {gpm} | {xpm} | {result_string} | {start_time}\n"
 
     return output_message
 

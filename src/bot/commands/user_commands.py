@@ -20,8 +20,7 @@ def run_register_command(update, context):
         account_id = context.args[0]
         new_user = User(telegram_handle, account_id, chat_id)
         save_user(new_user)
-        update.message.reply_text(
-            f"Successfully registered user {telegram_handle}")
+        update.message.reply_text(f"Successfully registered user {telegram_handle}")
     except (IndexError, ValueError):
         update.message.reply_text("No dota friend ID was given")
 
@@ -30,8 +29,7 @@ def run_get_player_recents_command(update, context):
     chat_id = update.message.chat_id
     telegram_handle = update.message.from_user.username
 
-    registered_user = user_services.lookup_user_by_telegram_handle(
-        telegram_handle)
+    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
     if not registered_user:
         update.message.reply_text(
