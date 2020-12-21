@@ -31,6 +31,11 @@ def get_hero_data(hero_id):
             return hero
 
 
+def convert_timestamp_to_datetime(timestamp):
+    datetime_obj = datetime.datetime.fromtimestamp(timestamp)
+    return datetime_obj.strftime("%m/%d/%Y")
+
+
 def get_match_result(player_slot, radiant_win):
     """
     Determines if the player (player_slot) won the game or not
@@ -45,7 +50,7 @@ def get_match_result(player_slot, radiant_win):
 
 
 def create_recent_matches_message(json_api_data):
-    output_message = "MatchID | Hero | KDA | Result\n"
+    output_message = "MatchID | Hero | KDA | Result | time Played\n"
 
     for element in json_api_data:
         match = MatchDto(**element)
@@ -60,13 +65,15 @@ def create_recent_matches_message(json_api_data):
 
         result_string = get_match_result(match.player_slot, match.radiant_win)
 
-        output_message += f"{match_id} | {hero_name} | {kda} | {result_string}\n"
+        start_time = convert_timestamp_to_datetime(match.start_time)
+
+        output_message += f"{match_id} | {hero_name} | {kda} | {result_string} | {start_time}\n"
 
     return output_message
 
 
 def create_match_message(match_data):
-    output_message = "MatchID | Hero | KDA | XPM | GPM | Result\n"
+    output_message = "MatchID | Hero | KDA | XPM | GPM | Result | Time Started\n"
 
     match = MatchDto(**match_data)
 
@@ -83,20 +90,21 @@ def create_match_message(match_data):
 
     result_string = get_match_result(match.player_slot, match.radiant_win)
 
+    start_time = convert_timestamp_to_datetime(match.start_time)
+
     output_message += (
-        f"{match_id} | {hero_name} | {kda} | {gpm} | {xpm} | {result_string}\n"
+        f"{match_id} | {hero_name} | {kda} | {gpm} | {xpm} | {result_string} | {start_time}\n"
     )
 
     return output_message
 
 
 def create_match_detail_message(match_data):
-    match_header = "Match ID | Score | Duration"
+    match_header = "Match ID | Score | Duration | Time"
 
     match = MatchDto(**match_data)
 
     player_data = [Player(**player) for player in match.players]
-    print(player_data)
 
     game_duration = str(datetime.timedelta(seconds=match.duration))
     game_mode = constants.GAME_MODE_MAP[match.game_mode]
@@ -105,7 +113,8 @@ def create_match_detail_message(match_data):
 
     match_winner = "Radiant" if match.radiant_win else "Dire"
     match_status_text = f"The {match_winner} won a(n) {game_mode} game"
-    match_general_text = f"{match.match_id} | {score} | {game_duration}"
+    start_time = convert_timestamp_to_datetime(match.start_time)
+    match_general_text = f"{match.match_id} | {score} | {game_duration} | {start_time}"
     player_header = f"Team | Name | Hero | KDA | CS | NW | GPM | XPM"
 
     output_message = (
