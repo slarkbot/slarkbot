@@ -1,11 +1,13 @@
-
-session="slarkbot"
-
-tmux has-session -t $session 2>/dev/null
+#!/bin/bash
+# tmux has-session -t $session 2>/dev/null
 
 if [ $? == 0 ]; then
-    echo "found session $session"
+    echo "found session slarkbot" 
+    echo "killing session"
     tmux kill-session -t slarkbot
 fi
 
-tmux new-session -d -s "slarkbot" ./start_bot.sh
+cd scripts
+echo "starting new session"
+tmux new -d -s slarkbot start_bot.sh
+echo "started new session"
