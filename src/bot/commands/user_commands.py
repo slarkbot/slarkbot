@@ -16,6 +16,11 @@ def run_register_command(update, context):
     chat_id = update.message.chat_id
     telegram_handle = update.message.from_user.username
 
+    if user_services.lookup_user_by_telegram_handle(telegram_handle):
+        return update.message.reply_text(
+            f"I already have a handle for @{telegram_handle}, sorry :("
+        )
+
     try:
         account_id = context.args[0]
         new_user = User(telegram_handle, account_id, chat_id)
