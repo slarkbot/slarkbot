@@ -8,4 +8,5 @@ CHANGELOG
 # Bugfixes
 
 # Features
+- Freedom units
 - Registration guards
