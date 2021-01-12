@@ -18,5 +18,5 @@ def convert_to_freedom_units(update, context):
         degrees_c = int(re.findall("\d+", match)[0])
         converted_units = (degrees_c * (9 / 5)) + 32
 
-        output = f"{text} is {converted_units}f in freedom units"
+        output = f"{degrees_c} is {converted_units}f in freedom units"
         return update.message.reply_text(output)
