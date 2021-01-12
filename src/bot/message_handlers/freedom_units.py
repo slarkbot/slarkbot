@@ -19,4 +19,4 @@ def convert_to_freedom_units(update, context):
         converted_units = (degrees_c * (9 / 5)) + 32
 
         output = f"{degrees_c} is {converted_units}f in freedom units"
-        return update.message.reply_text(output)
+        update.message.reply_text(output)
