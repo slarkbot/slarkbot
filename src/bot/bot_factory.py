@@ -28,6 +28,8 @@ def create_bot():
     dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
 
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units))
+    dp.add_handler(
+        MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units)
+    )
 
     return updater, logger
