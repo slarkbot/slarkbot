@@ -13,9 +13,8 @@ def convert_to_freedom_units(update, context):
 
     if match:
         match = match.group(0)
-        print(match)
 
-        degrees_c = int(re.findall("\d+", match)[0])
+        degrees_c = float(re.findall("\x2d?[0-9]*\x2e?[0-9]+", match)[0])
         converted_units = (degrees_c * (9 / 5)) + 32
 
         output = f"{degrees_c} is {converted_units}f in freedom units"
