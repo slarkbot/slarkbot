@@ -8,5 +8,6 @@ CHANGELOG
 # Bugfixes
 
 # Features
+- Get registered user MMR
 - Freedom units
 - Registration guards
