@@ -1,13 +1,13 @@
 
 CHANGELOG
 
-# Next [1.0.2]
+# Next [1.0.3]
 
 # Env Vars
 
 # Bugfixes
 
 # Features
-- Get registered user MMR
+- Get registered user rank
 - Freedom units
 - Registration guards
