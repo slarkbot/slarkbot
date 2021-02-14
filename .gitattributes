@@ -1,0 +1,6 @@
+
+* text=lf
+
+*.py text=lf
+*.sh text=lf
+
