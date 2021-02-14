@@ -160,7 +160,7 @@ def map_rank_tier_to_string(rank):
     print(rank)
 
     if not rank:
-        return "is not calibrated"
+        return "not calibrated"
 
     if rank is 80:
         return "Immortal"
