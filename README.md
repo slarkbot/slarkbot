@@ -27,7 +27,7 @@ Get DOTA statistics about matches, players, etc
 
 
 ## Running the Database
-### With Docker
+### With Docker - still wip
 This option creates a postgres database in a dockerized container, requires docker desktop
  - Run `./scripts/docker_up.sh` from root of project directory
 
