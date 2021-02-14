@@ -88,9 +88,9 @@ def run_get_player_rank_command(update, context):
         update.message.reply_text("An unknown error occured, sorry D:")
 
     persona_name = response["profile"]["personaname"]
-    mmr = response["mmr_estimate"]["estimate"]
+    rank_tier = response["rank_tier"]
 
-    possessive = "'" if persona_name.endswith("s") else "'s"
+    rank = helpers.map_rank_tier_to_string(rank_tier)
 
-    output_message = f"{persona_name}{possessive} mmr\t\t{mmr}"
+    output_message = f"{persona_name} is {rank}"
     update.message.reply_text(output_message)
