@@ -88,7 +88,7 @@ def run_get_player_rank_command(update, context):
         update.message.reply_text("An unknown error occured, sorry D:")
 
     persona_name = response["profile"]["personaname"]
-    rank_tier = response['rank_tier']
+    rank_tier = response["rank_tier"]
 
     rank = helpers.map_rank_tier_to_string(rank_tier)
 

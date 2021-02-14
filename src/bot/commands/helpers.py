@@ -160,11 +160,11 @@ def map_rank_tier_to_string(rank):
     print(rank)
 
     if not rank:
-        return 'is not calibrated'
+        return "is not calibrated"
 
     if rank is 80:
-        return 'Immortal'
-    
+        return "Immortal"
+
     # get last digit
     rank_copy = rank
     tier = rank_copy % 10
@@ -172,12 +172,11 @@ def map_rank_tier_to_string(rank):
     # get first digit
     while rank >= 10:
         rank = rank / 10
-    
+
     rank = int(rank)
-    
+
     print(tier)
 
     medal = constants.RANKS[rank]
 
-    return f'{medal} {tier}'
-    
+    return f"{medal} {tier}"

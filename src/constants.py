@@ -140,5 +140,5 @@ RANKS = {
     4: "Archon",
     5: "Legend",
     6: "Ancient",
-    7: "Divine"
+    7: "Divine",
 }
