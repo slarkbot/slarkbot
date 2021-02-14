@@ -151,3 +151,32 @@ def create_match_detail_message(match_data):
         output_message += f"{team} | {player_name} | {hero_name} | {kda} | {cs} | {net_worth} | {gpm} | {xpm}\n"
 
     return output_message
+
+
+def map_rank_tier_to_string(rank):
+    # ranks are two digit codes
+    # mapper values for first digit are found in constants.RANKS
+
+    print(rank)
+
+    if not rank:
+        return "is not calibrated"
+
+    if rank is 80:
+        return "Immortal"
+
+    # get last digit
+    rank_copy = rank
+    tier = rank_copy % 10
+
+    # get first digit
+    while rank >= 10:
+        rank = rank / 10
+
+    rank = int(rank)
+
+    print(tier)
+
+    medal = constants.RANKS[rank]
+
+    return f"{medal} {tier}"
