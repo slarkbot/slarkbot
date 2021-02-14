@@ -65,3 +65,32 @@ def run_get_player_recents_command(update, context):
 
     output_message = helpers.create_recent_matches_message(response[:limit])
     update.message.reply_text(output_message)
+
+
+def run_get_player_rank_command(update, context):
+    chat_id = update.message.chat_id
+    telegram_handle = update.message.from_user.username
+
+    telegram_handle = telegram_handle.replace("@", "")
+
+    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
+
+    if not registered_user:
+        update.message.reply_text(
+            "Could not find an account ID. Register your telegram handle using `/register`"
+        )
+
+    account_id = registered_user.account_id
+
+    response, status_code = endpoints.get_player_rank_by_account_id(account_id)
+
+    if status_code != constants.HTTP_STATUS_CODES.OK.value:
+        update.message.reply_text("An unknown error occured, sorry D:")
+
+    persona_name = response["profile"]["personaname"]
+    mmr = response["mmr_estimate"]["estimate"]
+
+    possessive = "'" if persona_name.endswith("s") else "'s"
+
+    output_message = f"{persona_name}{possessive} mmr\t\t{mmr}"
+    update.message.reply_text(output_message)
