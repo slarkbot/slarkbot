@@ -18,12 +18,15 @@ def run_register_command(update, context):
 
     try:
         account_id = context.args[0]
-        
-        user = (user_services.lookup_user_by_telegram_handle(telegram_handle) or
-                User(telegram_handle, account_id, chat_id))
+
+        user = user_services.lookup_user_by_telegram_handle(telegram_handle) or User(
+            telegram_handle, account_id, chat_id
+        )
         user.account_id = account_id
         save_user(user)
-        update.message.reply_text(f"Successfully registered user {telegram_handle} as {account_id}")
+        update.message.reply_text(
+            f"Successfully registered user {telegram_handle} as {account_id}"
+        )
     except (IndexError, ValueError):
         update.message.reply_text("No dota friend ID was given")
 
