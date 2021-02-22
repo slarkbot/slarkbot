@@ -1,13 +1,11 @@
 
 CHANGELOG
 
-# Next [1.0.2]
+# [1.0.3]
 
 # Env Vars
 
 # Bugfixes
 
 # Features
-- Get registered user MMR
-- Freedom units
-- Allow updating registered id
+
