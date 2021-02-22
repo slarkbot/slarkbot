@@ -1,6 +1,7 @@
 
 CHANGELOG
 
+
 # Next [1.0.3]
 
 # Env Vars
@@ -8,6 +9,3 @@ CHANGELOG
 # Bugfixes
 
 # Features
-- Get registered user rank
-- Freedom units
-- Registration guards
