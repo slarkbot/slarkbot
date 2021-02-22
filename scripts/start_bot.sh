@@ -6,7 +6,7 @@ git pull
 echo "activating venv"
 source venv/bin/activate
 
-echo "installing dependancies"
+echo "installing dependencies"
 pip install -r requirements.txt
 
 echo "starting bot"
