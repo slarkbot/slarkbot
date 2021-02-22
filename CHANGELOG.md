@@ -10,4 +10,4 @@ CHANGELOG
 # Features
 - Get registered user MMR
 - Freedom units
-- Registration guards
+- Allow updating registered id
