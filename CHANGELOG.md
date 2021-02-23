@@ -12,4 +12,5 @@ CHANGELOG
 # Features
 
 # Commands
+- changes: View most recent changes to slarkbot.
 
