@@ -4,6 +4,7 @@
 Telegram Bot for Dota2
 Get DOTA statistics about matches, players, etc
 
+The `docs` directory contains some handy documentation for various purposes.
 
 ## Local Development
  - No api key needed, however rate limits apply
