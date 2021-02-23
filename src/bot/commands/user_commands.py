@@ -70,8 +70,10 @@ def run_get_player_recents_command(update, context):
 
 def run_get_player_rank_command(update, context):
     chat_id = update.message.chat_id
-    telegram_handle = update.message.from_user.username
-
+    try:
+        telegram_handle = context.args[0]
+    except(IndexError, ValueError):
+        telegram_handle = update.message.from_user.username
     telegram_handle = telegram_handle.replace("@", "")
 
     registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
@@ -93,5 +95,5 @@ def run_get_player_rank_command(update, context):
 
     rank = helpers.map_rank_tier_to_string(rank_tier)
 
-    output_message = f"{persona_name} is {rank}"
+    output_message = f"{persona_name} (@{telegram_handle}) is {rank}"
     update.message.reply_text(output_message)
