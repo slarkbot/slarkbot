@@ -1,5 +1,7 @@
+
 This document is for copying and pasting into telegram to update the command list for the bot. You
-can use it for local development by pasting the below into the commands prompt with @Botfather
+can use it for local development by pasting the below into the commands prompt with @Botfather.
+Doing this allows for tab completion and should be updated if new commands are added.
 
 lastmatch - Gets the last match you played. Must use register command prior to using this command
 recents - get recent data, user must be registered
