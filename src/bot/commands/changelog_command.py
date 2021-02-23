@@ -1,7 +1,7 @@
 import os
 
 
-def get_latest_changelog(update, context):
+def run_changes_command(update, context):
     version = os.getenv("SLARKBOT_VERSION")
     root_dir = os.getenv("ROOT_DIR")
 
