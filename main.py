@@ -6,7 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
-os.env['ROOT_DIR'] = os.path.abspath(os.curdir)
+os.env["ROOT_DIR"] = os.path.abspath(os.curdir)
 
 from src.lib.endpoints import get_health_check
 from src.config import check_config
