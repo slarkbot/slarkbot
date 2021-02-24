@@ -34,9 +34,28 @@ def run_register_command(update, context):
 
 def run_get_player_recents_command(update, context):
     chat_id = update.message.chat_id
-    telegram_handle = update.message.from_user.username
 
-    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
+    if not context.args:
+        # Assume default if no arguments are given
+        registered_user = user_services.lookup_user_by_telegram_handle(
+            update.message.from_user.username
+        )
+    else:
+        try:
+            registered_user = user_services.lookup_user_by_telegram_handle(
+                context.args[0].replace("@", "")
+            )
+        except:
+            pass
+        if not registered_user:
+            try:
+                registered_user = user_services.lookup_user_by_telegram_handle(
+                    context.args[1].replace("@", "")
+                )
+            except:
+                registered_user = user_services.lookup_user_by_telegram_handle(
+                    update.message.from_user.username
+                )
 
     if not registered_user:
         update.message.reply_text(
@@ -45,15 +64,18 @@ def run_get_player_recents_command(update, context):
 
     account_id = registered_user.account_id
 
-    limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
     if context.args:
         try:
             limit = context.args[0]
             limit = int(limit)
         except ValueError:
-            update.message.reply_text(
-                "Oops, you gave me an invalid argument. Use `/recents <number>` or `/recents`"
-            )
+            try:
+                limit = context.args[1]
+                limit = int(limit)
+            except:
+                limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
+    else:
+        limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
 
     if limit > 20:
         limit = 20
