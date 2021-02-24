@@ -7,6 +7,7 @@ from src import constants
 
 
 def save_user(user):
+    user.telegram_handle = user.telegram_handle.lower()
     session = create_session()
     session.merge(user)
     session.commit()
