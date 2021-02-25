@@ -2,7 +2,7 @@
 CHANGELOG
 
 
-# Next [1.0.3]
+# Next [1.0.4]
 
 # Env Vars
 
@@ -10,4 +10,4 @@ CHANGELOG
 
 # Features
 - Optional user argument in /rank, /lastmatch and /recents
-- Usernames are now stored and retrieved case-insensitive. Existing data needs to be migrated to all-lowercase usernames in the database
+- Usernames are now stored and retrieved case-insensitive
