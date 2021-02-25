@@ -1,5 +1,7 @@
+
 This document is for copying and pasting into telegram to update the command list for the bot. You
-can use it for local development by pasting the below into the commands prompt with @Botfather
+can use it for local development by pasting the below into the commands prompt with @Botfather.
+Doing this allows for tab completion and should be updated if new commands are added.
 
 lastmatch - Gets the last match you played. Must use register command prior to using this command
 recents - get recent data, user must be registered
@@ -7,3 +9,4 @@ help - display command information usage, help text
 register - Register your friend ID to your telegram handle. Example :: /register <your account id here>
 status - Checks to see if the backend of the bot is fully functional. OK message means everything is good
 rank - View your Rank. User must be registered to use.
+changes - View the most recent slarkbot changes.

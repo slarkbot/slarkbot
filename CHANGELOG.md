@@ -9,5 +9,9 @@ CHANGELOG
 # Bugfixes
 
 # Features
-- Optional user argument in /rank, /lastmatch and /recents
+
 - Usernames are now stored and retrieved case-insensitive
+
+# Commands
+
+- /rank, /lastmatch and /recents now let you look up someone else's data by passing their username as an argument
