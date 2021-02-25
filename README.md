@@ -25,6 +25,7 @@ The `docs` directory contains some handy documentation for various purposes.
  - `POSTGRES_USER` :: User name for the dockerized postgres instance
  - `POSTGRES_PASSWORD` :: Password for the dockerized postgres instance
  - `POSTGRES_DB` :: Name of the dockerized postgres database
+ - `SLARKBOT_VERSION` :: The current semantic version of slarkbot
 
 
 ## Running the Database
