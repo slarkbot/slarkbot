@@ -7,6 +7,6 @@ of master. When releasing a new version of slarkbot, a PR from develop -> master
 with the new version to be released. The changelog is archived and placed in `archive` with
 a fresh changelog taking its place. Then, when master is up to date with the new changes,
 will the bot be restarted manually. Slarkbots configuration file (.env) should be updated
-with the new version so that grabbing changelogs for the changelog command (coming soon),
+with the new version so that grabbing changelogs for the changelog command,
 can fetch the latest release changelog.
 
