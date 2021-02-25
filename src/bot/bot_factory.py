@@ -6,6 +6,7 @@ from src.bot.commands import health_check_command
 from src.bot.commands import user_commands
 from src.bot.commands import help_command
 from src.bot.commands import match_commands
+from src.bot.commands import changelog_command
 
 from src.bot.message_handlers.freedom_units import convert_to_freedom_units
 
@@ -28,6 +29,7 @@ def create_bot():
     dp.add_handler(CommandHandler("help", help_command.run_help_command))
     dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
+    dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command))
 
     dp.add_handler(
         MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units)

@@ -1,0 +1,12 @@
+
+Slarkbot releases are mostly arbitrary based on whenever I feel like a feature should
+be added to the bot.
+
+Semantic versioning is done but mostly done monotonic just for the sake of keeping track
+of master. When releasing a new version of slarkbot, a PR from develop -> master is created
+with the new version to be released. The changelog is archived and placed in `archive` with
+a fresh changelog taking its place. Then, when master is up to date with the new changes,
+will the bot be restarted manually. Slarkbots configuration file (.env) should be updated
+with the new version so that grabbing changelogs for the changelog command,
+can fetch the latest release changelog.
+
