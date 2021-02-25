@@ -35,12 +35,15 @@ def run_register_command(update, context):
 def run_get_player_recents_command(update, context):
     chat_id = update.message.chat_id
 
+    # Assume default if no arguments are given
     if not context.args:
-        # Assume default if no arguments are given
         registered_user = user_services.lookup_user_by_telegram_handle(
             update.message.from_user.username
         )
     else:
+        # Try to match the first argument against the database for usernames
+        # If the result is not a valid user, try the second one
+        # If the result still isn't valid, assume the user's own name
         try:
             registered_user = user_services.lookup_user_by_telegram_handle(
                 context.args[0].replace("@", "")
@@ -53,29 +56,31 @@ def run_get_player_recents_command(update, context):
                     context.args[1].replace("@", "")
                 )
             except:
+                pass
+            if not registered_user:
                 registered_user = user_services.lookup_user_by_telegram_handle(
                     update.message.from_user.username
                 )
 
     if not registered_user:
         update.message.reply_text(
-            "Could not find an account ID. Register your telegram handle using `/register`"
+            "Could not find that username. If you're looking for your own matches, register your telegram handle using `/register`"
         )
 
     account_id = registered_user.account_id
 
-    if context.args:
+    if not context.args:
+        limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
+    else:
         try:
             limit = context.args[0]
             limit = int(limit)
-        except ValueError:
+        except:
             try:
                 limit = context.args[1]
                 limit = int(limit)
             except:
                 limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
-    else:
-        limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
 
     if limit > 20:
         limit = 20
