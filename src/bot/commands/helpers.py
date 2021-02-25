@@ -1,5 +1,6 @@
 import json
 import datetime
+import re
 from src import constants
 from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FILE_DIR
 from src.lib.endpoints import get_player_by_account_id
@@ -29,6 +30,10 @@ def get_hero_data(hero_id):
     for hero in hero_json:
         if hero["id"] == hero_id:
             return hero
+
+
+def escape_markdown(text):
+    return re.escape(text)
 
 
 def convert_timestamp_to_datetime(timestamp):
