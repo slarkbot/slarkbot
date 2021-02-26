@@ -75,7 +75,7 @@ def run_get_player_rank_command(update, context):
     chat_id = update.message.chat_id
     try:
         telegram_handle = context.args[0]
-    except(IndexError, ValueError):
+    except (IndexError, ValueError):
         telegram_handle = update.message.from_user.username
     telegram_handle = telegram_handle
 
