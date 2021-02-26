@@ -1624,6 +1624,19 @@
         "legs": 2
     },
     {
+        "id": 123,
+        "name": "npc_dota_hero_hoodwink",
+        "localized_name": "Hoodwink",
+        "primary_attr": "agi",
+        "attack_type": "Ranged",
+        "roles": [
+            "Nuker",
+            "Escape",
+            "Disabler"
+        ],
+        "legs": 2
+    },
+    {
         "id": 126,
         "name": "npc_dota_hero_void_spirit",
         "localized_name": "Void Spirit",
