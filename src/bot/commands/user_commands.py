@@ -77,7 +77,7 @@ def run_get_player_rank_command(update, context):
         telegram_handle = context.args[0]
     except(IndexError, ValueError):
         telegram_handle = update.message.from_user.username
-    telegram_handle = telegram_handle.replace("@", "")
+    telegram_handle = telegram_handle
 
     registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
