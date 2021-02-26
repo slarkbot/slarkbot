@@ -35,32 +35,20 @@ def run_register_command(update, context):
 def run_get_player_recents_command(update, context):
     chat_id = update.message.chat_id
 
-    # Assume default if no arguments are given
-    if not context.args:
-        registered_user = user_services.lookup_user_by_telegram_handle(
-            update.message.from_user.username
-        )
-    else:
-        # Try to match the first argument against the database for usernames
-        # If the result is not a valid user, try the second one
-        # If the result still isn't valid, assume the user's own name
+    # Assume defaults
+    registered_user = user_services.lookup_user_by_telegram_handle(
+        update.message.from_user.username
+    )
+    limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
+
+    for arg in context.args:
+        user = user_services.lookup_user_by_telegram_handle(arg)
+        if user:
+            registered_user = user
         try:
-            registered_user = user_services.lookup_user_by_telegram_handle(
-                context.args[0].replace("@", "")
-            )
+            limit = int(arg)
         except:
             pass
-        if not registered_user:
-            try:
-                registered_user = user_services.lookup_user_by_telegram_handle(
-                    context.args[1].replace("@", "")
-                )
-            except:
-                pass
-            if not registered_user:
-                registered_user = user_services.lookup_user_by_telegram_handle(
-                    update.message.from_user.username
-                )
 
     if not registered_user:
         update.message.reply_text(
@@ -68,19 +56,6 @@ def run_get_player_recents_command(update, context):
         )
 
     account_id = registered_user.account_id
-
-    if not context.args:
-        limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
-    else:
-        try:
-            limit = context.args[0]
-            limit = int(limit)
-        except:
-            try:
-                limit = context.args[1]
-                limit = int(limit)
-            except:
-                limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
 
     if limit > 20:
         limit = 20
