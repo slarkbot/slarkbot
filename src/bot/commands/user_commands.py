@@ -7,6 +7,7 @@ from src import constants
 
 
 def save_user(user):
+    user.telegram_handle = user.telegram_handle.lower()
     session = create_session()
     session.merge(user)
     session.commit()
@@ -33,26 +34,28 @@ def run_register_command(update, context):
 
 def run_get_player_recents_command(update, context):
     chat_id = update.message.chat_id
-    telegram_handle = update.message.from_user.username
 
-    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
+    # Assume defaults
+    registered_user = user_services.lookup_user_by_telegram_handle(
+        update.message.from_user.username
+    )
+    limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
+
+    for arg in context.args:
+        user = user_services.lookup_user_by_telegram_handle(arg)
+        if user:
+            registered_user = user
+        try:
+            limit = int(arg)
+        except:
+            pass
 
     if not registered_user:
         update.message.reply_text(
-            "Could not find an account ID. Register your telegram handle using `/register`"
+            "Could not find that username. If you're looking for your own matches, register your telegram handle using `/register`"
         )
 
     account_id = registered_user.account_id
-
-    limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
-    if context.args:
-        try:
-            limit = context.args[0]
-            limit = int(limit)
-        except ValueError:
-            update.message.reply_text(
-                "Oops, you gave me an invalid argument. Use `/recents <number>` or `/recents`"
-            )
 
     if limit > 20:
         limit = 20
@@ -70,9 +73,11 @@ def run_get_player_recents_command(update, context):
 
 def run_get_player_rank_command(update, context):
     chat_id = update.message.chat_id
-    telegram_handle = update.message.from_user.username
-
-    telegram_handle = telegram_handle.replace("@", "")
+    try:
+        telegram_handle = context.args[0]
+    except (IndexError, ValueError):
+        telegram_handle = update.message.from_user.username
+    telegram_handle = telegram_handle
 
     registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
@@ -93,5 +98,5 @@ def run_get_player_rank_command(update, context):
 
     rank = helpers.map_rank_tier_to_string(rank_tier)
 
-    output_message = f"{persona_name} is {rank}"
+    output_message = f"{persona_name} (@{telegram_handle}) is {rank}"
     update.message.reply_text(output_message)

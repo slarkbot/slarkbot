@@ -2,7 +2,7 @@
 CHANGELOG
 
 
-# Next [1.0.4]
+# Next [1.0.5]
 
 # Env Vars
 
