@@ -6,7 +6,7 @@ DEFAULT_LOG_LEVEL = "debug"
 
 
 USER_NOT_REGISTERED_MESSAGE = (
-    "I didn't find your telegram name.. have you register or changed your telegram @?"
+    "I couldn't find that Telegram username, please make sure to register your friend ID using `/register`"
 )
 
 
@@ -16,11 +16,12 @@ BAD_RESPONSE_MESSAGE = "Something went wrong, I didn't get a good response :("
 HELP_TEXT = """
     *Commands*
     `\/register <your steam friend id here>` :: Register your telegram handle to your steam friend id for look ups\. Example :: `\/register 55678920`\n
-    `\/help` :: display this help message\n
+    `\/help` :: Display this help message\n
     `\/status` :: Check to see if services are running, `OK` means everything is good to go\n
-    `\/recents <limit:optional>` :: Look up your most recent matches, defaults to 5 if limit is not defined\. Must have account id registered using `/register`\. Example :: `\/recents` or `\/recents 10` for 10 most recent matches\n
+    `\/recents <user:optional> <limit:optional>` :: Look up someone's most recent matches\. Defaults to 5 if limit is not defined and to you if user is not defined\. Must have account id registered using `/register`\. Example :: `\/recents`, `\/recents 10` for 10 most recent matches, `\/recents danvb` for Daniel's last games, `\/recents 20 KittyKirov` for Kirov's last 20 games\n
     `\/match <match_id>` :: Get detailed stats about the outcome of a match\n
-    `\/lastmatch` :: Gets the last match you played\. Must use register command prior to using this command
+    `\/lastmatch <user:optional>` :: Gets the last match someone played\. Defaults to you if no argument is given\. User must be registered for this to work \n
+    `\/rank <user:optional>` :: Gets a user's current medal\. Defaults to you if no argument is given\. User must be registered for this to work
     """
 
 
