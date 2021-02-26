@@ -2,7 +2,7 @@
 CHANGELOG
 
 
-# Next [1.0.4]
+# Next [1.0.5]
 
 # Env Vars
 
@@ -10,8 +10,5 @@ CHANGELOG
 
 # Features
 
-- Usernames are now stored and retrieved case-insensitive
-
 # Commands
 
-- /rank, /lastmatch and /recents now let you look up someone else's data by passing their username as an argument
