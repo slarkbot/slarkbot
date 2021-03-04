@@ -22,16 +22,16 @@ def create_bot():
     updater = Updater(bot_token, use_context=True)
     dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler("status", health_check_command.run_health_check), 0)
-    dp.add_handler(CommandHandler("register", user_commands.run_register_command), 0)
-    dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command), 0)
+    dp.add_handler(CommandHandler("status", health_check_command.run_health_check))
+    dp.add_handler(CommandHandler("register", user_commands.run_register_command))
+    dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command))
     dp.add_handler(
-        CommandHandler("recents", user_commands.run_get_player_recents_command), 0
+        CommandHandler("recents", user_commands.run_get_player_recents_command)
     )
-    dp.add_handler(CommandHandler("help", help_command.run_help_command), 0)
-    dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command), 0)
-    dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id), 0)
-    dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command), 0)
+    dp.add_handler(CommandHandler("help", help_command.run_help_command))
+    dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
+    dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
+    dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command))
 
     # Group handlers with the same trigger separately
     # to ensure they don't conflict with each other
