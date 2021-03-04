@@ -9,6 +9,7 @@ from src.bot.commands import match_commands
 from src.bot.commands import changelog_command
 
 from src.bot.message_handlers.freedom_units import convert_to_freedom_units
+from src.bot.message_handlers.youre_welcome import say_youre_welcome
 
 from src.constants import LOG_LEVEL_MAP
 
@@ -31,6 +32,7 @@ def create_bot():
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id), 6)
     dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command), 7)
 
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, say_youre_welcome))
     dp.add_handler(
         MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units), 8
     )
