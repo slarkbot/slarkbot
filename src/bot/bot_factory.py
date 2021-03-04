@@ -20,19 +20,19 @@ def create_bot():
     updater = Updater(bot_token, use_context=True)
     dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler("status", health_check_command.run_health_check))
-    dp.add_handler(CommandHandler("register", user_commands.run_register_command))
-    dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command))
+    dp.add_handler(CommandHandler("status", health_check_command.run_health_check), 0)
+    dp.add_handler(CommandHandler("register", user_commands.run_register_command), 1)
+    dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command), 2)
     dp.add_handler(
-        CommandHandler("recents", user_commands.run_get_player_recents_command)
+        CommandHandler("recents", user_commands.run_get_player_recents_command), 3
     )
-    dp.add_handler(CommandHandler("help", help_command.run_help_command))
-    dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
-    dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
-    dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command))
+    dp.add_handler(CommandHandler("help", help_command.run_help_command), 4)
+    dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command), 5)
+    dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id), 6)
+    dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command), 7)
 
     dp.add_handler(
-        MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units)
+        MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units), 8
     )
 
     return updater, logger
