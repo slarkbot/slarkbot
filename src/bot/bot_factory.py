@@ -9,6 +9,7 @@ from src.bot.commands import match_commands
 from src.bot.commands import changelog_command
 
 from src.bot.message_handlers.freedom_units import convert_to_freedom_units
+from src.bot.message_handlers.liberal_units import convert_to_liberal_units
 from src.bot.message_handlers.youre_welcome import say_youre_welcome
 
 from src.constants import LOG_LEVEL_MAP
@@ -22,19 +23,26 @@ def create_bot():
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("status", health_check_command.run_health_check), 0)
-    dp.add_handler(CommandHandler("register", user_commands.run_register_command), 1)
-    dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command), 2)
+    dp.add_handler(CommandHandler("register", user_commands.run_register_command), 0)
+    dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command), 0)
     dp.add_handler(
-        CommandHandler("recents", user_commands.run_get_player_recents_command), 3
+        CommandHandler("recents", user_commands.run_get_player_recents_command), 0
     )
-    dp.add_handler(CommandHandler("help", help_command.run_help_command), 4)
-    dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command), 5)
-    dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id), 6)
-    dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command), 7)
+    dp.add_handler(CommandHandler("help", help_command.run_help_command), 0)
+    dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command), 0)
+    dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id), 0)
+    dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command), 0)
 
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, say_youre_welcome))
+    # Group handlers with the same trigger separately
+    # to ensure they don't conflict with each other
     dp.add_handler(
-        MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units), 8
+        MessageHandler(Filters.text & ~Filters.command, say_youre_welcome), 1
+    )
+    dp.add_handler(
+        MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units), 2
+    )
+    dp.add_handler(
+        MessageHandler(Filters.text & ~Filters.command, convert_to_liberal_units), 3
     )
 
     return updater, logger
