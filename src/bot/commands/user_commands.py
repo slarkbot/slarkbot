@@ -4,6 +4,7 @@ from src.bot.services import user_services
 from src.bot.commands import helpers
 from src.lib import endpoints
 from src import constants
+from steam.steamid import SteamID
 
 
 def save_user(user):
@@ -99,3 +100,22 @@ def run_get_player_rank_command(update, context):
 
     output_message = f"{persona_name} (@{registered_user.telegram_handle}) is {rank}"
     update.message.reply_text(output_message)
+
+def run_get_player_steam_profile_command(update, context):
+    chat_id = update.message.chat_id
+
+    try:
+        telegram_handle = context.args[0]
+    except (IndexError, ValueError):
+        telegram_handle = update.message.from_user.username
+
+    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
+
+    if not registered_user:
+        update.message.reply_text(
+            "Could not find an account ID. Register your telegram handle using `/register`"
+        )
+
+    update.message.reply_text(
+        SteamID(registered_user.account_id).community_url
+    )
