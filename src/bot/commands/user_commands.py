@@ -22,7 +22,7 @@ def run_register_command(update, context):
         identifier = context.args[0]
 
         user = user_services.lookup_user_by_telegram_handle(telegram_handle) or User(
-            telegram_handle, account_id, chat_id
+            telegram_handle, "", chat_id
         )
 
         if SteamID(identifier).is_valid():
@@ -31,9 +31,11 @@ def run_register_command(update, context):
         elif SteamID.from_url(identifier):
             # If the identifier is a link to a steam profile, get the id from there
             account_id = SteamID.from_url(identifier).as_32
-        # else:
+        else:
             # Check if the Steam API gives us a valid profile
-
+            v = user_services.resolve_steam_vanity_url(identifier)
+            if v is not None:
+                account_id = v
 
         user.account_id = account_id
         save_user(user)
@@ -44,7 +46,7 @@ def run_register_command(update, context):
         update.message.reply_text("No dota friend ID was given")
     except (UnboundLocalError):
         update.message.reply_text(
-            "I couldn't make sense of your profile ID! You can give me a Dota friend code, a Steam ID number or a link to your Steam profile."
+            "I couldn't make sense of your profile ID! You can give me a Dota friend code, a Steam ID number, a link to your Steam profile or your custom URL."
         )
 
 
