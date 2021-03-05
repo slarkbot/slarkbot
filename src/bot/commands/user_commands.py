@@ -117,5 +117,6 @@ def run_get_player_steam_profile_command(update, context):
         )
 
     update.message.reply_text(
+        f"@{registered_user.telegram_handle}'s steam profile is " +
         SteamID(registered_user.account_id).community_url
     )
