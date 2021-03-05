@@ -9,8 +9,6 @@ def convert_to_freedom_units(update, context):
         re.M | re.I,
     )
 
-    print(match)
-
     if match:
         match = match.group(0)
 
