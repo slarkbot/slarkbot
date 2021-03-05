@@ -9,6 +9,8 @@ from src.bot.commands import match_commands
 from src.bot.commands import changelog_command
 
 from src.bot.message_handlers.freedom_units import convert_to_freedom_units
+from src.bot.message_handlers.liberal_units import convert_to_liberal_units
+from src.bot.message_handlers.youre_welcome import say_youre_welcome
 
 from src.constants import LOG_LEVEL_MAP
 
@@ -31,8 +33,16 @@ def create_bot():
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
     dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command))
 
+    # Group handlers with the same trigger separately
+    # to ensure they don't conflict with each other
     dp.add_handler(
-        MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units)
+        MessageHandler(Filters.text & ~Filters.command, say_youre_welcome), 1
+    )
+    dp.add_handler(
+        MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units), 2
+    )
+    dp.add_handler(
+        MessageHandler(Filters.text & ~Filters.command, convert_to_liberal_units), 3
     )
 
     return updater, logger
