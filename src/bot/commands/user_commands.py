@@ -19,18 +19,33 @@ def run_register_command(update, context):
     telegram_handle = update.message.from_user.username
 
     try:
-        account_id = context.args[0]
+        identifier = context.args[0]
 
         user = user_services.lookup_user_by_telegram_handle(telegram_handle) or User(
             telegram_handle, account_id, chat_id
         )
+
+        if SteamID(identifier).is_valid():
+            # If the identifier is a valid steamid, convert it and done
+            account_id = SteamID(identifier).as_32
+        elif SteamID.from_url(identifier):
+            # If the identifier is a link to a steam profile, get the id from there
+            account_id = SteamID.from_url(identifier).as_32
+        # else:
+            # Check if the Steam API gives us a valid profile
+
+
         user.account_id = account_id
         save_user(user)
         update.message.reply_text(
-            f"Successfully registered user {telegram_handle} as {account_id}"
+            f"Successfully registered user {telegram_handle} as {SteamID(account_id).community_url}"
         )
     except (IndexError, ValueError):
         update.message.reply_text("No dota friend ID was given")
+    except (UnboundLocalError):
+        update.message.reply_text(
+            "I couldn't make sense of your profile ID! You can give me a Dota friend code, a Steam ID number or a link to your Steam profile."
+        )
 
 
 def run_get_player_recents_command(update, context):
