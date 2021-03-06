@@ -2,6 +2,7 @@ from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services
 from src.bot.commands import helpers
+from src.lib.steamapi import resolve_steam_vanity_url
 from src.lib import endpoints
 from src import constants
 from steam.steamid import SteamID
@@ -33,7 +34,7 @@ def run_register_command(update, context):
             account_id = SteamID.from_url(identifier).as_32
         else:
             # Check if the Steam API gives us a valid profile
-            v = user_services.resolve_steam_vanity_url(identifier)
+            v = resolve_steam_vanity_url(identifier)
             if v is not None:
                 account_id = v
 
