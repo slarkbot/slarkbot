@@ -1,5 +1,5 @@
 import os
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
 
 from src.bot import logger_factory
 from src.bot.commands import health_check_command
@@ -43,6 +43,10 @@ def create_bot():
     )
     dp.add_handler(
         MessageHandler(Filters.text & ~Filters.command, convert_to_liberal_units), 3
+    )
+
+    dp.add_handler(
+        CallbackQueryHandler(match_commands.handle_match_details_callback, pattern="(match )[0-9]+")
     )
 
     return updater, logger

@@ -4,6 +4,7 @@ from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services
 from src.bot.commands import helpers
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def run_last_match_command(update, context):
@@ -26,7 +27,9 @@ def run_last_match_command(update, context):
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
     output_message = helpers.create_match_message(response[0])
-    update.message.reply_text(output_message)
+    button = InlineKeyboardButton("Full match details", callback_data=("match " + str(response[0]["match_id"])))
+    markup = InlineKeyboardMarkup.from_button(button)
+    update.message.reply_text(output_message, reply_markup=markup)
 
 
 def run_get_match_by_match_id(update, context):
@@ -49,3 +52,18 @@ def run_get_match_by_match_id(update, context):
 
     output_message = helpers.create_match_detail_message(response)
     update.message.reply_text(output_message)
+
+def handle_match_details_callback(update, context):
+    query = update.callback_query
+
+    match_id = int(query.data.replace("match ", ""))
+
+    response, status_code = endpoints.get_match_by_id(match_id)
+
+    if status_code != constants.HTTP_STATUS_CODES.OK.value:
+        query.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
+
+    output_message = helpers.create_match_detail_message(response)
+
+    query.answer()
+    query.message.edit_text(output_message)
