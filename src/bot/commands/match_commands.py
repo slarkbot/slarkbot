@@ -61,7 +61,8 @@ def handle_match_details_callback(update, context):
     response, status_code = endpoints.get_match_by_id(match_id)
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
-        query.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
+        query.answer(constants.BAD_RESPONSE_MESSAGE)
+        return
 
     output_message = helpers.create_match_detail_message(response)
 
