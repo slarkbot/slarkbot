@@ -17,7 +17,7 @@ def run_last_match_command(update, context):
     user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
     if not user:
-        update.message.reply_text(constants.USER_NOT_REGISTERED_MESSAGE)
+        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
     response, status_code = endpoints.get_player_recent_matches_by_account_id(
         user.account_id
@@ -40,9 +40,8 @@ def run_get_match_by_match_id(update, context):
         match_id = context.args[0]
         match_id = int(match_id)
     except (IndexError, ValueError):
-        update.message.reply_text(
-            "That isn't a match ID\. Use `/match <match id here>`",
-            parse_mode="MarkdownV2"
+        update.message.reply_markdown_v2(
+            "That isn't a match ID\. Use `/match <match id here>`"
         )
         return
 
