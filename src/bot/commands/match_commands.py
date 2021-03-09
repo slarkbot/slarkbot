@@ -36,14 +36,15 @@ def run_get_match_by_match_id(update, context):
     chat_id = update.message.chat_id
     telegram_handle = update.message.from_user.username
 
-    if context.args:
-        try:
-            match_id = context.args[0]
-            match_id = int(match_id)
-        except ValueError:
-            update.message.reply_text(
-                "That isn't a match ID. Use `/match <match id here>`"
-            )
+    try:
+        match_id = context.args[0]
+        match_id = int(match_id)
+    except (IndexError, ValueError):
+        update.message.reply_text(
+            "That isn't a match ID\. Use `/match <match id here>`",
+            parse_mode="MarkdownV2"
+        )
+        return
 
     response, status_code = endpoints.get_match_by_id(match_id)
 
