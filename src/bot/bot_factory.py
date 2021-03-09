@@ -12,6 +12,8 @@ from src.bot.message_handlers.freedom_units import convert_to_freedom_units
 from src.bot.message_handlers.liberal_units import convert_to_liberal_units
 from src.bot.message_handlers.youre_welcome import say_youre_welcome
 
+from src.bot.callback_handlers import match_callback
+
 from src.constants import LOG_LEVEL_MAP
 
 
@@ -46,7 +48,10 @@ def create_bot():
     )
 
     dp.add_handler(
-        CallbackQueryHandler(match_commands.handle_match_details_callback, pattern="(match )[0-9]+")
+        CallbackQueryHandler(
+            match_callback.handle_match_details_callback,
+            pattern="(match )[0-9]+"
+        )
     )
 
     return updater, logger
