@@ -7,8 +7,11 @@ CHANGELOG
 # Env Vars
 
 # Bugfixes
+- Fix markdown parsing in some responses
 
 # Features
+- Inline query for full match details on /lastmatch
 
 # Commands
-
+- /changelog: alias for /changes
+- /matches: alias for /recents
