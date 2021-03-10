@@ -100,6 +100,7 @@ def run_get_player_rank_command(update, context):
     output_message = f"{persona_name} (@{registered_user.telegram_handle}) is {rank}"
     update.message.reply_text(output_message)
 
+
 def run_get_player_hero_winrate_command(update, context):
     chat_id = update.message.chat_id
 
