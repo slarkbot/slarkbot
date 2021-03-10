@@ -23,6 +23,7 @@ def read_json_file(file_path):
 
 
 def get_hero_data(hero_id):
+    hero_id = int(hero_id)
     hero_data_file = (
         JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_DATA.value
     )
@@ -30,6 +31,7 @@ def get_hero_data(hero_id):
     for hero in hero_json:
         if hero["id"] == hero_id:
             return hero
+
 
 def get_hero_by_name(hero_name):
     hero_data_file = (
@@ -40,11 +42,24 @@ def get_hero_by_name(hero_name):
         if hero["localized_name"].lower() == hero_name.lower():
             return hero
 
+
 def filter_hero_winrates(hero_data, hero_id):
     hero_id = str(hero_id)
     for hero in hero_data:
         if str(hero["hero_id"]) == hero_id:
             return hero
+
+
+def format_winrate_response(hero_data, telegram_handle):
+    hero_by_id = get_hero_data(hero_data["hero_id"])
+    hero_name = hero_by_id["localized_name"]
+    if hero_data["games"] == 0:
+        return f"@{telegram_handle} has no games as {hero_name} recorded"
+
+    winrate = hero_data["win"] / hero_data["games"] * 100
+    winrate = round(winrate, 3)
+    return f"@{telegram_handle} has a {winrate}% winrate as {hero_name} ({hero_data['win']} wins over {hero_data['games']} games)"
+
 
 def escape_markdown(text):
     return re.escape(text)

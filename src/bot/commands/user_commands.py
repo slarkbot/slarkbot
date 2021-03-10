@@ -129,8 +129,8 @@ def run_get_player_hero_winrate_command(update, context):
             update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
         hero_data = helpers.filter_hero_winrates(response, hero["id"])
-
-        update.message.reply_text(hero_data["win"])
+        
+        update.message.reply_text(helpers.format_winrate_response(hero_data, registered_user.telegram_handle))
     else:
         update.message.reply_markdown_v2(
             "No arguments given! Try `/winrate <hero name>` or `/winrate <username> <hero name>`"
