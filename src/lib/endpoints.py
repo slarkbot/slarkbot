@@ -51,3 +51,9 @@ def get_player_rank_by_account_id(account_id):
     uri = API_URI_ENDPOINTS.PLAYERS.value % account_id
     response = request.make_request(uri)
     return response.json(), response.status_code
+
+
+def get_player_hero_stats(id):
+    uri = API_URI_ENDPOINTS.PLAYER_HERO_STATS.value % id
+    response = request.make_request(uri)
+    return response.json(), response.status_code

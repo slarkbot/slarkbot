@@ -111,18 +111,28 @@ def run_get_player_hero_winrate_command(update, context):
             # If there's a username in the args, remove it now
             hero_name_parts.pop(0)
         else:
-            registered_user = user_services.lookup_user_by_telegram_handle(update.message.from_user.username)
+            registered_user = user_services.lookup_user_by_telegram_handle(
+                update.message.from_user.username
+            )
 
         if not registered_user:
             update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
         hero_name = " ".join(hero_name_parts)
+        hero = helpers.get_hero_by_name(hero_name)
 
-        # Look up hero name and hit the API when a match is found
-        update.message.reply_text(hero_name)
+        response, status_code = endpoints.get_player_hero_stats(
+            registered_user.account_id
+        )
+
+        if status_code != constants.HTTP_STATUS_CODES.OK.value:
+            update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
+
+        hero_data = helpers.filter_hero_winrates(response, hero["id"])
+
+        update.message.reply_text(hero_data["win"])
     else:
-        update.message.reply_text("No arguments given")
-
-
-
+        update.message.reply_markdown_v2(
+            "No arguments given! Try `/winrate <hero name>` or `/winrate <username> <hero name>`"
+        )
 

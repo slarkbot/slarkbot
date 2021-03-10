@@ -31,6 +31,20 @@ def get_hero_data(hero_id):
         if hero["id"] == hero_id:
             return hero
 
+def get_hero_by_name(hero_name):
+    hero_data_file = (
+        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_DATA.value
+    )
+    hero_json = read_json_file(hero_data_file)
+    for hero in hero_json:
+        if hero["localized_name"].lower() == hero_name.lower():
+            return hero
+
+def filter_hero_winrates(hero_data, hero_id):
+    hero_id = str(hero_id)
+    for hero in hero_data:
+        if str(hero["hero_id"]) == hero_id:
+            return hero
 
 def escape_markdown(text):
     return re.escape(text)
