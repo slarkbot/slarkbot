@@ -122,7 +122,7 @@ def run_get_player_hero_winrate_command(update, context):
         hero = helpers.get_hero_by_name(hero_name)
 
         if not hero:
-            update.message.reply_text("I don't understand which hero you mean, sorry!")
+            update.message.reply_markdown_v2("I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`")
 
         response, status_code = endpoints.get_player_hero_stats(
             registered_user.account_id
