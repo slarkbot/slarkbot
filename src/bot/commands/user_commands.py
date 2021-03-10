@@ -99,3 +99,30 @@ def run_get_player_rank_command(update, context):
 
     output_message = f"{persona_name} (@{registered_user.telegram_handle}) is {rank}"
     update.message.reply_text(output_message)
+
+def run_get_player_hero_winrate_command(update, context):
+    chat_id = update.message.chat_id
+
+    if context.args:
+        hero_name_parts = context.args
+        registered_user = user_services.lookup_user_by_telegram_handle(context.args[0])
+
+        if registered_user:
+            # If there's a username in the args, remove it now
+            hero_name_parts.pop(0)
+        else:
+            registered_user = user_services.lookup_user_by_telegram_handle(update.message.from_user.username)
+
+        if not registered_user:
+            update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
+
+        hero_name = " ".join(hero_name_parts)
+
+        # Look up hero name and hit the API when a match is found
+        update.message.reply_text(hero_name)
+    else:
+        update.message.reply_text("No arguments given")
+
+
+
+
