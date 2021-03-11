@@ -55,7 +55,7 @@ def get_match_result(player_slot, radiant_win):
 
 
 def create_recent_matches_message(json_api_data):
-    output_message = "MatchID | Hero | KDA | Result | time Played\n"
+    output_message = "MatchID | Hero | KDA | Result | Time Played\n"
 
     for element in json_api_data:
         match = MatchDto(**element)
