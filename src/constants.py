@@ -59,6 +59,7 @@ JSON_CONSTANT_DATA_FILE_DIR = "src/constant_data/"
 
 class JSON_CONSTANT_DATA_FILE_MAPPING(Enum):
     HERO_DATA = "heroes.json"
+    HERO_ALIASES = "aliases.json"
 
 
 ENVIRONMENT_VARIABLES_CONFIG = {

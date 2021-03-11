@@ -41,6 +41,16 @@ def get_hero_by_name(hero_name):
         if hero["localized_name"].lower() == hero_name.lower():
             return hero
 
+    hero_alias_file = (
+        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_ALIASES.value
+    )
+    alias_json = read_json_file(hero_alias_file)
+    for alias in alias_json:
+        if alias["name"].lower() == hero_name.lower():
+            hero = get_hero_data(alias["id"])
+            return hero
+
+
 
 def filter_hero_winrates(hero_data, hero_id):
     for hero in hero_data:
