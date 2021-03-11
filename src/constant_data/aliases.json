@@ -14,5 +14,313 @@
   {
     "id": 1,
     "name": "Andy Mage"
+  },
+  {
+    "id": 4,
+    "name": "BS"
+  },
+  {
+    "id": 5,
+    "name": "CM"
+  },
+  {
+    "id": 5,
+    "name": "Rylai"
+  },
+  {
+    "id": 6,
+    "name": "Drow"
+  },
+  {
+    "id": 9,
+    "name": "potm"
+  },
+  {
+    "id": 11,
+    "name": "SF"
+  },
+  {
+    "id": 11,
+    "name": "Shadowfiend"
+  },
+  {
+    "id": 11,
+    "name": "Shadow Friend"
+  },
+  {
+    "id": 12,
+    "name": "PL"
+  },
+  {
+    "id": 16,
+    "name": "SK"
+  },
+  {
+    "id": 17,
+    "name": "Storm"
+  },
+  {
+    "id": 20,
+    "name": "Venge"
+  },
+  {
+    "id": 21,
+    "name": "Windrunner"
+  },
+  {
+    "id": 23,
+    "name": "Kunka"
+  },
+  {
+    "id": 29,
+    "name": "Tide"
+  },
+  {
+    "id": 30,
+    "name": "WD"
+  },
+  {
+    "id": 32,
+    "name": "Richard"
+  },
+  {
+    "id": 36,
+    "name": "Necrolyte"
+  },
+  {
+    "id": 39,
+    "name": "qop"
+  },
+  {
+    "id": 42,
+    "name": "Skeleton King"
+  },
+  {
+    "id": 42,
+    "name": "WK"
+  },
+  {
+    "id": 43,
+    "name": "Krobelus"
+  },
+  {
+    "id": 43,
+    "name": "Krob"
+  },
+  {
+    "id": 44,
+    "name": "PA"
+  },
+  {
+    "id": 46,
+    "name": "TA"
+  },
+  {
+    "id": 46,
+    "name": "Templar"
+  },
+  {
+    "id": 49,
+    "name": "DK"
+  },
+  {
+    "id": 49,
+    "name": "Davion"
+  },
+  {
+    "id": 52,
+    "name": "Lesh"
+  },
+  {
+    "id": 53,
+    "name": "Furion"
+  },
+  {
+    "id": 53,
+    "name": "Natures Prophet"
+  },
+  {
+    "id": 53,
+    "name": "NP"
+  },
+  {
+    "id": 54,
+    "name": "Naix"
+  },
+  {
+    "id": 57,
+    "name": "Omni"
+  },
+  {
+    "id": 58,
+    "name": "Ench"
+  },
+  {
+    "id": 60,
+    "name": "Nightstalker"
+  },
+  {
+    "id": 61,
+    "name": "Brood"
+  },
+  {
+    "id": 62,
+    "name": "Gondar"
+  },
+  {
+    "id": 62,
+    "name": "BH"
+  },
+  {
+    "id": 62,
+    "name": "Bounty"
+  },
+  {
+    "id": 65,
+    "name": "Bat"
+  },
+  {
+    "id": 67,
+    "name": "slkjdskjfsdkfjsld"
+  },
+  {
+    "id": 68,
+    "name": "AA"
+  },
+  {
+    "id": 69,
+    "name": "Doom Bringer"
+  },
+  {
+    "id": 69,
+    "name": "Doombringer"
+  },
+  {
+    "id": 71,
+    "name": "SB"
+  },
+  {
+    "id": 72,
+    "name": "Gyro"
+  },
+  {
+    "id": 73,
+    "name": "Alch"
+  },
+  {
+    "id": 76,
+    "name": "Outworld Destroyer"
+  },
+  {
+    "id": 76,
+    "name": "OD"
+  },
+  {
+    "id": 76,
+    "name": "Outhouse Decorator"
+  },
+  {
+    "id": 76,
+    "name": "Outsourced Developer"
+  },
+  {
+    "id": 79,
+    "name": "SD"
+  },
+  {
+    "id": 80,
+    "name": "Druid"
+  },
+  {
+    "id": 81,
+    "name": "CK"
+  },
+  {
+    "id": 83,
+    "name": "Treant"
+  },
+  {
+    "id": 84,
+    "name": "Ogre"
+  },
+  {
+    "id": 88,
+    "name": "Nyx"
+  },
+  {
+    "id": 89,
+    "name": "Naga"
+  },
+  {
+    "id": 90,
+    "name": "kotl"
+  },
+  {
+    "id": 91,
+    "name": "Wisp"
+  },
+  {
+    "id": 94,
+    "name": "Dusa"
+  },
+  {
+    "id": 95,
+    "name": "Troll"
+  },
+  {
+    "id": 96,
+    "name": "Centaur"
+  },
+  {
+    "id": 99,
+    "name": "Bristle"
+  },
+  {
+    "id": 101,
+    "name": "Sky"
+  },
+  {
+    "id": 103,
+    "name": "ET"
+  },
+  {
+    "id": 104,
+    "name": "LC"
+  },
+  {
+    "id": 106,
+    "name": "Ember"
+  },
+  {
+    "id": 109,
+    "name": "TB"
+  },
+  {
+    "id": 112,
+    "name": "Wyvern"
+  },
+  {
+    "id": 112,
+    "name": "WW"
+  },
+  {
+    "id": 114,
+    "name": "MK"
+  },
+  {
+    "id": 114,
+    "name": "Monkey"
+  },
+  {
+    "id": 119,
+    "name": "Willow"
+  },
+  {
+    "id": 120,
+    "name": "Pango"
+  },
+  {
+    "id": 121,
+    "name": "Grim"
   }
 ]
