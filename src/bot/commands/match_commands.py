@@ -51,4 +51,4 @@ def run_get_match_by_match_id(update, context):
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
     output_message = helpers.create_match_detail_message(response)
-    update.message.reply_text(output_message)
+    update.message.reply_markdown_v2(output_message, disable_web_page_preview=True)
