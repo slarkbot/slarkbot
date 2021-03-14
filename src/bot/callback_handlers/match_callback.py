@@ -17,4 +17,4 @@ def handle_match_details_callback(update, context):
     output_message = helpers.create_match_detail_message(response)
 
     query.answer()
-    query.message.edit_text(output_message)
+    query.message.edit_text(output_message, parse_mode="MarkdownV2", disable_web_page_preview=True)
