@@ -33,6 +33,9 @@ def create_bot():
     dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
     dp.add_handler(CommandHandler("changes", changelog_command.run_changes_command))
+    dp.add_handler(
+        CommandHandler("profile", user_commands.run_get_player_steam_profile_command)
+    )
 
     # Group handlers with the same trigger separately
     # to ensure they don't conflict with each other
