@@ -5,7 +5,7 @@ import logging
 DEFAULT_LOG_LEVEL = "debug"
 
 
-USER_NOT_REGISTERED_MESSAGE = "I couldn't find that Telegram username, please make sure to register your friend ID using `/register`"
+USER_NOT_REGISTERED_MESSAGE = "I couldn't find that Telegram username\! Please make sure to register your friend ID using `/register <your friend ID>`"
 
 
 BAD_RESPONSE_MESSAGE = "Something went wrong, I didn't get a good response :("

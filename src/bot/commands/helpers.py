@@ -4,6 +4,7 @@ import re
 from src import constants
 from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FILE_DIR
 from src.lib.endpoints import get_player_by_account_id
+from telegram.utils.helpers import escape_markdown
 
 
 class MatchDto:
@@ -55,7 +56,7 @@ def get_match_result(player_slot, radiant_win):
 
 
 def create_recent_matches_message(json_api_data):
-    output_message = "MatchID | Hero | KDA | Result | time Played\n"
+    output_message = "MatchID | Hero | KDA | Result | Time Played\n"
 
     for element in json_api_data:
         match = MatchDto(**element)
@@ -154,6 +155,14 @@ def create_match_detail_message(match_data):
             player_name = "Anonymous"
 
         output_message += f"{team} | {player_name} | {hero_name} | {kda} | {cs} | {net_worth} | {gpm} | {xpm}\n"
+
+    # Escape markdown up to this point
+    output_message = escape_markdown(output_message)
+
+    dotabuff_link = f"https://www.dotabuff.com/matches/{match.match_id}"
+    opendota_link = f"https://www.opendota.com/matches/{match.match_id}"
+
+    output_message += f"More information: [Dotabuff]({dotabuff_link}), [OpenDota]({opendota_link})"
 
     return output_message
 
