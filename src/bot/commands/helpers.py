@@ -4,6 +4,7 @@ import re
 from src import constants
 from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FILE_DIR
 from src.lib.endpoints import get_player_by_account_id
+from telegram.utils.helpers import escape_markdown
 
 
 class MatchDto:
@@ -32,6 +33,45 @@ def get_hero_data(hero_id):
             return hero
 
 
+def get_hero_by_name(hero_name):
+    hero_name = hero_name.lower()
+
+    hero_data_file = (
+        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_DATA.value
+    )
+    hero_json = read_json_file(hero_data_file)
+    for hero in hero_json:
+        if hero["localized_name"].lower() == hero_name:
+            return hero
+
+    hero_alias_file = (
+        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_ALIASES.value
+    )
+    alias_json = read_json_file(hero_alias_file)
+    for hero in alias_json:
+        for alias in hero["aliases"]:
+            if alias.lower() == hero_name:
+                found_hero = get_hero_data(hero["id"])
+                return found_hero
+
+
+def filter_hero_winrates(hero_data, hero_id):
+    for hero in hero_data:
+        if hero["hero_id"] == hero_id:
+            return hero
+
+
+def format_winrate_response(hero_data, telegram_handle):
+    hero_by_id = get_hero_data(int(hero_data["hero_id"]))
+    hero_name = hero_by_id["localized_name"]
+    if hero_data["games"] == 0:
+        return f"@{telegram_handle} has no games as {hero_name} recorded"
+
+    winrate = hero_data["win"] / hero_data["games"] * 100
+    winrate = round(winrate, 3)
+    return f"@{telegram_handle} has a {winrate}% winrate as {hero_name} ({hero_data['win']} wins over {hero_data['games']} games)"
+
+
 def escape_markdown(text):
     return re.escape(text)
 
@@ -55,7 +95,7 @@ def get_match_result(player_slot, radiant_win):
 
 
 def create_recent_matches_message(json_api_data):
-    output_message = "MatchID | Hero | KDA | Result | time Played\n"
+    output_message = "MatchID | Hero | KDA | Result | Time Played\n"
 
     for element in json_api_data:
         match = MatchDto(**element)
@@ -154,6 +194,16 @@ def create_match_detail_message(match_data):
             player_name = "Anonymous"
 
         output_message += f"{team} | {player_name} | {hero_name} | {kda} | {cs} | {net_worth} | {gpm} | {xpm}\n"
+
+    # Escape markdown up to this point
+    output_message = escape_markdown(output_message)
+
+    dotabuff_link = f"https://www.dotabuff.com/matches/{match.match_id}"
+    opendota_link = f"https://www.opendota.com/matches/{match.match_id}"
+
+    output_message += (
+        f"More information: [Dotabuff]({dotabuff_link}), [OpenDota]({opendota_link})"
+    )
 
     return output_message
 

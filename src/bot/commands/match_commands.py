@@ -4,6 +4,7 @@ from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services
 from src.bot.commands import helpers
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def run_last_match_command(update, context):
@@ -16,7 +17,7 @@ def run_last_match_command(update, context):
     user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
     if not user:
-        update.message.reply_text(constants.USER_NOT_REGISTERED_MESSAGE)
+        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
     response, status_code = endpoints.get_player_recent_matches_by_account_id(
         user.account_id
@@ -26,21 +27,25 @@ def run_last_match_command(update, context):
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
     output_message = helpers.create_match_message(response[0])
-    update.message.reply_text(output_message)
+    button = InlineKeyboardButton(
+        "Full match details", callback_data=("match " + str(response[0]["match_id"]))
+    )
+    markup = InlineKeyboardMarkup.from_button(button)
+    update.message.reply_text(output_message, reply_markup=markup)
 
 
 def run_get_match_by_match_id(update, context):
     chat_id = update.message.chat_id
     telegram_handle = update.message.from_user.username
 
-    if context.args:
-        try:
-            match_id = context.args[0]
-            match_id = int(match_id)
-        except ValueError:
-            update.message.reply_text(
-                "That isn't a match ID. Use `/match <match id here>`"
-            )
+    try:
+        match_id = context.args[0]
+        match_id = int(match_id)
+    except (IndexError, ValueError):
+        update.message.reply_markdown_v2(
+            "That isn't a match ID\. Use `/match <match id here>`"
+        )
+        return
 
     response, status_code = endpoints.get_match_by_id(match_id)
 
@@ -48,4 +53,4 @@ def run_get_match_by_match_id(update, context):
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
     output_message = helpers.create_match_detail_message(response)
-    update.message.reply_text(output_message)
+    update.message.reply_markdown_v2(output_message, disable_web_page_preview=True)

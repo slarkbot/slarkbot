@@ -2,7 +2,7 @@
 CHANGELOG
 
 
-# Next [1.0.6]
+# Next [1.0.7]
 
 # Env Vars
 
@@ -12,3 +12,4 @@ CHANGELOG
 
 # Commands
 
+# Commands
