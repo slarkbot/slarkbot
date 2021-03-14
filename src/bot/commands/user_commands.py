@@ -34,9 +34,9 @@ def run_register_command(update, context):
             account_id = SteamID.from_url(identifier).as_32
         else:
             # Check if the Steam API gives us a valid profile
-            vanity = resolve_steam_vanity_url(identifier)
-            if vanity is not None:
-                account_id = vanity
+            account_id_from_vanity = resolve_steam_vanity_url(identifier)
+            if account_id_from_vanity is not None:
+                account_id = account_id_from_vanity
 
         user.account_id = account_id
         save_user(user)
