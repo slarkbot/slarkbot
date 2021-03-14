@@ -138,7 +138,9 @@ def run_get_player_hero_winrate_command(update, context):
         hero = helpers.get_hero_by_name(hero_name)
 
         if not hero:
-            update.message.reply_markdown_v2("I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`")
+            update.message.reply_markdown_v2(
+                "I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`"
+            )
 
         response, status_code = endpoints.get_player_hero_stats(
             registered_user.account_id
@@ -149,13 +151,15 @@ def run_get_player_hero_winrate_command(update, context):
 
         hero_data = helpers.filter_hero_winrates(response, str(hero["id"]))
 
-        update.message.reply_text(helpers.format_winrate_response(hero_data, registered_user.telegram_handle))
+        update.message.reply_text(
+            helpers.format_winrate_response(hero_data, registered_user.telegram_handle)
+        )
     else:
         update.message.reply_markdown_v2(
             "No arguments given! Try `/winrate <hero name>` or `/winrate <username> <hero name>`"
         )
 
-        
+
 def run_get_player_steam_profile_command(update, context):
     try:
         telegram_handle = context.args[0]
@@ -171,4 +175,3 @@ def run_get_player_steam_profile_command(update, context):
         f"@{registered_user.telegram_handle}'s steam profile is "
         + SteamID(registered_user.account_id).community_url
     )
-   

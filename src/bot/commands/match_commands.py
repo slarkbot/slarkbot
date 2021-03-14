@@ -27,7 +27,9 @@ def run_last_match_command(update, context):
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
     output_message = helpers.create_match_message(response[0])
-    button = InlineKeyboardButton("Full match details", callback_data=("match " + str(response[0]["match_id"])))
+    button = InlineKeyboardButton(
+        "Full match details", callback_data=("match " + str(response[0]["match_id"]))
+    )
     markup = InlineKeyboardMarkup.from_button(button)
     update.message.reply_text(output_message, reply_markup=markup)
 

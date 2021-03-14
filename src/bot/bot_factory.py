@@ -1,5 +1,11 @@
 import os
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
+from telegram.ext import (
+    Updater,
+    CommandHandler,
+    CallbackQueryHandler,
+    MessageHandler,
+    Filters,
+)
 
 from src.bot import logger_factory
 from src.bot.commands import health_check_command
@@ -27,16 +33,20 @@ def create_bot():
     dp.add_handler(CommandHandler("status", health_check_command.run_health_check))
     dp.add_handler(CommandHandler("register", user_commands.run_register_command))
     dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command))
-    dp.add_handler(CommandHandler("winrate", user_commands.run_get_player_hero_winrate_command))
-    dp.add_handler(CommandHandler(
-        ["recents", "matches"], user_commands.run_get_player_recents_command
-    ))
+    dp.add_handler(
+        CommandHandler("winrate", user_commands.run_get_player_hero_winrate_command)
+    )
+    dp.add_handler(
+        CommandHandler(
+            ["recents", "matches"], user_commands.run_get_player_recents_command
+        )
+    )
     dp.add_handler(CommandHandler("help", help_command.run_help_command))
     dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
-    dp.add_handler(CommandHandler(
-        ["changes", "changelog"], changelog_command.run_changes_command
-    ))
+    dp.add_handler(
+        CommandHandler(["changes", "changelog"], changelog_command.run_changes_command)
+    )
     dp.add_handler(
         CommandHandler("profile", user_commands.run_get_player_steam_profile_command)
     )
@@ -55,8 +65,7 @@ def create_bot():
 
     dp.add_handler(
         CallbackQueryHandler(
-            match_callback.handle_match_details_callback,
-            pattern="(match )[0-9]+"
+            match_callback.handle_match_details_callback, pattern="(match )[0-9]+"
         )
     )
 

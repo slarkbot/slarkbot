@@ -55,7 +55,6 @@ def get_hero_by_name(hero_name):
                 return found_hero
 
 
-
 def filter_hero_winrates(hero_data, hero_id):
     for hero in hero_data:
         if hero["hero_id"] == hero_id:
@@ -202,7 +201,9 @@ def create_match_detail_message(match_data):
     dotabuff_link = f"https://www.dotabuff.com/matches/{match.match_id}"
     opendota_link = f"https://www.opendota.com/matches/{match.match_id}"
 
-    output_message += f"More information: [Dotabuff]({dotabuff_link}), [OpenDota]({opendota_link})"
+    output_message += (
+        f"More information: [Dotabuff]({dotabuff_link}), [OpenDota]({opendota_link})"
+    )
 
     return output_message
 
