@@ -10,3 +10,5 @@ register - Register your friend ID to your telegram handle. Example :: /register
 status - Checks to see if the backend of the bot is fully functional. OK message means everything is good
 rank - View your Rank. User must be registered to use.
 changes - View the most recent slarkbot changes.
+winrate - Check winrate with a given hero. User must be registered.
+profile - Get a link to your or someone else's steam profile

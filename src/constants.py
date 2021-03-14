@@ -20,7 +20,8 @@ HELP_TEXT = """
     `\/match <match_id>` :: Get detailed stats about the outcome of a match\n
     `\/lastmatch <user:optional>` :: Gets the last match someone played\. Defaults to you if no argument is given\. User must be registered for this to work \n
     `\/rank <user:optional>` :: Gets a user's current medal\. Defaults to you if no argument is given\. User must be registered for this to work \n
-    `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work
+    `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work\n
+    `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
     """
 
 
