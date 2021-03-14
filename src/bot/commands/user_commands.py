@@ -34,9 +34,9 @@ def run_register_command(update, context):
             account_id = SteamID.from_url(identifier).as_32
         else:
             # Check if the Steam API gives us a valid profile
-            v = resolve_steam_vanity_url(identifier)
-            if v is not None:
-                account_id = v
+            account_id_from_vanity = resolve_steam_vanity_url(identifier)
+            if account_id_from_vanity is not None:
+                account_id = account_id_from_vanity
 
         user.account_id = account_id
         save_user(user)
@@ -121,8 +121,6 @@ def run_get_player_rank_command(update, context):
 
 
 def run_get_player_steam_profile_command(update, context):
-    chat_id = update.message.chat_id
-
     try:
         telegram_handle = context.args[0]
     except (IndexError, ValueError):
