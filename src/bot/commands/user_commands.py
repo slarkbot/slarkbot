@@ -119,6 +119,7 @@ def run_get_player_rank_command(update, context):
     output_message = f"{persona_name} (@{registered_user.telegram_handle}) is {rank}"
     update.message.reply_text(output_message)
 
+
 def run_get_player_steam_profile_command(update, context):
     chat_id = update.message.chat_id
 
@@ -135,6 +136,6 @@ def run_get_player_steam_profile_command(update, context):
         )
 
     update.message.reply_text(
-        f"@{registered_user.telegram_handle}'s steam profile is " +
-        SteamID(registered_user.account_id).community_url
+        f"@{registered_user.telegram_handle}'s steam profile is "
+        + SteamID(registered_user.account_id).community_url
     )
