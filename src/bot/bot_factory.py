@@ -27,6 +27,7 @@ def create_bot():
     dp.add_handler(CommandHandler("status", health_check_command.run_health_check))
     dp.add_handler(CommandHandler("register", user_commands.run_register_command))
     dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command))
+    dp.add_handler(CommandHandler("winrate", user_commands.run_get_player_hero_winrate_command))
     dp.add_handler(CommandHandler(
         ["recents", "matches"], user_commands.run_get_player_recents_command
     ))

@@ -12,9 +12,13 @@ CHANGELOG
 - Results in F and C conversion are now rounded
 
 # Features
+- A handcrafted list of hero aliases to match against when a command needs a hero name
+
+# Commands
+- /winrate <username> <hero name>: check winrate with a given hero. User must be registered. 
+- /register can now convert between steamid32, steamid64, a full profile URL or the vanity part of the profile URL
 - Inline query for full match details on /lastmatch
 - Links to OpenDota and Dotabuff in /match
-- /register can now convert between steamid32, steamid64, a full profile URL or the vanity part of the profile URL
 
 # Commands
 - /changelog: alias for /changes

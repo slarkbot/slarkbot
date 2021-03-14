@@ -19,7 +19,8 @@ HELP_TEXT = """
     `\/recents <user:optional> <limit:optional>` :: Look up someone's most recent matches\. Defaults to 5 if limit is not defined and to you if user is not defined\. Must have account id registered using `/register`\. Example :: `\/recents`, `\/recents 10` for 10 most recent matches, `\/recents danvb` for Daniel's last games, `\/recents 20 KittyKirov` for Kirov's last 20 games\n
     `\/match <match_id>` :: Get detailed stats about the outcome of a match\n
     `\/lastmatch <user:optional>` :: Gets the last match someone played\. Defaults to you if no argument is given\. User must be registered for this to work \n
-    `\/rank <user:optional>` :: Gets a user's current medal\. Defaults to you if no argument is given\. User must be registered for this to work
+    `\/rank <user:optional>` :: Gets a user's current medal\. Defaults to you if no argument is given\. User must be registered for this to work \n
+    `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work
     """
 
 
@@ -32,6 +33,7 @@ class API_URI_ENDPOINTS(Enum):
     HERO_STATS = "heroStats"
     CONSTANTS = "constants/%s"
     PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/recentMatches"
+    PLAYER_HERO_STATS = "players/%s/heroes"
 
 
 class QUERY_PARAMETERS(Enum):
@@ -58,6 +60,7 @@ JSON_CONSTANT_DATA_FILE_DIR = "src/constant_data/"
 
 class JSON_CONSTANT_DATA_FILE_MAPPING(Enum):
     HERO_DATA = "heroes.json"
+    HERO_ALIASES = "aliases.json"
 
 
 ENVIRONMENT_VARIABLES_CONFIG = {
