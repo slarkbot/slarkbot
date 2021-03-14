@@ -70,9 +70,7 @@ def run_get_player_recents_command(update, context):
             pass
 
     if not registered_user:
-        update.message.reply_text(
-            "Could not find that username. If you're looking for your own matches, register your telegram handle using `/register`"
-        )
+        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
     account_id = registered_user.account_id
 
@@ -100,16 +98,14 @@ def run_get_player_rank_command(update, context):
     registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
     if not registered_user:
-        update.message.reply_text(
-            "Could not find an account ID. Register your telegram handle using `/register`"
-        )
+        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
     account_id = registered_user.account_id
 
     response, status_code = endpoints.get_player_rank_by_account_id(account_id)
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
-        update.message.reply_text("An unknown error occured, sorry D:")
+        update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
     persona_name = response["profile"]["personaname"]
     rank_tier = response["rank_tier"]
