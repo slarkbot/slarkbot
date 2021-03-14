@@ -33,22 +33,25 @@ def get_hero_data(hero_id):
 
 
 def get_hero_by_name(hero_name):
+    hero_name = hero_name.lower()
+
     hero_data_file = (
         JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_DATA.value
     )
     hero_json = read_json_file(hero_data_file)
     for hero in hero_json:
-        if hero["localized_name"].lower() == hero_name.lower():
+        if hero["localized_name"].lower() == hero_name:
             return hero
 
     hero_alias_file = (
         JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_ALIASES.value
     )
     alias_json = read_json_file(hero_alias_file)
-    for alias in alias_json:
-        if alias["name"].lower() == hero_name.lower():
-            hero = get_hero_data(alias["id"])
-            return hero
+    for hero in alias_json:
+        for alias in hero["aliases"]:
+            if alias.lower() == hero_name:
+                found_hero = get_hero_data(hero["id"])
+                return found_hero
 
 
 

@@ -1,326 +1,246 @@
 [
   {
     "id": 1,
-    "name": "AM"
-  },
-  {
-    "id": 1,
-    "name": "Antimage"
-  },
-  {
-    "id": 1,
-    "name": "Andymage"
-  },
-  {
-    "id": 1,
-    "name": "Andy Mage"
+    "aliases": ["AM", "Antimage", "Andymage", "Andy Mage"]
   },
   {
     "id": 4,
-    "name": "BS"
+    "aliases": ["BS"]
   },
   {
     "id": 5,
-    "name": "CM"
-  },
-  {
-    "id": 5,
-    "name": "Rylai"
+    "aliases": ["CM", "Rylai"]
   },
   {
     "id": 6,
-    "name": "Drow"
+    "aliases": ["Drow"]
   },
   {
     "id": 9,
-    "name": "potm"
+    "aliases": ["potm"]
   },
   {
     "id": 11,
-    "name": "SF"
-  },
-  {
-    "id": 11,
-    "name": "Shadowfiend"
-  },
-  {
-    "id": 11,
-    "name": "Shadow Friend"
+    "aliases": ["SF", "Shadowfiend", "Shadow Friend"]
   },
   {
     "id": 12,
-    "name": "PL"
+    "aliases": ["PL"]
   },
   {
     "id": 16,
-    "name": "SK"
+    "aliases": ["SK"]
   },
   {
     "id": 17,
-    "name": "Storm"
+    "aliases": ["Storm"]
   },
   {
     "id": 20,
-    "name": "Venge"
+    "aliases": ["Venge"]
   },
   {
     "id": 21,
-    "name": "Windrunner"
+    "aliases": ["Windrunner"]
   },
   {
     "id": 23,
-    "name": "Kunka"
+    "aliases": ["Kunka"]
   },
   {
     "id": 29,
-    "name": "Tide"
+    "aliases": ["Tide"]
   },
   {
     "id": 30,
-    "name": "WD"
+    "aliases": ["WD"]
   },
   {
     "id": 32,
-    "name": "Richard"
+    "aliases": ["Richard"]
   },
   {
     "id": 36,
-    "name": "Necrolyte"
+    "aliases": ["Necrolyte"]
   },
   {
     "id": 39,
-    "name": "qop"
+    "aliases": ["qop"]
   },
   {
     "id": 42,
-    "name": "Skeleton King"
-  },
-  {
-    "id": 42,
-    "name": "WK"
+    "aliases": ["Skeleton King", "WK"]
   },
   {
     "id": 43,
-    "name": "Krobelus"
-  },
-  {
-    "id": 43,
-    "name": "Krob"
+    "aliases": ["Krobelus", "Krob"]
   },
   {
     "id": 44,
-    "name": "PA"
+    "aliases": ["PA"]
   },
   {
     "id": 46,
-    "name": "TA"
-  },
-  {
-    "id": 46,
-    "name": "Templar"
+    "aliases": ["TA", "Templar"]
   },
   {
     "id": 49,
-    "name": "DK"
-  },
-  {
-    "id": 49,
-    "name": "Davion"
+    "aliases": ["DK", "Davion"]
   },
   {
     "id": 52,
-    "name": "Lesh"
+    "aliases": ["Lesh"]
   },
   {
     "id": 53,
-    "name": "Furion"
-  },
-  {
-    "id": 53,
-    "name": "Natures Prophet"
-  },
-  {
-    "id": 53,
-    "name": "NP"
+    "aliases": ["Furion", "NP", "Natures Prophet"]
   },
   {
     "id": 54,
-    "name": "Naix"
+    "aliases": ["Naix"]
   },
   {
     "id": 57,
-    "name": "Omni"
+    "aliases": ["Omni"]
   },
   {
     "id": 58,
-    "name": "Ench"
+    "aliases": ["Ench"]
   },
   {
     "id": 60,
-    "name": "Nightstalker"
+    "aliases": ["Nightstalker"]
   },
   {
     "id": 61,
-    "name": "Brood"
+    "aliases": ["Brood"]
   },
   {
     "id": 62,
-    "name": "Gondar"
-  },
-  {
-    "id": 62,
-    "name": "BH"
-  },
-  {
-    "id": 62,
-    "name": "Bounty"
+    "aliases": ["Gondar", "BH", "Bounty"]
   },
   {
     "id": 65,
-    "name": "Bat"
+    "aliases": ["Bat"]
   },
   {
     "id": 67,
-    "name": "slkjdskjfsdkfjsld"
+    "aliases": ["slkjdskjfsdkfjsld"]
   },
   {
     "id": 68,
-    "name": "AA"
+    "aliases": ["AA"]
   },
   {
     "id": 69,
-    "name": "Doom Bringer"
-  },
-  {
-    "id": 69,
-    "name": "Doombringer"
+    "aliases": ["Doom Bringer", "Doombringer"]
   },
   {
     "id": 71,
-    "name": "SB"
+    "aliases": ["SB"]
   },
   {
     "id": 72,
-    "name": "Gyro"
+    "aliases": ["Gyro"]
   },
   {
     "id": 73,
-    "name": "Alch"
+    "aliases": ["Alch"]
   },
   {
     "id": 76,
-    "name": "Outworld Devourer"
-  },
-  {
-    "id": 76,
-    "name": "OD"
-  },
-  {
-    "id": 76,
-    "name": "Outhouse Decorator"
-  },
-  {
-    "id": 76,
-    "name": "Outsourced Developer"
+    "aliases": ["Outworld Devourer", "OD", "Outhouse Decorator", "Outsourced Developer"]
   },
   {
     "id": 79,
-    "name": "SD"
+    "aliases": ["SD"]
   },
   {
     "id": 80,
-    "name": "Druid"
+    "aliases": ["Druid"]
   },
   {
     "id": 81,
-    "name": "CK"
+    "aliases": ["CK"]
   },
   {
     "id": 83,
-    "name": "Treant"
+    "aliases": ["Treant"]
   },
   {
     "id": 84,
-    "name": "Ogre"
+    "aliases": ["Ogre"]
   },
   {
     "id": 88,
-    "name": "Nyx"
+    "aliases": ["Nyx"]
   },
   {
     "id": 89,
-    "name": "Naga"
+    "aliases": ["Naga"]
   },
   {
     "id": 90,
-    "name": "kotl"
+    "aliases": ["kotl"]
   },
   {
     "id": 91,
-    "name": "Wisp"
+    "aliases": ["Wisp"]
   },
   {
     "id": 94,
-    "name": "Dusa"
+    "aliases": ["Dusa"]
   },
   {
     "id": 95,
-    "name": "Troll"
+    "aliases": ["Troll"]
   },
   {
     "id": 96,
-    "name": "Centaur"
+    "aliases": ["Centaur"]
   },
   {
     "id": 99,
-    "name": "Bristle"
+    "aliases": ["Bristle"]
   },
   {
     "id": 101,
-    "name": "Sky"
+    "aliases": ["Sky"]
   },
   {
     "id": 103,
-    "name": "ET"
+    "aliases": ["ET"]
   },
   {
     "id": 104,
-    "name": "LC"
+    "aliases": ["LC"]
   },
   {
     "id": 106,
-    "name": "Ember"
+    "aliases": ["Ember"]
   },
   {
     "id": 109,
-    "name": "TB"
+    "aliases": ["TB"]
   },
   {
     "id": 112,
-    "name": "Wyvern"
-  },
-  {
-    "id": 112,
-    "name": "WW"
+    "aliases": ["Wyvern", "WW"]
   },
   {
     "id": 114,
-    "name": "MK"
-  },
-  {
-    "id": 114,
-    "name": "Monkey"
+    "aliases": ["MK", "Monkey"]
   },
   {
     "id": 119,
-    "name": "Willow"
+    "aliases": ["Willow"]
   },
   {
     "id": 120,
-    "name": "Pango"
+    "aliases": ["Pango"]
   },
   {
     "id": 121,
-    "name": "Grim"
+    "aliases": ["Grim"]
   }
 ]
