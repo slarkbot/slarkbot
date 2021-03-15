@@ -52,8 +52,6 @@ def run_register_command(update, context):
 
 
 def run_get_player_recents_command(update, context):
-    chat_id = update.message.chat_id
-
     # Assume defaults
     registered_user = user_services.lookup_user_by_telegram_handle(
         update.message.from_user.username
@@ -89,7 +87,6 @@ def run_get_player_recents_command(update, context):
 
 
 def run_get_player_rank_command(update, context):
-    chat_id = update.message.chat_id
     try:
         telegram_handle = context.args[0]
     except (IndexError, ValueError):
@@ -117,8 +114,6 @@ def run_get_player_rank_command(update, context):
 
 
 def run_get_player_hero_winrate_command(update, context):
-    chat_id = update.message.chat_id
-
     if context.args:
         hero_name_parts = context.args
         registered_user = user_services.lookup_user_by_telegram_handle(context.args[0])
