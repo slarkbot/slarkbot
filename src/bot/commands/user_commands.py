@@ -156,7 +156,7 @@ def run_get_player_hero_winrate_command(update, context):
         )
     else:
         update.message.reply_markdown_v2(
-            "No arguments given! Try `/winrate <hero name>` or `/winrate <username> <hero name>`"
+            "No arguments given\! Try `/winrate <hero name>` or `/winrate <username> <hero name>`"
         )
 
 
