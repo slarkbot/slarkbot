@@ -134,7 +134,7 @@ def run_get_player_hero_winrate_command(update, context):
 
         if not hero:
             update.message.reply_markdown_v2(
-                "I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`"
+                "I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`\. If you tried to tag a user, they may not be registered\."
             )
 
         response, status_code = endpoints.get_player_hero_stats(
