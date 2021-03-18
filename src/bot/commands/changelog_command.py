@@ -1,6 +1,6 @@
 import os
 
-from . import helpers
+from telegram.utils.helpers import escape_markdown
 
 
 def run_changes_command(update, context):
@@ -14,6 +14,6 @@ def run_changes_command(update, context):
     with open(archive_path, "r") as f:
         content = f.read()
 
-    content = helpers.escape_markdown(content)
+    content = escape_markdown(content, version=2)
 
     update.message.reply_text(content, parse_mode="MarkdownV2")
