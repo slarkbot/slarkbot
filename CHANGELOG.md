@@ -13,5 +13,6 @@ CHANGELOG
 - Fix markdown escaping in various commands
 
 # Features
+- Say nice where appropriate :)
 
 # Commands
