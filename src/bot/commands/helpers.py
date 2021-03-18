@@ -1,6 +1,5 @@
 import json
 import datetime
-import re
 from src import constants
 from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FILE_DIR
 from src.lib.endpoints import get_player_by_account_id
