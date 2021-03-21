@@ -42,7 +42,7 @@ def create_bot():
             ["recents", "matches"], user_commands.run_get_player_recents_command
         )
     )
-    dp.add_handler(CommandHandler("help", help_command.run_help_command))
+    dp.add_handler(CommandHandler(["help", "start"], help_command.run_help_command))
     dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
     dp.add_handler(
