@@ -16,3 +16,4 @@ CHANGELOG
 - Say nice where appropriate :)
 
 # Commands
+- /start: alias for /help in case a user PMs the bot
