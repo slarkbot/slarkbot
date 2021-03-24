@@ -10,9 +10,11 @@ def convert_to_freedom_units(update, context):
     )
 
     if match:
+        output = ""
         for group in match:
             degrees_c = float(re.findall("\x2d?[0-9]*\x2e?[0-9]+", group)[0])
             converted_units = (degrees_c * (9 / 5)) + 32
 
-            output = f"{degrees_c} is {round(converted_units, 3)}°F in freedom units"
-            update.message.reply_text(output)
+            output += f"{degrees_c} is {round(converted_units, 3)}°F in freedom units\n"
+
+        update.message.reply_text(output)
