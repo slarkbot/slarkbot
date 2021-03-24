@@ -17,6 +17,7 @@ from src.bot.commands import changelog_command
 from src.bot.message_handlers.freedom_units import convert_to_freedom_units
 from src.bot.message_handlers.liberal_units import convert_to_liberal_units
 from src.bot.message_handlers.youre_welcome import say_youre_welcome
+from src.bot.message_handlers.nice import say_nice
 
 from src.bot.callback_handlers import match_callback
 
@@ -41,7 +42,7 @@ def create_bot():
             ["recents", "matches"], user_commands.run_get_player_recents_command
         )
     )
-    dp.add_handler(CommandHandler("help", help_command.run_help_command))
+    dp.add_handler(CommandHandler(["help", "start"], help_command.run_help_command))
     dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
     dp.add_handler(
@@ -62,6 +63,7 @@ def create_bot():
     dp.add_handler(
         MessageHandler(Filters.text & ~Filters.command, convert_to_liberal_units), 3
     )
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, say_nice), 4)
 
     dp.add_handler(
         CallbackQueryHandler(

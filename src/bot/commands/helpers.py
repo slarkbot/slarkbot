@@ -1,6 +1,5 @@
 import json
 import datetime
-import re
 from src import constants
 from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FILE_DIR
 from src.lib.endpoints import get_player_by_account_id
@@ -70,10 +69,6 @@ def format_winrate_response(hero_data, telegram_handle):
     winrate = hero_data["win"] / hero_data["games"] * 100
     winrate = round(winrate, 3)
     return f"@{telegram_handle} has a {winrate}% winrate as {hero_name} ({hero_data['win']} wins over {hero_data['games']} games)"
-
-
-def escape_markdown(text):
-    return re.escape(text)
 
 
 def convert_timestamp_to_datetime(timestamp):
@@ -196,7 +191,7 @@ def create_match_detail_message(match_data):
         output_message += f"{team} | {player_name} | {hero_name} | {kda} | {cs} | {net_worth} | {gpm} | {xpm}\n"
 
     # Escape markdown up to this point
-    output_message = escape_markdown(output_message)
+    output_message = escape_markdown(output_message, version=2)
 
     dotabuff_link = f"https://www.dotabuff.com/matches/{match.match_id}"
     opendota_link = f"https://www.opendota.com/matches/{match.match_id}"

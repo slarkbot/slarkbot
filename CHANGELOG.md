@@ -2,14 +2,12 @@
 CHANGELOG
 
 
-# Next [1.0.7]
+# next [1.0.9]
 
 # Env Vars
 
 # Bugfixes
 
 # Features
-
-# Commands
 
 # Commands
