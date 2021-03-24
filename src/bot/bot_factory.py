@@ -63,9 +63,7 @@ def create_bot():
     dp.add_handler(
         MessageHandler(Filters.text & ~Filters.command, convert_to_liberal_units), 3
     )
-    dp.add_handler(
-        MessageHandler(Filters.text & ~Filters.command, say_nice), 4
-    )
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, say_nice), 4)
 
     dp.add_handler(
         CallbackQueryHandler(
