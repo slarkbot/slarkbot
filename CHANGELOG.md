@@ -2,18 +2,12 @@
 CHANGELOG
 
 
-# Next [1.0.7]
+# next [1.0.9]
 
 # Env Vars
 
 # Bugfixes
-- Fixed error message when trying to use /winrate without any arguments
-- Removed redundant variables from various commands
-- Make F and C conversion work with multiple matches per handler
-- Fix markdown escaping in various commands
 
 # Features
-- Say nice where appropriate :)
 
 # Commands
-- /start: alias for /help in case a user PMs the bot
