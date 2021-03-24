@@ -8,7 +8,6 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def run_last_match_command(update, context):
-    chat_id = update.message.chat_id
     try:
         telegram_handle = context.args[0]
     except (IndexError, ValueError):
@@ -35,7 +34,6 @@ def run_last_match_command(update, context):
 
 
 def run_get_match_by_match_id(update, context):
-    chat_id = update.message.chat_id
     telegram_handle = update.message.from_user.username
 
     try:

@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "aliases": ["AM", "Antimage", "Andymage", "Andy Mage"]
+    "aliases": ["AM", "Antimage", "Andymage", "Andy Mage", "Magina"]
   },
   {
     "id": 4,
@@ -34,6 +34,10 @@
   {
     "id": 17,
     "aliases": ["Storm"]
+  },
+  {
+    "id": 19,
+    "aliases": ["Tony", "Luka"]
   },
   {
     "id": 20,
@@ -100,6 +104,10 @@
     "aliases": ["Naix"]
   },
   {
+    "id": 55,
+    "aliases": ["DS"]
+  },
+  {
     "id": 57,
     "aliases": ["Omni"]
   },
@@ -146,6 +154,10 @@
   {
     "id": 73,
     "aliases": ["Alch"]
+  },
+  {
+    "id": 74,
+    "aliases": ["Injoker"]
   },
   {
     "id": 76,
