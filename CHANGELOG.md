@@ -7,8 +7,8 @@ CHANGELOG
 # Env Vars
 
 # Bugfixes
+- Slarkbot now responds to you when you thank him in different ways
 
 # Features
-- Slarkbot now responds to you when you thank him in different ways
 
 # Commands
