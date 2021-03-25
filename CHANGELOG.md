@@ -9,7 +9,7 @@ CHANGELOG
 # Bugfixes
 
 # Features
-
+- Slarkbot now responds to you when you thank him in different ways
 # Commands
 
 # Commands
