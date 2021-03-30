@@ -37,6 +37,8 @@ This option creates a postgres database in a dockerized container. Requires dock
 ### With Standard PostgreSQL Server
  - Run `./scripts/standup_db.sh` from root of project directory
 
+Use `./scripts/drop_db.sh` at any time to remove the database. This does not remove the docker volume.
+
 ## Testing
 Test cases uses default Python testing module `unittest` but uses `pytest` as the test runner
  - Write your unit tests
