@@ -29,9 +29,10 @@ The `docs` directory contains some handy documentation for various purposes.
 
 
 ## Running the Database
-### With Docker - still wip
-This option creates a postgres database in a dockerized container, requires docker desktop
- - Run `./scripts/docker_up.sh` from root of project directory
+### With Docker-compose
+This option creates a postgres database in a dockerized container. Requires docker desktop
+ - Run `docker-compose up -d` to bring up the container.
+ - Use `docker-compose down` to stop the database server.
 
 ### With Standard PostgreSQL Server
  - Run `./scripts/standup_db.sh` from root of project directory
