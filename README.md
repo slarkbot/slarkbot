@@ -39,6 +39,9 @@ This option creates a postgres database in a dockerized container. Requires dock
 
 Use `./scripts/drop_db.sh` at any time to remove the database. This does not remove the docker volume.
 
+### Seeding Data
+ - `./scripts/seed.py` will seed hero and alias data into the slarkbot database.
+
 ## Testing
 Test cases uses default Python testing module `unittest` but uses `pytest` as the test runner
  - Write your unit tests
