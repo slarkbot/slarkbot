@@ -34,6 +34,10 @@ This option creates a postgres database in a dockerized container. Requires dock
  - Run `docker-compose up -d` to bring up the container.
  - Use `docker-compose down` to stop the database server.
 
+NOTE: If you already have a PostgreSQL server, you should utilize a different port. If you
+have trouble connecting to the container, it uses 5433 rather than the default 5432. Double
+check your connection info!
+
 ### With Standard PostgreSQL Server
  - Run `./scripts/standup_db.sh` from root of project directory
 
