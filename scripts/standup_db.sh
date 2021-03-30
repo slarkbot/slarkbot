@@ -3,8 +3,9 @@
 cd ./scripts
 source ../.env
 
-dropdb $POSTGRES_DB
 psql -U $POSTGRES_USER \
+    -h localhost \
     -p $DATABASE_PORT \
     -v db_name=$POSTGRES_DB \
-    -f create_database.sql
+    -d $POSTGRES_DB \
+    -f create_database.sql -W
