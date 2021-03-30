@@ -29,12 +29,22 @@ The `docs` directory contains some handy documentation for various purposes.
 
 
 ## Running the Database
-### With Docker - still wip
-This option creates a postgres database in a dockerized container, requires docker desktop
- - Run `./scripts/docker_up.sh` from root of project directory
+### With Docker-compose
+This option creates a postgres database in a dockerized container. Requires docker desktop
+ - Run `docker-compose up -d` to bring up the container.
+ - Use `docker-compose down` to stop the database server.
+
+NOTE: If you already have a PostgreSQL server, you should utilize a different port. If you
+have trouble connecting to the container, it uses 5433 rather than the default 5432. Double
+check your connection info!
 
 ### With Standard PostgreSQL Server
  - Run `./scripts/standup_db.sh` from root of project directory
+
+Use `./scripts/drop_db.sh` at any time to remove the database. This does not remove the docker volume.
+
+### Seeding Data
+ - `./scripts/seed.py` will seed hero and alias data into the slarkbot database.
 
 ## Testing
 Test cases uses default Python testing module `unittest` but uses `pytest` as the test runner
