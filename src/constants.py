@@ -22,6 +22,7 @@ HELP_TEXT = """
     `\/rank <user:optional>` :: Gets a user's current medal\. Defaults to you if no argument is given\. User must be registered for this to work \n
     `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work\n
     `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
+    `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game. Example :: \/build <hero name or alias>\n
     """
 
 
