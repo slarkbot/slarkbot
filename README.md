@@ -1,15 +1,17 @@
 
 # Slark Bot
 
-Telegram Bot for Dota2
-Get DOTA statistics about matches, players, etc
+Telegram Bot for Dota2. Get DOTA statistics about matches, players, etc
 
 The `docs` directory contains some handy documentation for various purposes.
 
 ## Local Development
- - No api key needed, however rate limits apply
-   - Api documentation can be found [here](https://docs.opendota.com/#)
+ - No OpenDota api key needed, however rate limits apply
+ - Api documentation can be found [here](https://docs.opendota.com/#)
+ - A Steam API key is required and can be found [here](https://steamcommunity.com/dev/apikey)
 
+### Windows Users
+ - It is STRONGLY encouraged to use a linux like environment. Contributors on Windows systems use Windows subsystem for Linux (WSL).
 
 ## Installation & Environment Configuration 
  - Create a virtual environment using `python -m venv venv`
@@ -17,6 +19,13 @@ The `docs` directory contains some handy documentation for various purposes.
  - `pip install -r requirements.txt` to install dependencies
  - `cp .env.example .env` and change values as needed
  - `pre-commit install` adds the testing and lint hooks to pre-push (to make sure you do the right thing)
+
+## Scripts
+Scripts are made available to the command line via `setup.py`. To use these scripts, run `python setup.py install`.
+ - `slarbot_reseed` :: Drop, recreate, and reseed the slarkbot database
+
+Usage for these scripts are as follows:
+`$ slarkbot_reseed`
 
 ## Environment Variables
  - `OPEN_DOTA_API_BASE_URL` :: Base url for OpenDota API
