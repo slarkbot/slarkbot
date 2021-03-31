@@ -276,27 +276,19 @@ def create_suggested_build_message(hero_name, item_data):
         late_game_items
     )
 
-    mapped_start_game_items = map_item_ids_to_item_names(
-        most_bought_start_game_items)
-    mapped_early_game_items = map_item_ids_to_item_names(
-        most_bought_early_game_items)
-    mapped_mid_game_items = map_item_ids_to_item_names(
-        most_bought_mid_game_items)
-    mapped_late_game_items = map_item_ids_to_item_names(
-        most_bought_late_game_items)
+    mapped_start_game_items = map_item_ids_to_item_names(most_bought_start_game_items)
+    mapped_early_game_items = map_item_ids_to_item_names(most_bought_early_game_items)
+    mapped_mid_game_items = map_item_ids_to_item_names(most_bought_mid_game_items)
+    mapped_late_game_items = map_item_ids_to_item_names(most_bought_late_game_items)
 
     output_message = f"Recommended items for {hero_name}\n"
 
     # output_message += "**Start game items**\n"
     # output_message += " -> ".join(mapped_start_game_items)
 
-    output_message += create_build_section(
-        "Start game items", mapped_start_game_items)
-    output_message += create_build_section(
-        "Early game items", mapped_early_game_items)
-    output_message += create_build_section(
-        "Mid game items", mapped_mid_game_items)
-    output_message += create_build_section(
-        "Late game items", mapped_late_game_items)
+    output_message += create_build_section("Start game items", mapped_start_game_items)
+    output_message += create_build_section("Early game items", mapped_early_game_items)
+    output_message += create_build_section("Mid game items", mapped_mid_game_items)
+    output_message += create_build_section("Late game items", mapped_late_game_items)
 
     return output_message
