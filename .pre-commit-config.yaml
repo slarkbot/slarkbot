@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: test
         name: run tests
-        entry: pytest --ignore=setup.py
+        entry: pytest
         language: python
         types: [python]
         stages: [push]
@@ -18,4 +18,3 @@ repos:
         types: [python]
         stages: [push]
         always_run: true
-          
