@@ -92,8 +92,7 @@ def run_get_player_rank_command(update, context):
     except (IndexError, ValueError):
         telegram_handle = update.message.from_user.username
 
-    registered_user = user_services.lookup_user_by_telegram_handle(
-        telegram_handle)
+    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
     if not registered_user:
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
@@ -121,8 +120,7 @@ def run_get_player_hero_winrate_command(update, context):
         )
 
     hero_name_parts = context.args
-    registered_user = user_services.lookup_user_by_telegram_handle(
-        context.args[0])
+    registered_user = user_services.lookup_user_by_telegram_handle(context.args[0])
 
     if registered_user:
         # If there's a username in the args, remove it now
@@ -143,9 +141,7 @@ def run_get_player_hero_winrate_command(update, context):
             "I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`\. If you tried to tag a user, they may not be registered\."
         )
 
-    response, status_code = endpoints.get_player_hero_stats(
-        registered_user.account_id
-    )
+    response, status_code = endpoints.get_player_hero_stats(registered_user.account_id)
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
@@ -153,8 +149,7 @@ def run_get_player_hero_winrate_command(update, context):
     hero_data = helpers.filter_hero_winrates(response, str(hero["id"]))
 
     update.message.reply_text(
-        helpers.format_winrate_response(
-            hero_data, registered_user.telegram_handle)
+        helpers.format_winrate_response(hero_data, registered_user.telegram_handle)
     )
 
 
@@ -164,8 +159,7 @@ def run_get_player_steam_profile_command(update, context):
     except (IndexError, ValueError):
         telegram_handle = update.message.from_user.username
 
-    registered_user = user_services.lookup_user_by_telegram_handle(
-        telegram_handle)
+    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
 
     if not registered_user:
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
