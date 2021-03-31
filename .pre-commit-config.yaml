@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: test
         name: run tests
-        entry: pytest ./src/test  
+        entry: pytest .
         language: python
         types: [python]
         stages: [push]
