@@ -45,8 +45,7 @@ def main():
     all_aliases = []
     for alias_obj in aliases:
         for alias in alias_obj["aliases"]:
-            all_aliases.append(
-                {"hero_id": alias_obj["id"], "alias": alias.lower()})
+            all_aliases.append({"hero_id": alias_obj["id"], "alias": alias.lower()})
 
     all_items = []
     for item_name, item_data in items.items():
