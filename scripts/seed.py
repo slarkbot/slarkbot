@@ -37,8 +37,7 @@ def main():
 
     all_items = []
     for item_name, item_data in items.items():
-        display_name = item_data.get(
-            "dname") or item_name.replace("_", " ").title()
+        display_name = item_data.get("dname") or item_name.replace("_", " ").title()
         new_item = {"id": item_data["id"], "item_name": display_name}
         all_items.append(new_item)
 
