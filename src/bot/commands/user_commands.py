@@ -92,7 +92,8 @@ def run_get_player_rank_command(update, context):
     except (IndexError, ValueError):
         telegram_handle = update.message.from_user.username
 
-    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
+    registered_user = user_services.lookup_user_by_telegram_handle(
+        telegram_handle)
 
     if not registered_user:
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
@@ -114,45 +115,47 @@ def run_get_player_rank_command(update, context):
 
 
 def run_get_player_hero_winrate_command(update, context):
-    if context.args:
-        hero_name_parts = context.args
-        registered_user = user_services.lookup_user_by_telegram_handle(context.args[0])
-
-        if registered_user:
-            # If there's a username in the args, remove it now
-            hero_name_parts.pop(0)
-        else:
-            registered_user = user_services.lookup_user_by_telegram_handle(
-                update.message.from_user.username
-            )
-
-        if not registered_user:
-            update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
-
-        hero_name = " ".join(hero_name_parts)
-        hero = helpers.get_hero_by_name(hero_name)
-
-        if not hero:
-            update.message.reply_markdown_v2(
-                "I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`\. If you tried to tag a user, they may not be registered\."
-            )
-
-        response, status_code = endpoints.get_player_hero_stats(
-            registered_user.account_id
-        )
-
-        if status_code != constants.HTTP_STATUS_CODES.OK.value:
-            update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
-
-        hero_data = helpers.filter_hero_winrates(response, str(hero["id"]))
-
-        update.message.reply_text(
-            helpers.format_winrate_response(hero_data, registered_user.telegram_handle)
-        )
-    else:
+    if not context.args:
         update.message.reply_markdown_v2(
             "No arguments given\! Try `/winrate <hero name>` or `/winrate <username> <hero name>`"
         )
+
+    hero_name_parts = context.args
+    registered_user = user_services.lookup_user_by_telegram_handle(
+        context.args[0])
+
+    if registered_user:
+        # If there's a username in the args, remove it now
+        hero_name_parts.pop(0)
+    else:
+        registered_user = user_services.lookup_user_by_telegram_handle(
+            update.message.from_user.username
+        )
+
+    if not registered_user:
+        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
+
+    hero_name = " ".join(hero_name_parts)
+    hero = helpers.get_hero_by_name(hero_name)
+
+    if not hero:
+        update.message.reply_markdown_v2(
+            "I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`\. If you tried to tag a user, they may not be registered\."
+        )
+
+    response, status_code = endpoints.get_player_hero_stats(
+        registered_user.account_id
+    )
+
+    if status_code != constants.HTTP_STATUS_CODES.OK.value:
+        update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
+
+    hero_data = helpers.filter_hero_winrates(response, str(hero["id"]))
+
+    update.message.reply_text(
+        helpers.format_winrate_response(
+            hero_data, registered_user.telegram_handle)
+    )
 
 
 def run_get_player_steam_profile_command(update, context):
@@ -161,7 +164,8 @@ def run_get_player_steam_profile_command(update, context):
     except (IndexError, ValueError):
         telegram_handle = update.message.from_user.username
 
-    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
+    registered_user = user_services.lookup_user_by_telegram_handle(
+        telegram_handle)
 
     if not registered_user:
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
