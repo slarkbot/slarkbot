@@ -1,4 +1,3 @@
-
 from src.bot.models.sessions import create_session
 from src.bot.models.hero import Hero
 
