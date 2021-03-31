@@ -12,3 +12,4 @@ CHANGELOG
 # Features
 
 # Commands
+- build: Get suggested item recommendations for heroes
