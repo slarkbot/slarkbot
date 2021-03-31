@@ -13,6 +13,7 @@ from src.bot.commands import user_commands
 from src.bot.commands import help_command
 from src.bot.commands import match_commands
 from src.bot.commands import changelog_command
+from src.bot.commands import hero_commands
 
 from src.bot.message_handlers.freedom_units import convert_to_freedom_units
 from src.bot.message_handlers.liberal_units import convert_to_liberal_units
@@ -51,6 +52,7 @@ def create_bot():
     dp.add_handler(
         CommandHandler("profile", user_commands.run_get_player_steam_profile_command)
     )
+    dp.add_handler(CommandHandler("build", hero_commands.run_suggested_builds_command))
 
     # Group handlers with the same trigger separately
     # to ensure they don't conflict with each other

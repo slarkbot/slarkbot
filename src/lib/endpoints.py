@@ -57,3 +57,9 @@ def get_player_hero_stats(id):
     uri = API_URI_ENDPOINTS.PLAYER_HERO_STATS.value % id
     response = request.make_request(uri)
     return response.json(), response.status_code
+
+
+def get_hero_item_popularity(id):
+    uri = API_URI_ENDPOINTS.HERO_ITEM_POPULARITY.value % id
+    response = request.make_request(uri)
+    return response.json(), response.status_code
