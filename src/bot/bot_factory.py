@@ -32,38 +32,27 @@ def create_bot():
     updater = Updater(bot_token, use_context=True)
     dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler(
-        "status", health_check_command.run_health_check))
-    dp.add_handler(CommandHandler(
-        "register", user_commands.run_register_command))
-    dp.add_handler(CommandHandler(
-        "rank", user_commands.run_get_player_rank_command))
+    dp.add_handler(CommandHandler("status", health_check_command.run_health_check))
+    dp.add_handler(CommandHandler("register", user_commands.run_register_command))
+    dp.add_handler(CommandHandler("rank", user_commands.run_get_player_rank_command))
     dp.add_handler(
-        CommandHandler(
-            "winrate", user_commands.run_get_player_hero_winrate_command)
+        CommandHandler("winrate", user_commands.run_get_player_hero_winrate_command)
     )
     dp.add_handler(
         CommandHandler(
             ["recents", "matches"], user_commands.run_get_player_recents_command
         )
     )
-    dp.add_handler(CommandHandler(
-        ["help", "start"], help_command.run_help_command))
-    dp.add_handler(CommandHandler(
-        "lastmatch", match_commands.run_last_match_command))
-    dp.add_handler(CommandHandler(
-        "match", match_commands.run_get_match_by_match_id))
+    dp.add_handler(CommandHandler(["help", "start"], help_command.run_help_command))
+    dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
+    dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
     dp.add_handler(
-        CommandHandler(["changes", "changelog"],
-                       changelog_command.run_changes_command)
+        CommandHandler(["changes", "changelog"], changelog_command.run_changes_command)
     )
     dp.add_handler(
-        CommandHandler(
-            "profile", user_commands.run_get_player_steam_profile_command)
+        CommandHandler("profile", user_commands.run_get_player_steam_profile_command)
     )
-    dp.add_handler(
-        CommandHandler("build", hero_commands.run_suggested_builds_command)
-    )
+    dp.add_handler(CommandHandler("build", hero_commands.run_suggested_builds_command))
 
     # Group handlers with the same trigger separately
     # to ensure they don't conflict with each other
@@ -71,15 +60,12 @@ def create_bot():
         MessageHandler(Filters.text & ~Filters.command, say_youre_welcome), 1
     )
     dp.add_handler(
-        MessageHandler(Filters.text & ~Filters.command,
-                       convert_to_freedom_units), 2
+        MessageHandler(Filters.text & ~Filters.command, convert_to_freedom_units), 2
     )
     dp.add_handler(
-        MessageHandler(Filters.text & ~Filters.command,
-                       convert_to_liberal_units), 3
+        MessageHandler(Filters.text & ~Filters.command, convert_to_liberal_units), 3
     )
-    dp.add_handler(MessageHandler(
-        Filters.text & ~Filters.command, say_nice), 4)
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, say_nice), 4)
 
     dp.add_handler(
         CallbackQueryHandler(
