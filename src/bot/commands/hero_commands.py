@@ -1,6 +1,7 @@
 from src.bot.services import item_services, hero_services
 from src.lib import endpoints
 from src import constants
+from src.bot.commands import helpers
 
 
 def run_suggested_builds_command(update, context):
@@ -31,5 +32,6 @@ def run_suggested_builds_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_suggested_build_message(response)
+    output_message = helpers.create_suggested_build_message(
+        hero_name, response)
     update.message.reply_markdown_v2(output_message)

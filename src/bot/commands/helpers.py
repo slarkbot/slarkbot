@@ -4,6 +4,7 @@ from src import constants
 from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FILE_DIR
 from src.lib.endpoints import get_player_by_account_id
 from telegram.utils.helpers import escape_markdown
+from src.bot.services import item_services
 
 
 class MatchDto:
@@ -212,7 +213,7 @@ def map_rank_tier_to_string(rank):
     if not rank:
         return "not calibrated"
 
-    if rank is 80:
+    if rank == 80:
         return "Immortal"
 
     # get last digit
@@ -232,5 +233,68 @@ def map_rank_tier_to_string(rank):
     return f"{medal} {tier}"
 
 
-def create_suggested_build_message(item_data):
-    pass
+def find_three_most_bought_items_in_item_data(item_data):
+    return sorted(item_data, key=item_data.get, reverse=True)[:3]
+
+
+def map_item_ids_to_item_names(item_ids):
+    mapped_names = []
+    for item_id in item_ids:
+        item = item_services.get_item_by_id(item_id)
+
+        if item:
+            mapped_names.append(item.item_name)
+
+    return mapped_names
+
+
+def create_build_section(header_title, data):
+    header = f"**{header_title}**"
+    data_field = " -> ".join(data)
+    escaped_data = escape_markdown(data_field, version=2)
+    return f"{header}\n{escaped_data}\n"
+
+
+def create_suggested_build_message(hero_name, item_data):
+    start_game_items = item_data["start_game_items"]
+    early_game_items = item_data["early_game_items"]
+    mid_game_items = item_data["mid_game_items"]
+    late_game_items = item_data["late_game_items"]
+
+    most_bought_start_game_items = find_three_most_bought_items_in_item_data(
+        start_game_items
+    )
+    most_bought_early_game_items = find_three_most_bought_items_in_item_data(
+        early_game_items
+    )
+    most_bought_mid_game_items = find_three_most_bought_items_in_item_data(
+        mid_game_items
+    )
+    most_bought_late_game_items = find_three_most_bought_items_in_item_data(
+        late_game_items
+    )
+
+    mapped_start_game_items = map_item_ids_to_item_names(
+        most_bought_start_game_items)
+    mapped_early_game_items = map_item_ids_to_item_names(
+        most_bought_early_game_items)
+    mapped_mid_game_items = map_item_ids_to_item_names(
+        most_bought_mid_game_items)
+    mapped_late_game_items = map_item_ids_to_item_names(
+        most_bought_late_game_items)
+
+    output_message = f"Recommended items for {hero_name}\n"
+
+    # output_message += "**Start game items**\n"
+    # output_message += " -> ".join(mapped_start_game_items)
+
+    output_message += create_build_section(
+        "Start game items", mapped_start_game_items)
+    output_message += create_build_section(
+        "Early game items", mapped_early_game_items)
+    output_message += create_build_section(
+        "Mid game items", mapped_mid_game_items)
+    output_message += create_build_section(
+        "Late game items", mapped_late_game_items)
+
+    return output_message
