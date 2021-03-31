@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source .env
+
+./scripts/drop_db.sh
+./scripts/standup_db.sh
+./scripts/seed.py
