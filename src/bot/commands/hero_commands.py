@@ -32,6 +32,5 @@ def run_suggested_builds_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_suggested_build_message(
-        hero_name, response)
+    output_message = helpers.create_suggested_build_message(hero_name, response)
     update.message.reply_markdown_v2(output_message)
