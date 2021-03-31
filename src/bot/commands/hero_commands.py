@@ -1,4 +1,6 @@
 from src.bot.services import item_services, hero_services
+from src.lib import endpoints
+from src import constants
 
 
 def run_suggested_builds_command(update, context):
@@ -23,3 +25,11 @@ def run_suggested_builds_command(update, context):
         update.message.reply_markdown_v2(
             f"I couldn't find a hero by the name {hero_name} D:"
         )
+
+    response, status_code = endpoints.get_hero_item_popularity(hero.id)
+
+    if status_code != constants.HTTP_STATUS_CODES.OK.value:
+        update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
+
+    output_message = helpers.create_suggested_build_message(response)
+    update.message.reply_markdown_v2(output_message)

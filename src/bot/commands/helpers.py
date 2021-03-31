@@ -230,3 +230,7 @@ def map_rank_tier_to_string(rank):
     medal = constants.RANKS[rank]
 
     return f"{medal} {tier}"
+
+
+def create_suggested_build_message(item_data):
+    pass
