@@ -10,4 +10,4 @@ psql -U $POSTGRES_USER \
     -f rebuild_constants.sql 
 
 cd ..
-python ./scripts/seed.py
+python3 ./scripts/seed.py
