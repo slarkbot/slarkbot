@@ -8,3 +8,6 @@ psql -U $POSTGRES_USER \
     -v db_name=$POSTGRES_DB \
     -d $POSTGRES_DB \
     -f rebuild_constants.sql 
+
+cd ..
+python ./scripts/seed.py
