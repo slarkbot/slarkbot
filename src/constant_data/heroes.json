@@ -1677,5 +1677,17 @@
             "Durable"
         ],
         "legs": 2
+    },
+    {
+        "id": 135,
+        "name": "npc_dota_hero_dawnbreaker",
+        "localized_name": "Dawnbreaker",
+        "primary_attr": "str",
+        "attack_type": "Melee",
+        "roles": [
+            "Carry",
+            "Durable"
+        ],
+        "legs": 2
     }
 ]
