@@ -1,3 +1,4 @@
+
 cd ./scripts
 source ../.env
 
@@ -10,4 +11,4 @@ psql -U $POSTGRES_USER \
     -f rebuild_constants.sql 
 
 cd ..
-python3 ./scripts/seed.py
+./scripts/seed.py
