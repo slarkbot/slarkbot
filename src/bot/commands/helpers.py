@@ -85,13 +85,13 @@ def get_match_result(player_slot, radiant_win):
     player on dire team    :: 128 - 255
     """
     if player_slot < 128:  # on radiant team
-        return "Won" if radiant_win else "Loss"
+        return "Win" if radiant_win else "Loss"
     else:  # on dire team
-        return "Loss" if radiant_win else "Won"
+        return "Loss" if radiant_win else "Win"
 
 
 def create_recent_matches_message(json_api_data):
-    output_message = "MatchID | Hero | KDA | Result | Time Played\n"
+    output_message = "MatchID | Result | KDA | Duration | Hero\n"
 
     for element in json_api_data:
         match = MatchDto(**element)
@@ -106,10 +106,10 @@ def create_recent_matches_message(json_api_data):
 
         result_string = get_match_result(match.player_slot, match.radiant_win)
 
-        start_time = convert_timestamp_to_datetime(match.start_time)
+        duration = str(datetime.timedelta(seconds = match.duration))
 
         output_message += (
-            f"{match_id} | {hero_name} | {kda} | {result_string} | {start_time}\n"
+            f"{match_id} | {result_string[0]} | {kda} | {duration} | {hero_name} \n"
         )
 
     return output_message
