@@ -116,8 +116,6 @@ def create_recent_matches_message(json_api_data):
 
 
 def create_match_message(match_data):
-    output_message = "MatchID | Hero | KDA | XPM | GPM | Result | Time Started\n"
-
     match = MatchDto(**match_data)
 
     match_id = match.match_id
@@ -126,16 +124,21 @@ def create_match_message(match_data):
     hero_data = get_hero_data(hero_id)
     hero_name = hero_data["localized_name"]
 
+    duration = str(datetime.timedelta(seconds = match.duration))
+
     kda = f"%s/%s/%s" % (match.kills, match.deaths, match.assists)
 
     gpm = match.gold_per_min
     xpm = match.xp_per_min
 
     result_string = get_match_result(match.player_slot, match.radiant_win)
+    game_mode = constants.GAME_MODE_MAP[match.game_mode]
 
-    start_time = convert_timestamp_to_datetime(match.start_time)
+    start_date = convert_timestamp_to_datetime(match.start_time)
 
-    output_message += f"{match_id} | {hero_name} | {kda} | {gpm} | {xpm} | {result_string} | {start_time}\n"
+    output_message  = f"Result: {result_string} after {duration} \n\n"
+    output_message += f"Match ID: {match_id} | {start_date} | {game_mode} \n"
+    output_message += f"{hero_name} | {kda} | {gpm} GPM | {xpm} XPM \n"
 
     return output_message
 
