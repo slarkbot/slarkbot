@@ -30,7 +30,7 @@ def run_last_match_command(update, context):
         "Full match details", callback_data=("match " + str(response[0]["match_id"]))
     )
     markup = InlineKeyboardMarkup.from_button(button)
-    update.message.reply_text(output_message, reply_markup=markup)
+    update.message.reply_markdown_v2(output_message, reply_markup=markup)
 
 
 def run_get_match_by_match_id(update, context):

@@ -136,9 +136,9 @@ def create_match_message(match_data):
 
     start_date = convert_timestamp_to_datetime(match.start_time)
 
-    output_message  = f"Result: {result_string} after {duration} \n\n"
-    output_message += f"Match ID: {match_id} | {start_date} | {game_mode} \n"
-    output_message += f"{hero_name} | {kda} | {gpm} GPM | {xpm} XPM \n"
+    output_message  = f"*{hero_name}* \| {kda} \| {gpm} GPM \| {xpm} XPM \n\n"
+    output_message += f"Match ID: {match_id} \| {start_date} \| {game_mode} \n"
+    output_message += f"Result: *{result_string}* after {duration}"
 
     return output_message
 
