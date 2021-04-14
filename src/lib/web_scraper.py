@@ -1,4 +1,3 @@
-
 import requests
 from bs4 import BeautifulSoup
 from src import constants
@@ -7,7 +6,7 @@ from pprint import pprint
 
 def _get_request_headers():
     return {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36'
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
     }
 
 
@@ -23,20 +22,19 @@ def get_hero_counters(hero_name):
 
     raw_html = response.text
 
-    processed_html = BeautifulSoup(raw_html, 'html.parser')
+    processed_html = BeautifulSoup(raw_html, "html.parser")
 
-    counter_table_rows = processed_html.find_all(
-        'table')[1].contents[1].contents
+    counter_table_rows = processed_html.find_all("table")[1].contents[1].contents
 
     hero_counters = []
     for row in counter_table_rows:
 
         hero = []
         for data_column in row:
-            if data_column.has_attr('style'):
+            if data_column.has_attr("style"):
                 continue
 
-            hero.append(data_column['data-value'])
+            hero.append(data_column["data-value"])
 
         hero_counters.append(hero)
 
