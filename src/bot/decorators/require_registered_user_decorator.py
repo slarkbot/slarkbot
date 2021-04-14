@@ -3,6 +3,12 @@ from src.bot.services import user_services
 
 
 def require_register(func):
+    """
+    A decorator that checks if a user is registered or a registered
+    user was given as an argument. Fails if a user was not given and
+    if the user that sent the command is not registered
+    """
+
     @wraps(func)
     def inner(update, context):
         try:

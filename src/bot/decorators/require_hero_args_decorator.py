@@ -4,6 +4,12 @@ from src.bot.services import hero_services
 
 
 def require_hero_args(func):
+    """
+    Validates that a hero name or hero alias was given as args,
+    and retrieves the hero from the database. Fails if no
+    hero was given or if a hero doesn't exist.
+    """
+
     @wraps(func)
     def inner(update, context):
         if not context.args:
