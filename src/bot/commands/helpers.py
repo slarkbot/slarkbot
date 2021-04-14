@@ -5,6 +5,7 @@ from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FI
 from src.lib.endpoints import get_player_by_account_id
 from telegram.utils.helpers import escape_markdown
 from src.bot.services import item_services
+from src.bot.services import user_services
 
 
 class MatchDto:
@@ -159,40 +160,35 @@ def create_match_detail_message(match_data):
     match_status_text = f"The {match_winner} won a(n) {game_mode} game"
     start_time = convert_timestamp_to_datetime(match.start_time)
     match_general_text = f"{match.match_id} | {score} | {game_duration} | {start_time}"
-    player_header = f"Team | Name | Hero | KDA | CS | NW | GPM | XPM"
 
     output_message = (
-        f"{match_status_text}\n{match_header}\n{match_general_text}\n{player_header}\n"
+        f"{match_status_text}\n{match_header}\n{match_general_text}\n"
     )
 
+    # Be agnostic about the amount of players on radiant or dire, just in case
+    # Quick and dirty solution of cutting off at the middle would probably also work
+    output_message += "\nRadiant:\n"
     for player in player_data:
-        team = "R" if player.isRadiant else "D"
+        if player.isRadiant:
+            output_message += build_player_string(player)
+    
+    output_message += "\nDire:\n"
+    for player in player_data:
+        if not player.isRadiant:
+            output_message += build_player_string(player)
 
-        kills = player.kills
-        deaths = player.deaths
-        assists = player.assists
-        kda = f"{kills}/{deaths}/{assists}"
+    known_players = []
 
-        last_hits = player.last_hits
-        denies = player.denies
-        cs = f"{last_hits}/{denies}"
+    for player in player_data:
+        if player.account_id:
+            bot_user = user_services.lookup_user_by_account_id(player.account_id)
+            if bot_user:
+                hero_data = get_hero_data(player.hero_id)
+                hero_name = hero_data["localized_name"]
+                
+                known_players.append(f"{bot_user.telegram_handle} ({hero_name})")
 
-        net_worth = player.total_gold
-        xpm = player.xp_per_min
-        gpm = player.gold_per_min
-
-        account_id = player.account_id
-
-        hero_data = get_hero_data(player.hero_id)
-        hero_name = hero_data["localized_name"]
-
-        try:
-            response, status = get_player_by_account_id(account_id)
-            player_name = response["profile"]["personaname"]
-        except KeyError:
-            player_name = "Anonymous"
-
-        output_message += f"{team} | {player_name} | {hero_name} | {kda} | {cs} | {net_worth} | {gpm} | {xpm}\n"
+    output_message += f"\nKnown players: {', '.join(known_players)}"
 
     # Escape markdown up to this point
     output_message = escape_markdown(output_message, version=2)
@@ -201,11 +197,29 @@ def create_match_detail_message(match_data):
     opendota_link = f"https://www.opendota.com/matches/{match.match_id}"
 
     output_message += (
-        f"More information: [Dotabuff]({dotabuff_link}), [OpenDota]({opendota_link})"
+        f"\n\nMore information: [Dotabuff]({dotabuff_link}), [OpenDota]({opendota_link})"
     )
 
     return output_message
 
+
+def build_player_string(player):
+    kills = player.kills
+    deaths = player.deaths
+    assists = player.assists
+    kda = f"{kills}/{deaths}/{assists}"
+
+    last_hits = player.last_hits
+    denies = player.denies
+    cs = f"{last_hits}/{denies}"
+
+    xpm = player.xp_per_min
+    gpm = player.gold_per_min
+
+    hero_data = get_hero_data(player.hero_id)
+    hero_name = hero_data["localized_name"]
+
+    return f"{kda} | {cs} | {gpm} GPM | {xpm} XPM | {hero_name}\n"
 
 def map_rank_tier_to_string(rank):
     # ranks are two digit codes
