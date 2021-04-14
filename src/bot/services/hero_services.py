@@ -18,3 +18,8 @@ def get_hero_alias_by_name(hero_alias):
     return (
         session.query(HeroAlias).filter(HeroAlias.alias == hero_alias.lower()).first()
     )
+
+
+def get_hero_aliases_by_hero_id(hero_id):
+    session = create_session()
+    return session.query(HeroAlias).filter(HeroAlias.hero_id == hero_id).all()

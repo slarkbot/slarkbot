@@ -9,6 +9,7 @@ The `docs` directory contains some handy documentation for various purposes.
  - Python 3.6+
  - A PostgreSQL install with the server running or docker and docker-compose
  - A Telegram account and steam account (to test your changes)
+ - BeautifulSoup may give issues. You may need to install the system package alongside the virtualenv dependency. There is a package named `bs4` that may also need to be installed with `pip`.
 
 ## Local Development
  - No OpenDota api key needed, however rate limits apply
