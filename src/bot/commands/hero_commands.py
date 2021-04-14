@@ -67,9 +67,10 @@ def run_get_hero_aliases(update, context):
 
 def run_get_hero_counters_command(update, context):
     if not context.args:
-        update.message.reply_markdown_v2(
-            constants.MISSING_ARGUMENT_MESSAGE % "/counter <hero or alias>"
+        message = escape_markdown(
+            constants.MISSING_ARGUMENT_MESSAGE % "/counter <hero or alias>", version=2
         )
+        update.message.reply_markdown_v2(message)
 
     hero_name_parts = context.args
 
