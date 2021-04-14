@@ -1,5 +1,6 @@
 from functools import wraps
 from src.bot.services import user_services
+from src import constants
 
 
 def require_register(func):

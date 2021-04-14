@@ -1,5 +1,5 @@
 from functools import wraps
-
+from src import constants
 from src.bot.services import hero_services
 
 
@@ -14,7 +14,7 @@ def require_hero_args(func):
     def inner(update, context):
         if not context.args:
             update.message.reply_markdown_v2(
-                constants.MISSING_ARGUMENT_MESSAGE % "/build <hero name or alias>"
+                constants.MISSING_ARGUMENT_MESSAGE % "`/build <hero name or alias>`"
             )
 
         hero_name_parts = context.args
