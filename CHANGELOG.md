@@ -11,3 +11,4 @@ CHANGELOG
 # Features
 
 # Commands
+- Add /alias

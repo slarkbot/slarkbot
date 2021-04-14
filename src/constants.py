@@ -26,6 +26,7 @@ HELP_TEXT = """
     `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work\n
     `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
     `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game. Example :: \/build <hero name or alias>\n
+    `\/alias <hero name>` :: Get aliases for a hero\n
     """
 
 
