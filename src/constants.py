@@ -39,6 +39,10 @@ class API_URI_ENDPOINTS(Enum):
     HERO_ITEM_POPULARITY = "heroes/%s/itemPopularity"
 
 
+class WEB_SCRAPER_URIS(Enum):
+    COUNTERS = "https://www.dotabuff.com/heroes/%s/counters"
+
+
 class QUERY_PARAMETERS(Enum):
     RESPONSE_LIMIT = 5
 
