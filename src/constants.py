@@ -27,6 +27,7 @@ HELP_TEXT = """
     `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
     `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game. Example :: \/build <hero name or alias>\n
     `\/alias <hero name>` :: Get aliases for a hero\n
+    `\/counters <hero name>` :: Get a list of heroes that counter the given hero. Includes win rates and the percent disadvantage\n
     """
 
 WEBSCRAPER_USER_AGENT_HEADER = {
