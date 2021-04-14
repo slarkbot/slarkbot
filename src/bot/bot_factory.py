@@ -56,6 +56,11 @@ def create_bot():
     dp.add_handler(
         CommandHandler(["alias", "aliases"], hero_commands.run_get_hero_aliases)
     )
+    dp.add_handler(
+        CommandHandler(
+            ["counter", "counters"], hero_commands.run_get_hero_counters_command
+        )
+    )
 
     # Group handlers with the same trigger separately
     # to ensure they don't conflict with each other
