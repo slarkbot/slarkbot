@@ -62,3 +62,8 @@ def run_get_hero_aliases(update, context):
     output = escape_markdown(output, version=2)
 
     update.message.reply_markdown_v2(output)
+
+
+def run_get_hero_counters_command(update, context):
+    if not context.args:
+        update.message.reply_markdown_v2()
