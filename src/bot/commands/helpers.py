@@ -144,7 +144,7 @@ def create_match_message(match_data):
     return output_message
 
 
-def create_match_detail_message(match_data):
+def create_match_detail_message(match_data, format = "default"):
     match = MatchDto(**match_data)
 
     player_data = [Player(**player) for player in match.players]
@@ -167,9 +167,19 @@ def create_match_detail_message(match_data):
     output_message += f"{match_winner} victory in {game_duration}\n"
     output_message += f"{score} kills\n"
 
+    output_message = escape_markdown(output_message, version=2)
+
+    # Determine which content needs to be inserted
+    if format == "players":
+        output_message += build_players_match_message(match, player_data)
+    else:
+        output_message += build_default_match_message(match, player_data)
+
+    return output_message
+
+def build_default_match_message(match, player_data):
     # Be agnostic about the amount of players on radiant or dire, just in case
-    # Quick and dirty solution of cutting off at the middle would probably also work
-    output_message += "\nRadiant:\n"
+    output_message = "\nRadiant:\n"
     for player in player_data:
         if player.isRadiant:
             output_message += build_player_string(player)
@@ -195,15 +205,56 @@ def create_match_detail_message(match_data):
     # Escape markdown up to this point
     output_message = escape_markdown(output_message, version=2)
 
-    dotabuff_link = f"https://www.dotabuff.com/matches/{match.match_id}"
     opendota_link = f"https://www.opendota.com/matches/{match.match_id}"
+    dotabuff_link = f"https://www.dotabuff.com/matches/{match.match_id}"
 
     output_message += (
-        f"\n\nMore information: [Dotabuff]({dotabuff_link}), [OpenDota]({opendota_link})"
+        f"\n\nMore information: [OpenDota]({opendota_link}), [Dotabuff]({dotabuff_link})"
     )
 
     return output_message
 
+def build_players_match_message(match, player_data):
+    output_message = "\nRadiant:\n"
+    for player in player_data:
+        if player.isRadiant:
+            try:
+                response, status = get_player_by_account_id(player.account_id)
+                player_name = response["profile"]["personaname"]
+            except KeyError:
+                player_name = "Anonymous"
+            
+            hero_data = get_hero_data(player.hero_id)
+            hero_name = hero_data["localized_name"]
+
+            if player.rank_tier:
+                rank = f"- {map_rank_tier_to_string(player.rank_tier)}"
+            else:
+                rank = ""
+
+            output_message += f"{player_name} ({hero_name}) {rank}\n"
+    
+    output_message += "\nDire:\n"
+    for player in player_data:
+        if not player.isRadiant:
+            try:
+                response, status = get_player_by_account_id(player.account_id)
+                player_name = response["profile"]["personaname"]
+            except KeyError:
+                player_name = "Anonymous"
+            
+            hero_data = get_hero_data(player.hero_id)
+            hero_name = hero_data["localized_name"]
+
+            if player.rank_tier:
+                rank = f"- {map_rank_tier_to_string(player.rank_tier)}"
+            else:
+                rank = ""
+
+            output_message += f"{player_name} ({hero_name}) {rank}\n"
+
+    output_message = escape_markdown(output_message, version=2)
+    return output_message
 
 def build_player_string(player):
     kills = player.kills

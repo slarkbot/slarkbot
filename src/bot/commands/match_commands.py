@@ -34,8 +34,6 @@ def run_last_match_command(update, context):
 
 
 def run_get_match_by_match_id(update, context):
-    telegram_handle = update.message.from_user.username
-
     try:
         match_id = context.args[0]
         match_id = int(match_id)
@@ -51,4 +49,9 @@ def run_get_match_by_match_id(update, context):
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
     output_message = helpers.create_match_detail_message(response)
-    update.message.reply_markdown_v2(output_message, disable_web_page_preview=True)
+
+    button = InlineKeyboardButton(
+        "Players", callback_data=("players " + str(response["match_id"]))
+    )
+    markup = InlineKeyboardMarkup.from_button(button)
+    update.message.reply_markdown_v2(output_message, reply_markup=markup, disable_web_page_preview=True)
