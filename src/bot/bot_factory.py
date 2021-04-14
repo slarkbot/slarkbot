@@ -53,6 +53,9 @@ def create_bot():
         CommandHandler("profile", user_commands.run_get_player_steam_profile_command)
     )
     dp.add_handler(CommandHandler("build", hero_commands.run_suggested_builds_command))
+    dp.add_handler(
+        CommandHandler(["alias", "aliases"], hero_commands.run_get_hero_aliases)
+    )
 
     # Group handlers with the same trigger separately
     # to ensure they don't conflict with each other
