@@ -1,262 +1,430 @@
 [
   {
     "id": 1,
-    "aliases": ["AM", "Antimage", "Andymage", "Andy Mage", "Magina"]
+    "aliases": [
+      "AM",
+      "Antimage",
+      "Andymage",
+      "Andy Mage",
+      "Magina"
+    ]
   },
   {
     "id": 4,
-    "aliases": ["BS"]
+    "aliases": [
+      "BS"
+    ]
   },
   {
     "id": 5,
-    "aliases": ["CM", "Rylai"]
+    "aliases": [
+      "CM",
+      "Rylai"
+    ]
   },
   {
     "id": 6,
-    "aliases": ["Drow"]
+    "aliases": [
+      "Drow"
+    ]
+  },
+  {
+    "id": 8,
+    "aliases": [
+      "jugg",
+      "bagel",
+      "crackgel",
+      "yurnero"
+    ]
   },
   {
     "id": 9,
-    "aliases": ["potm"]
+    "aliases": [
+      "potm"
+    ]
   },
   {
     "id": 11,
-    "aliases": ["SF", "Shadowfiend", "Shadow Friend"]
+    "aliases": [
+      "SF",
+      "Shadowfiend",
+      "Shadow Friend"
+    ]
   },
   {
     "id": 12,
-    "aliases": ["PL"]
+    "aliases": [
+      "PL"
+    ]
   },
   {
     "id": 16,
-    "aliases": ["SK"]
+    "aliases": [
+      "SK"
+    ]
   },
   {
     "id": 17,
-    "aliases": ["Storm"]
+    "aliases": [
+      "Storm"
+    ]
   },
   {
     "id": 19,
-    "aliases": ["Tony", "Luka"]
+    "aliases": [
+      "Tony",
+      "Luka"
+    ]
   },
   {
     "id": 20,
-    "aliases": ["Venge"]
+    "aliases": [
+      "Venge"
+    ]
   },
   {
     "id": 21,
-    "aliases": ["Windrunner"]
+    "aliases": [
+      "Windrunner"
+    ]
   },
   {
     "id": 23,
-    "aliases": ["Kunka"]
+    "aliases": [
+      "Kunka"
+    ]
   },
   {
     "id": 29,
-    "aliases": ["Tide"]
+    "aliases": [
+      "Tide"
+    ]
   },
   {
     "id": 30,
-    "aliases": ["WD"]
+    "aliases": [
+      "WD"
+    ]
   },
   {
     "id": 32,
-    "aliases": ["Richard"]
+    "aliases": [
+      "Richard"
+    ]
   },
   {
     "id": 36,
-    "aliases": ["Necrolyte"]
+    "aliases": [
+      "Necrolyte"
+    ]
   },
   {
     "id": 39,
-    "aliases": ["qop"]
+    "aliases": [
+      "qop"
+    ]
   },
   {
     "id": 42,
-    "aliases": ["Skeleton King", "WK"]
+    "aliases": [
+      "Skeleton King",
+      "WK"
+    ]
   },
   {
     "id": 43,
-    "aliases": ["Krobelus", "Krob"]
+    "aliases": [
+      "Krobelus",
+      "Krob"
+    ]
   },
   {
     "id": 44,
-    "aliases": ["PA"]
+    "aliases": [
+      "PA"
+    ]
   },
   {
     "id": 46,
-    "aliases": ["TA", "Templar"]
+    "aliases": [
+      "TA",
+      "Templar"
+    ]
   },
   {
     "id": 49,
-    "aliases": ["DK", "Davion"]
+    "aliases": [
+      "DK",
+      "Davion"
+    ]
   },
   {
     "id": 52,
-    "aliases": ["Lesh"]
+    "aliases": [
+      "Lesh"
+    ]
   },
   {
     "id": 53,
-    "aliases": ["Furion", "NP", "Natures Prophet"]
+    "aliases": [
+      "Furion",
+      "NP",
+      "Natures Prophet"
+    ]
   },
   {
     "id": 54,
-    "aliases": ["Naix"]
+    "aliases": [
+      "Naix"
+    ]
   },
   {
     "id": 55,
-    "aliases": ["DS"]
+    "aliases": [
+      "DS"
+    ]
   },
   {
     "id": 57,
-    "aliases": ["Omni"]
+    "aliases": [
+      "Omni"
+    ]
   },
   {
     "id": 58,
-    "aliases": ["Ench"]
+    "aliases": [
+      "Ench"
+    ]
   },
   {
     "id": 60,
-    "aliases": ["Nightstalker"]
+    "aliases": [
+      "Nightstalker"
+    ]
   },
   {
     "id": 61,
-    "aliases": ["Brood"]
+    "aliases": [
+      "Brood"
+    ]
   },
   {
     "id": 62,
-    "aliases": ["Gondar", "BH", "Bounty"]
+    "aliases": [
+      "Gondar",
+      "BH",
+      "Bounty"
+    ]
   },
   {
     "id": 65,
-    "aliases": ["Bat"]
+    "aliases": [
+      "Bat"
+    ]
   },
   {
     "id": 67,
-    "aliases": ["slkjdskjfsdkfjsld"]
+    "aliases": [
+      "slkjdskjfsdkfjsld"
+    ]
   },
   {
     "id": 68,
-    "aliases": ["AA"]
+    "aliases": [
+      "AA"
+    ]
   },
   {
     "id": 69,
-    "aliases": ["Doom Bringer", "Doombringer"]
+    "aliases": [
+      "Doom Bringer",
+      "Doombringer"
+    ]
   },
   {
     "id": 71,
-    "aliases": ["SB"]
+    "aliases": [
+      "SB"
+    ]
   },
   {
     "id": 72,
-    "aliases": ["Gyro"]
+    "aliases": [
+      "Gyro"
+    ]
   },
   {
     "id": 73,
-    "aliases": ["Alch"]
+    "aliases": [
+      "Alch"
+    ]
   },
   {
     "id": 74,
-    "aliases": ["Injoker"]
+    "aliases": [
+      "Injoker"
+    ]
   },
   {
     "id": 76,
-    "aliases": ["Outworld Devourer", "OD", "Outhouse Decorator", "Outsourced Developer"]
+    "aliases": [
+      "Outworld Devourer",
+      "OD",
+      "Outhouse Decorator",
+      "Outsourced Developer"
+    ]
   },
   {
     "id": 79,
-    "aliases": ["SD"]
+    "aliases": [
+      "SD"
+    ]
   },
   {
     "id": 80,
-    "aliases": ["Druid"]
+    "aliases": [
+      "Druid"
+    ]
   },
   {
     "id": 81,
-    "aliases": ["CK"]
+    "aliases": [
+      "CK"
+    ]
   },
   {
     "id": 83,
-    "aliases": ["Treant"]
+    "aliases": [
+      "Treant"
+    ]
   },
   {
     "id": 84,
-    "aliases": ["Ogre"]
+    "aliases": [
+      "Ogre"
+    ]
   },
   {
     "id": 88,
-    "aliases": ["Nyx"]
+    "aliases": [
+      "Nyx"
+    ]
   },
   {
     "id": 89,
-    "aliases": ["Naga"]
+    "aliases": [
+      "Naga"
+    ]
   },
   {
     "id": 90,
-    "aliases": ["kotl"]
+    "aliases": [
+      "kotl"
+    ]
   },
   {
     "id": 91,
-    "aliases": ["Wisp"]
+    "aliases": [
+      "Wisp"
+    ]
   },
   {
     "id": 94,
-    "aliases": ["Dusa"]
+    "aliases": [
+      "Dusa"
+    ]
   },
   {
     "id": 95,
-    "aliases": ["Troll"]
+    "aliases": [
+      "Troll"
+    ]
   },
   {
     "id": 96,
-    "aliases": ["Centaur"]
+    "aliases": [
+      "Centaur"
+    ]
   },
   {
     "id": 99,
-    "aliases": ["Bristle"]
+    "aliases": [
+      "Bristle"
+    ]
   },
   {
     "id": 101,
-    "aliases": ["Sky"]
+    "aliases": [
+      "Sky"
+    ]
   },
   {
     "id": 103,
-    "aliases": ["ET"]
+    "aliases": [
+      "ET"
+    ]
   },
   {
     "id": 104,
-    "aliases": ["LC"]
+    "aliases": [
+      "LC"
+    ]
   },
   {
     "id": 106,
-    "aliases": ["Ember"]
+    "aliases": [
+      "Ember"
+    ]
   },
   {
     "id": 109,
-    "aliases": ["TB"]
+    "aliases": [
+      "TB"
+    ]
   },
   {
     "id": 112,
-    "aliases": ["Wyvern", "WW"]
+    "aliases": [
+      "Wyvern",
+      "WW"
+    ]
   },
   {
     "id": 114,
-    "aliases": ["MK", "Monkey"]
+    "aliases": [
+      "MK",
+      "Monkey"
+    ]
   },
   {
     "id": 119,
-    "aliases": ["Willow"]
+    "aliases": [
+      "Willow"
+    ]
   },
   {
     "id": 120,
-    "aliases": ["Pango"]
+    "aliases": [
+      "Pango"
+    ]
   },
   {
     "id": 121,
-    "aliases": ["Grim"]
+    "aliases": [
+      "Grim"
+    ]
   },
   {
     "id": 135,
-    "aliases": ["Dawn", "Dawn breaker", "Womniknight"]
+    "aliases": [
+      "Dawn",
+      "Dawn breaker",
+      "Womniknight",
+      "thigh mama",
+      "dombreaker",
+      "whoa mama",
+      "thigh breaker",
+      "mom breaker"
+    ]
   }
 ]
