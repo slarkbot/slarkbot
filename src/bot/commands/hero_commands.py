@@ -21,20 +21,8 @@ def run_suggested_builds_command(update, hero):
     update.message.reply_markdown_v2(output_message)
 
 
-def run_get_hero_aliases(update, context):
-    if not context.args:
-        udpate.message.reply_markdown_v2(
-            constants.MISSING_ARGUMENT_MESSAGE % "/alias <hero>"
-        )
-
-    hero_name_parts = context.args
-    hero_name = "".join(hero_name_parts)
-
-    hero = hero_services.get_hero_by_name(hero_name)
-
-    if not hero:
-        update.message.reply_markdown_v2(constants.HERO_NOT_FOUND_MESSAGE % hero_name)
-
+@require_hero_args
+def run_get_hero_aliases(update, hero):
     hero_aliases = hero_services.get_hero_aliases_by_hero_id(hero.id)
 
     aliases = [alias.alias for alias in hero_aliases]
@@ -46,30 +34,8 @@ def run_get_hero_aliases(update, context):
     update.message.reply_markdown_v2(output)
 
 
-def run_get_hero_counters_command(update, context):
-    if not context.args:
-        message = escape_markdown(
-            constants.MISSING_ARGUMENT_MESSAGE % "/counter <hero or alias>", version=2
-        )
-        update.message.reply_markdown_v2(message)
-
-    hero_name_parts = context.args
-
-    hero_name = "".join(hero_name_parts)
-
-    hero = hero_services.get_hero_by_name(hero_name)
-
-    if not hero:
-        hero_alias = hero_services.get_hero_alias_by_name(hero_name)
-
-        if hero_alias:
-            hero = hero_services.get_hero_by_id(hero_alias.hero_id)
-
-    if not hero:
-        update.message.reply_markdown_v2(
-            f"I couldn't find a hero by the name {hero_name} D:"
-        )
-
+@require_hero_args
+def run_get_hero_counters_command(update, hero):
     counters = web_scraper.get_hero_counters(hero.localized_name)
 
     if not counters:
