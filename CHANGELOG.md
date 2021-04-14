@@ -2,7 +2,7 @@
 CHANGELOG
 
 
-# next [1.0.9]
+# next [1.1.0]
 
 # Env Vars
 
@@ -11,4 +11,3 @@ CHANGELOG
 # Features
 
 # Commands
-- Add /alias

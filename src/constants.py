@@ -27,7 +27,12 @@ HELP_TEXT = """
     `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
     `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game. Example :: \/build <hero name or alias>\n
     `\/alias <hero name>` :: Get aliases for a hero\n
+    `\/counters <hero name>` :: Get a list of heroes that counter the given hero. Includes win rates and the percent disadvantage\n
     """
+
+WEBSCRAPER_USER_AGENT_HEADER = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+}
 
 
 class API_URI_ENDPOINTS(Enum):
@@ -41,6 +46,10 @@ class API_URI_ENDPOINTS(Enum):
     PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/recentMatches"
     PLAYER_HERO_STATS = "players/%s/heroes"
     HERO_ITEM_POPULARITY = "heroes/%s/itemPopularity"
+
+
+class WEB_SCRAPER_URIS(Enum):
+    COUNTERS = "https://www.dotabuff.com/heroes/%s/counters"
 
 
 class QUERY_PARAMETERS(Enum):
