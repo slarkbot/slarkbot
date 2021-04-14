@@ -4,18 +4,12 @@ from src import constants
 from pprint import pprint
 
 
-def _get_request_headers():
-    return {
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
-    }
-
-
 def get_hero_counters(hero_name):
     hero_name = hero_name.replace(" ", "-").lower()
 
     uri = constants.WEB_SCRAPER_URIS.COUNTERS.value % hero_name
 
-    response = requests.get(uri, headers=_get_request_headers())
+    response = requests.get(uri, headers=constants.WEBSCRAPER_USER_AGENT_HEADER)
 
     if response.status_code != 200:
         return None

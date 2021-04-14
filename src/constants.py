@@ -25,6 +25,10 @@ HELP_TEXT = """
     `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game. Example :: \/build <hero name or alias>\n
     """
 
+WEBSCRAPER_USER_AGENT_HEADER = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+}
+
 
 class API_URI_ENDPOINTS(Enum):
     HEALTH_CHECK = "health"
