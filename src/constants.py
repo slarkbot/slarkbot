@@ -29,6 +29,10 @@ HELP_TEXT = """
     `\/alias <hero name>` :: Get aliases for a hero\n
     """
 
+WEBSCRAPER_USER_AGENT_HEADER = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+}
+
 
 class API_URI_ENDPOINTS(Enum):
     HEALTH_CHECK = "health"
@@ -41,6 +45,10 @@ class API_URI_ENDPOINTS(Enum):
     PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/recentMatches"
     PLAYER_HERO_STATS = "players/%s/heroes"
     HERO_ITEM_POPULARITY = "heroes/%s/itemPopularity"
+
+
+class WEB_SCRAPER_URIS(Enum):
+    COUNTERS = "https://www.dotabuff.com/heroes/%s/counters"
 
 
 class QUERY_PARAMETERS(Enum):
