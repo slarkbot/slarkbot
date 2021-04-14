@@ -4,6 +4,7 @@ from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services
 from src.bot.commands import helpers
+from src.bot.commands import match_helpers
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 
@@ -25,7 +26,7 @@ def run_last_match_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_match_message(response[0])
+    output_message = match_helpers.create_match_message(response[0])
     button = InlineKeyboardButton(
         "Full match details", callback_data=("match " + str(response[0]["match_id"]))
     )
@@ -48,10 +49,12 @@ def run_get_match_by_match_id(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_match_detail_message(response)
+    output_message = match_helpers.create_match_detail_message(response)
 
     button = InlineKeyboardButton(
         "Players", callback_data=("players " + str(response["match_id"]))
     )
     markup = InlineKeyboardMarkup.from_button(button)
-    update.message.reply_markdown_v2(output_message, reply_markup=markup, disable_web_page_preview=True)
+    update.message.reply_markdown_v2(
+        output_message, reply_markup=markup, disable_web_page_preview=True
+    )

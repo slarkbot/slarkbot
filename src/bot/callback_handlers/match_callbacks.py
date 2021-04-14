@@ -1,6 +1,7 @@
 from src.lib import endpoints
 from src import constants
 from src.bot.commands import helpers
+from src.bot.commands import match_helpers
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 
@@ -15,7 +16,7 @@ def handle_match_details_callback(update, context):
         query.answer(constants.BAD_RESPONSE_MESSAGE)
         return
 
-    output_message = helpers.create_match_detail_message(response)
+    output_message = match_helpers.create_match_detail_message(response)
 
     query.answer()
 
@@ -37,7 +38,7 @@ def handle_match_players_callback(update, context):
         query.answer(constants.BAD_RESPONSE_MESSAGE)
         return
 
-    output_message = helpers.create_match_detail_message(response, format="players")
+    output_message = match_helpers.create_match_detail_message(response, format="players")
 
     query.answer()
 
