@@ -145,25 +145,27 @@ def create_match_message(match_data):
 
 
 def create_match_detail_message(match_data):
-    match_header = "Match ID | Score | Duration | Time"
-
     match = MatchDto(**match_data)
 
     player_data = [Player(**player) for player in match.players]
 
     game_duration = str(datetime.timedelta(seconds=match.duration))
     game_mode = constants.GAME_MODE_MAP[match.game_mode]
+    try:
+        game_type = constants.LOBBY_TYPE_MAP[match.lobby_type]
+    except:
+        # Event games give an unknown ID
+        game_type = "Unknown"
 
-    score = f"{match.radiant_score}/{match.dire_score}"
+    score = f"{match.radiant_score} - {match.dire_score}"
 
     match_winner = "Radiant" if match.radiant_win else "Dire"
-    match_status_text = f"The {match_winner} won a(n) {game_mode} game"
     start_time = convert_timestamp_to_datetime(match.start_time)
-    match_general_text = f"{match.match_id} | {score} | {game_duration} | {start_time}"
 
-    output_message = (
-        f"{match_status_text}\n{match_header}\n{match_general_text}\n"
-    )
+    output_message  = f"Match {match.match_id} on {start_time}:\n"
+    output_message += f"{game_type} lobby, {game_mode} game\n"
+    output_message += f"{match_winner} victory in {game_duration}\n"
+    output_message += f"{score} kills\n"
 
     # Be agnostic about the amount of players on radiant or dire, just in case
     # Quick and dirty solution of cutting off at the middle would probably also work
