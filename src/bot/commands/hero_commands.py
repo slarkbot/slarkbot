@@ -52,7 +52,7 @@ def run_get_hero_aliases(update, context):
     hero = hero_services.get_hero_by_name(hero_name)
 
     if not hero:
-        upate.message.reply_markdown_v2(constants.HERO_NOT_FOUND_MESSAGE % hero_name)
+        update.message.reply_markdown_v2(constants.HERO_NOT_FOUND_MESSAGE % hero_name)
 
     hero_aliases = hero_services.get_hero_aliases_by_hero_id(hero.id)
 
