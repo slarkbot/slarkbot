@@ -7,8 +7,11 @@ DEFAULT_LOG_LEVEL = "debug"
 
 USER_NOT_REGISTERED_MESSAGE = "I couldn't find that Telegram username\! Please make sure to register your friend ID using `/register <your friend ID>`"
 
-
 BAD_RESPONSE_MESSAGE = "Something went wrong, I didn't get a good response :("
+
+MISSING_ARGUMENT_MESSAGE = "No arguments were given!\n Try %s"
+
+HERO_NOT_FOUND_MESSAGE = "I couldn't find a hero by the name %s"
 
 
 HELP_TEXT = """
@@ -23,6 +26,7 @@ HELP_TEXT = """
     `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work\n
     `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
     `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game. Example :: \/build <hero name or alias>\n
+    `\/alias <hero name>` :: Get aliases for a hero\n
     """
 
 

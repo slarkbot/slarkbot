@@ -13,3 +13,4 @@ changes - View the most recent slarkbot changes.
 winrate - Check winrate with a given hero. User must be registered.
 profile - Get a link to your or someone else's steam profile
 build - Get recommended items throughout different phases of the game. Example :: /build <hero name or alias>
+alias - Get aliases for a hero to use with commands relating to heros
