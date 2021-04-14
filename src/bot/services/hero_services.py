@@ -16,8 +16,7 @@ def get_hero_by_id(hero_id):
 def get_hero_alias_by_name(hero_alias):
     session = create_session()
     return (
-        session.query(HeroAlias).filter(
-            HeroAlias.alias == hero_alias.lower()).first()
+        session.query(HeroAlias).filter(HeroAlias.alias == hero_alias.lower()).first()
     )
 
 
