@@ -5,7 +5,8 @@ from src.bot.models.sessions import create_session
 from src.bot.services import user_services
 from src.bot.commands import helpers
 from src.bot.commands import match_helpers
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+from src.bot.callback_handlers.match_callbacks import create_inline_keyboard
 
 
 def run_last_match_command(update, context):
@@ -52,19 +53,7 @@ def run_get_match_by_match_id(update, context):
 
     output_message = match_helpers.create_match_detail_message(response)
 
-    button1 = InlineKeyboardButton(
-        "Scoreboard",
-        callback_data=("match " + str(response["match_id"]) + " default")
-    )
-
-    button2 = InlineKeyboardButton(
-        "Players/Ranks",
-        callback_data=("match " + str(response["match_id"]) + " players")
-    )
-
-    buttons = [button1, button2]
-
-    markup = InlineKeyboardMarkup.from_row(buttons)
+    markup = create_inline_keyboard(match_id)
     update.message.reply_markdown_v2(
         output_message, reply_markup=markup, disable_web_page_preview=True
     )

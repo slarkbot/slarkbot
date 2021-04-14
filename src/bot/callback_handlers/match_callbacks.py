@@ -31,30 +31,45 @@ def handle_match_details_callback(update, context):
 
     query.answer()
 
-    button1 = InlineKeyboardButton(
-        "Scoreboard",
-        callback_data=("match " + str(response["match_id"]))
-    )
-
-    button2 = InlineKeyboardButton(
-        "Players/Ranks",
-        callback_data=("match " + str(response["match_id"]) + " players")
-    )
-
-    button3 = InlineKeyboardButton(
-        "Damage/Heal",
-        callback_data=("match " + str(response["match_id"]) + " damage")
-    )
-
-    button4 = InlineKeyboardButton(
-        "Order",
-        callback_data=("match " + str(response["match_id"]) + " order")
-    )
-
-    buttons = [button1, button2, button3, button4]
-
-    markup = InlineKeyboardMarkup.from_column(buttons)
+    markup = create_inline_keyboard(match_id, response_format)
     
     query.message.edit_text(
         output_message, parse_mode="MarkdownV2", reply_markup=markup, disable_web_page_preview=True
     )
+
+
+def create_inline_keyboard(match_id, response_format="default"):
+    match_id = str(match_id)
+
+    button_default = InlineKeyboardButton(
+        "Scoreboard",
+        callback_data=(f"match {match_id}")
+    )
+
+    button_players = InlineKeyboardButton(
+        "Players/Ranks",
+        callback_data=(f"match {match_id} players")
+    )
+
+    button_damage = InlineKeyboardButton(
+        "Damage/Heal",
+        callback_data=(f"match {match_id} damage")
+    )
+
+    button_order = InlineKeyboardButton(
+        "Picks/Bans",
+        callback_data=(f"match {match_id} order")
+    )
+
+    # Exclude the current view from the inline keyboard
+    if response_format == "players":
+        buttons = [button_default, button_damage, button_order]
+    elif response_format == "damage":
+        buttons = [button_default, button_players, button_order]
+    elif response_format == "order":
+        buttons = [button_default, button_players, button_damage]
+    else:
+        buttons = [button_players, button_damage, button_order]
+    
+    markup = InlineKeyboardMarkup.from_row(buttons)
+    return markup
