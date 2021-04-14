@@ -69,12 +69,7 @@ def create_bot():
 
     dp.add_handler(
         CallbackQueryHandler(
-            match_callbacks.handle_match_details_callback, pattern="(match )[0-9]+"
-        )
-    )
-    dp.add_handler(
-        CallbackQueryHandler(
-            match_callbacks.handle_match_players_callback, pattern="(players )[0-9]+"
+            match_callbacks.handle_match_details_callback, pattern="(match )[0-9].*"
         )
     )
 

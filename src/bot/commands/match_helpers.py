@@ -1,7 +1,5 @@
-import json
 import datetime
 from src import constants
-from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FILE_DIR
 from src.lib.endpoints import get_player_by_account_id
 from telegram.utils.helpers import escape_markdown
 from src.bot.services import item_services
@@ -100,22 +98,29 @@ def create_match_detail_message(match_data, format = "default"):
     # Determine which content needs to be inserted
     if format == "players":
         output_message += build_players_match_message(match, player_data)
+    elif format == "damage":
+        output_message += build_damage_match_message(match, player_data)
+    elif format == "order":
+        output_message += build_order_match_message(match, player_data)
     else:
         output_message += build_default_match_message(match, player_data)
 
     return output_message
+
+
+# Default scoreboard
 
 def build_default_match_message(match, player_data):
     # Be agnostic about the amount of players on radiant or dire, just in case
     output_message = "\nRadiant:\n"
     for player in player_data:
         if player.isRadiant:
-            output_message += build_player_string(player)
+            output_message += build_default_player_string(player)
     
     output_message += "\nDire:\n"
     for player in player_data:
         if not player.isRadiant:
-            output_message += build_player_string(player)
+            output_message += build_default_player_string(player)
 
     known_players = []
 
@@ -142,49 +147,8 @@ def build_default_match_message(match, player_data):
 
     return output_message
 
-def build_players_match_message(match, player_data):
-    output_message = "\nRadiant:\n"
-    for player in player_data:
-        if player.isRadiant:
-            try:
-                response, status = helpers.get_player_by_account_id(player.account_id)
-                player_name = response["profile"]["personaname"]
-            except KeyError:
-                player_name = "Anonymous"
-            
-            hero_data = helpers.get_hero_data(player.hero_id)
-            hero_name = hero_data["localized_name"]
 
-            if player.rank_tier:
-                rank = f"| {helpers.map_rank_tier_to_string(player.rank_tier)}"
-            else:
-                rank = ""
-
-            output_message += f"{player_name} ({hero_name}) {rank}\n"
-    
-    output_message += "\nDire:\n"
-    for player in player_data:
-        if not player.isRadiant:
-            try:
-                response, status = helpers.get_player_by_account_id(player.account_id)
-                player_name = response["profile"]["personaname"]
-            except KeyError:
-                player_name = "Anonymous"
-            
-            hero_data = helpers.get_hero_data(player.hero_id)
-            hero_name = hero_data["localized_name"]
-
-            if player.rank_tier:
-                rank = f"| {helpers.map_rank_tier_to_string(player.rank_tier)}"
-            else:
-                rank = ""
-
-            output_message += f"{player_name} ({hero_name}) {rank}\n"
-
-    output_message = escape_markdown(output_message, version=2)
-    return output_message
-
-def build_player_string(player):
+def build_default_player_string(player):
     kills = player.kills
     deaths = player.deaths
     assists = player.assists
@@ -194,10 +158,130 @@ def build_player_string(player):
     denies = player.denies
     cs = f"{last_hits}/{denies}"
 
+    level = player.level
+
     xpm = player.xp_per_min
     gpm = player.gold_per_min
 
     hero_data = helpers.get_hero_data(player.hero_id)
     hero_name = hero_data["localized_name"]
 
-    return f"{kda} | {cs} | {gpm} GPM | {xpm} XPM | {hero_name}\n"
+    return f"{kda} | {level} | {cs} | {gpm} GPM | {xpm} XPM | {hero_name}\n"
+
+
+# Players/rank view
+
+def build_players_match_message(match, player_data):
+    output_message = "\nRadiant:\n"
+    for player in player_data:
+        if player.isRadiant:
+            output_message += build_players_player_line(player)
+    
+    output_message += "\nDire:\n"
+    for player in player_data:
+        if not player.isRadiant:
+            output_message += build_players_player_line(player)
+
+    output_message = escape_markdown(output_message, version=2)
+    return output_message
+
+
+def build_players_player_line(player):
+    try:
+        response, status = helpers.get_player_by_account_id(player.account_id)
+        player_name = response["profile"]["personaname"]
+    except KeyError:
+        player_name = "Anonymous"
+
+    hero_data = helpers.get_hero_data(player.hero_id)
+    hero_name = hero_data["localized_name"]
+
+    if player.rank_tier:
+        rank = f"| {helpers.map_rank_tier_to_string(player.rank_tier)}"
+    else:
+        rank = ""
+
+    return f"{player_name} ({hero_name}) {rank}\n"
+
+
+# Damage and healing done
+
+def build_damage_match_message(match, player_data):
+    output_message = "\nRadiant:\n"
+    for player in player_data:
+        if player.isRadiant:
+            output_message += build_damage_player_line(player)
+    
+    output_message += "\nDire:\n"
+    for player in player_data:
+        if not player.isRadiant:
+            output_message += build_damage_player_line(player)
+
+    output_message = escape_markdown(output_message, version=2)
+    return output_message
+
+
+def build_damage_player_line(player):
+    damage = player.hero_damage
+    building_damage = player.tower_damage
+    healing = player.hero_healing
+
+    hero_data = helpers.get_hero_data(player.hero_id)
+    hero_name = hero_data["localized_name"]
+
+    return f"{damage} DMG | {building_damage} TD | {healing} H | {hero_name}\n"
+
+
+# Pick order
+
+def build_order_match_message(match, player_data):
+    heroes_in_game = []
+    for player in player_data:
+        heroes_in_game.append(player.hero_id)
+    
+    picks_and_bans = []
+    for pick_or_ban in match.picks_bans:
+        picks_and_bans.append(pick_or_ban["hero_id"])
+    
+    # Filter picks and bans by heroes that actually appeared in the game
+    # Everything else got banned
+    picks_ordered = [pick for pick in picks_and_bans if pick in heroes_in_game]
+    bans = [ban for ban in picks_and_bans if ban not in heroes_in_game]
+
+    output_message = "\nRadiant:\n"
+    for player in player_data:
+        if player.isRadiant:
+            output_message += build_order_player_line(player, picks_ordered)
+    
+    output_message += "\nDire:\n"
+    for player in player_data:
+        if not player.isRadiant:
+            output_message += build_order_player_line(player, picks_ordered)
+
+    banned_heroes = []
+    for ban in bans:
+        hero_data = helpers.get_hero_data(ban)
+        hero_name = hero_data["localized_name"]
+
+        banned_heroes.append(hero_name)
+    
+    output_message += "\nBans:\n"
+    output_message += ", ".join(banned_heroes)
+
+    output_message = escape_markdown(output_message, version=2)
+
+    return output_message
+
+def build_order_player_line(player, picks_ordered):
+    index = picks_ordered.index(player.hero_id)
+    if index < 4:
+        pick_string = "First phase"
+    elif index < 8:
+        pick_string = "Second phase"
+    else:
+        pick_string = "Last pick"
+    
+    hero_data = helpers.get_hero_data(player.hero_id)
+    hero_name = hero_data["localized_name"]
+
+    return f"{hero_name}: {pick_string}\n"

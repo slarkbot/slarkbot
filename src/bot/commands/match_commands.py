@@ -28,7 +28,8 @@ def run_last_match_command(update, context):
 
     output_message = match_helpers.create_match_message(response[0])
     button = InlineKeyboardButton(
-        "Full match details", callback_data=("match " + str(response[0]["match_id"]))
+        "Full match details",
+        callback_data=("match " + str(response[0]["match_id"]))
     )
     markup = InlineKeyboardMarkup.from_button(button)
     update.message.reply_markdown_v2(output_message, reply_markup=markup)
@@ -51,10 +52,19 @@ def run_get_match_by_match_id(update, context):
 
     output_message = match_helpers.create_match_detail_message(response)
 
-    button = InlineKeyboardButton(
-        "Players", callback_data=("players " + str(response["match_id"]))
+    button1 = InlineKeyboardButton(
+        "Scoreboard",
+        callback_data=("match " + str(response["match_id"]) + " default")
     )
-    markup = InlineKeyboardMarkup.from_button(button)
+
+    button2 = InlineKeyboardButton(
+        "Players/Ranks",
+        callback_data=("match " + str(response["match_id"]) + " players")
+    )
+
+    buttons = [button1, button2]
+
+    markup = InlineKeyboardMarkup.from_row(buttons)
     update.message.reply_markdown_v2(
         output_message, reply_markup=markup, disable_web_page_preview=True
     )
