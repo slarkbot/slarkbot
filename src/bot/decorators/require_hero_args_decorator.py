@@ -13,9 +13,7 @@ def require_hero_args(func):
     @wraps(func)
     def inner(update, context):
         if not context.args:
-            update.message.reply_markdown_v2(
-                constants.MISSING_ARGUMENT_MESSAGE
-            )
+            update.message.reply_markdown_v2(constants.MISSING_ARGUMENT_MESSAGE)
 
         hero_name_parts = context.args
 
