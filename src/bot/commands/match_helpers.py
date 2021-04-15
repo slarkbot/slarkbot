@@ -166,7 +166,7 @@ def build_default_player_string(player):
     hero_data = helpers.get_hero_data(player.hero_id)
     hero_name = hero_data["localized_name"]
 
-    return f"{kda} | {level} | {cs} | {gpm} GPM | {xpm} XPM | {hero_name}\n"
+    return f"{kda} | L{level} | {cs} | {gpm} GPM | {xpm} XPM | {hero_name}\n"
 
 
 # Players/rank view
@@ -188,9 +188,8 @@ def build_players_match_message(match, player_data):
 
 def build_players_player_line(player):
     try:
-        response, status = helpers.get_player_by_account_id(player.account_id)
-        player_name = response["profile"]["personaname"]
-    except KeyError:
+        player_name = player.personaname
+    except:
         player_name = "Anonymous"
 
     hero_data = helpers.get_hero_data(player.hero_id)
@@ -200,8 +199,10 @@ def build_players_player_line(player):
         rank = f"| {helpers.map_rank_tier_to_string(player.rank_tier)}"
     else:
         rank = ""
-
-    return f"{player_name} ({hero_name}) {rank}\n"
+    
+    party_letter = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"][player.party_id]
+    
+    return f"{party_letter} | {player_name} ({hero_name}) {rank}\n"
 
 
 # Damage and healing done
