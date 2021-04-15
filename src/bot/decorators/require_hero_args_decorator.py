@@ -13,7 +13,8 @@ def require_hero_args(func):
     @wraps(func)
     def inner(update, context):
         if not context.args:
-            update.message.reply_markdown_v2(constants.MISSING_ARGUMENT_MESSAGE)
+            update.message.reply_markdown_v2(constants.MISSING_HERO_ARGUMENT_MESSAGE)
+            return
 
         hero_name_parts = context.args
 
@@ -29,7 +30,7 @@ def require_hero_args(func):
 
         if not hero:
             update.message.reply_markdown_v2(
-                f"I couldn't find a hero by the name {hero_name} D:"
+                constants.HERO_NOT_FOUND_MESSAGE % hero_name
             )
 
         func(update, hero)
