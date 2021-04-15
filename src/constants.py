@@ -9,7 +9,7 @@ USER_NOT_REGISTERED_MESSAGE = "I couldn't find that Telegram username\! Please m
 
 BAD_RESPONSE_MESSAGE = "Something went wrong, I didn't get a good response :("
 
-MISSING_ARGUMENT_MESSAGE = "No arguments were given\!\n Try %s"
+MISSING_HERO_ARGUMENT_MESSAGE = "No arguments were given\! Make sure to send a hero name after the command. Use /help for help"
 
 HERO_NOT_FOUND_MESSAGE = "I couldn't find a hero by the name %s"
 
