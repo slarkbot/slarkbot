@@ -1,7 +1,7 @@
 from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services
-from src.bot.commands import helpers
+from src.bot.commands import helpers, match_helpers
 from src.lib.steamapi import resolve_steam_vanity_url
 from src.lib import endpoints
 from src import constants
@@ -82,7 +82,7 @@ def run_get_player_recents_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_recent_matches_message(response[:limit])
+    output_message = match_helpers.create_recent_matches_message(response[:limit])
     update.message.reply_text(output_message)
 
 

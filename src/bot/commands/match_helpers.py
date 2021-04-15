@@ -60,11 +60,13 @@ def create_match_message(match_data):
 
     result_string = helpers.get_match_result(match.player_slot, match.radiant_win)
     game_mode = constants.GAME_MODE_MAP[match.game_mode]
+    lobby_type = constants.LOBBY_TYPE_MAP[match.lobby_type]
 
     start_date = helpers.convert_timestamp_to_datetime(match.start_time)
 
     output_message  = f"*{hero_name}* \| {kda} \| {gpm} GPM \| {xpm} XPM \n\n"
-    output_message += f"Match ID: {match_id} \| {start_date} \| {game_mode} \n"
+    output_message += f"Match ID: {match_id} \| {start_date}\n"
+    output_message += f"{lobby_type} lobby \| {game_mode} game \n"
     output_message += f"Result: *{result_string}* after {duration}"
 
     return output_message
