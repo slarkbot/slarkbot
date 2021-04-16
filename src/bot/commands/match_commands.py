@@ -3,23 +3,14 @@ from src import constants
 from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services
-from src.bot.commands import helpers
-from src.bot.commands import match_helpers
+from src.bot.commands import helpers, match_helpers
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 from src.bot.callback_handlers.match_callbacks import create_inline_keyboard
+from src.bot.decorators.require_registered_user_decorator import require_register
 
 
-def run_last_match_command(update, context):
-    try:
-        telegram_handle = context.args[0]
-    except (IndexError, ValueError):
-        telegram_handle = update.message.from_user.username
-
-    user = user_services.lookup_user_by_telegram_handle(telegram_handle)
-
-    if not user:
-        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
-
+@require_register
+def run_last_match_command(update, user):
     response, status_code = endpoints.get_player_recent_matches_by_account_id(
         user.account_id
     )

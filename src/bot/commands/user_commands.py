@@ -6,6 +6,7 @@ from src.lib.steamapi import resolve_steam_vanity_url
 from src.lib import endpoints
 from src import constants
 from steam.steamid import SteamID
+from src.bot.decorators.require_registered_user_decorator import require_register
 
 
 def save_user(user):
@@ -86,19 +87,9 @@ def run_get_player_recents_command(update, context):
     update.message.reply_text(output_message)
 
 
-def run_get_player_rank_command(update, context):
-    try:
-        telegram_handle = context.args[0]
-    except (IndexError, ValueError):
-        telegram_handle = update.message.from_user.username
-
-    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
-
-    if not registered_user:
-        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
-
-    account_id = registered_user.account_id
-
+@require_register
+def run_get_player_rank_command(update, user):
+    account_id = user.account_id
     response, status_code = endpoints.get_player_rank_by_account_id(account_id)
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
@@ -109,7 +100,7 @@ def run_get_player_rank_command(update, context):
 
     rank = helpers.map_rank_tier_to_string(rank_tier)
 
-    output_message = f"{persona_name} (@{registered_user.telegram_handle}) is {rank}"
+    output_message = f"{persona_name} (@{user.telegram_handle}) is {rank}"
     update.message.reply_text(output_message)
 
 
@@ -153,18 +144,9 @@ def run_get_player_hero_winrate_command(update, context):
     )
 
 
-def run_get_player_steam_profile_command(update, context):
-    try:
-        telegram_handle = context.args[0]
-    except (IndexError, ValueError):
-        telegram_handle = update.message.from_user.username
-
-    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
-
-    if not registered_user:
-        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
-
+@require_register
+def run_get_player_steam_profile_command(update, user):
     update.message.reply_text(
-        f"@{registered_user.telegram_handle}'s steam profile is "
-        + SteamID(registered_user.account_id).community_url
+        f"@{user.telegram_handle}'s steam profile is "
+        + SteamID(user.account_id).community_url
     )
