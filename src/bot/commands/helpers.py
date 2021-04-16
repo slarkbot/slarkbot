@@ -32,7 +32,7 @@ def get_hero_data(hero_id):
         if hero["id"] == hero_id:
             return hero
 
-
+# Legacy method
 def get_hero_by_name(hero_name):
     hero_name = hero_name.lower()
 

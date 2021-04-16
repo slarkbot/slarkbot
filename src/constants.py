@@ -44,6 +44,7 @@ class API_URI_ENDPOINTS(Enum):
     HERO_STATS = "heroStats"
     CONSTANTS = "constants/%s"
     PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/recentMatches"
+    PLAYER_MATCHES_BY_HERO = "players/%s/matches?hero_id=%s"
     PLAYER_HERO_STATS = "players/%s/heroes"
     HERO_ITEM_POPULARITY = "heroes/%s/itemPopularity"
 

@@ -59,14 +59,25 @@ def run_get_player_recents_command(update, context):
     )
     limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
 
+    hero_name_parts = context.args
+    parts_to_remove = []
+
     for arg in context.args:
         user = user_services.lookup_user_by_telegram_handle(arg)
         if user:
             registered_user = user
+            # If this argument is a user, remove it from hero name parts
+            parts_to_remove.append(arg)
+
         try:
             limit = int(arg)
+            # If this argument is an int, treat it as a limit
+            parts_to_remove.append(arg)
         except:
             pass
+
+    for arg in parts_to_remove:
+        hero_name_parts.remove(arg)
 
     if not registered_user:
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
@@ -76,9 +87,17 @@ def run_get_player_recents_command(update, context):
     if limit > 20:
         limit = 20
 
-    response, status_code = endpoints.get_player_recent_matches_by_account_id(
-        account_id
-    )
+    hero_name = " ".join(hero_name_parts)
+    hero_id = helpers.get_hero_id_by_name_or_alias(hero_name)
+    
+    if hero_id:
+        response, status_code = endpoints.get_player_matches_by_hero_id(
+            account_id, hero_id
+        )
+    else:
+        response, status_code = endpoints.get_player_recent_matches_by_account_id(
+            account_id
+        )
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
