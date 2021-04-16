@@ -103,7 +103,7 @@ def create_match_detail_message(match_data, format = "default"):
     elif format == "damage":
         output_message += build_damage_match_message(match, player_data)
     elif format == "order":
-        output_message += build_order_match_message(match, player_data)
+        output_message += build_pick_order_match_message(match, player_data)
     else:
         output_message += build_default_match_message(match, player_data)
 
@@ -237,7 +237,7 @@ def build_damage_player_line(player):
 
 # Pick order
 
-def build_order_match_message(match, player_data):
+def build_pick_order_match_message(match, player_data):
     heroes_in_game = []
     for player in player_data:
         heroes_in_game.append(player.hero_id)
@@ -254,12 +254,12 @@ def build_order_match_message(match, player_data):
     output_message = "\nRadiant:\n"
     for player in player_data:
         if player.isRadiant:
-            output_message += build_order_player_line(player, picks_ordered)
+            output_message += build_pick_order_player_line(player, picks_ordered)
     
     output_message += "\nDire:\n"
     for player in player_data:
         if not player.isRadiant:
-            output_message += build_order_player_line(player, picks_ordered)
+            output_message += build_pick_order_player_line(player, picks_ordered)
 
     banned_heroes = []
     for ban in bans:
@@ -275,7 +275,7 @@ def build_order_match_message(match, player_data):
 
     return output_message
 
-def build_order_player_line(player, picks_ordered):
+def build_pick_order_player_line(player, picks_ordered):
     index = picks_ordered.index(player.hero_id)
     if index < 4:
         pick_string = "First phase"
