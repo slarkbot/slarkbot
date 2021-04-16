@@ -125,7 +125,7 @@ def run_get_player_hero_winrate_command(update, context):
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
     hero_name = " ".join(hero_name_parts)
-    hero_id = hero_services.get_hero_id_by_name_or_alias(hero_name)
+    hero_id = helpers.get_hero_id_by_name_or_alias(hero_name)
 
     if not hero_id:
         update.message.reply_markdown_v2(
@@ -137,7 +137,7 @@ def run_get_player_hero_winrate_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    hero_data = helpers.filter_hero_winrates(response, str(hero_id))
+    hero_data = helpers.filter_hero_winrates(response, hero_id)
 
     update.message.reply_text(
         helpers.format_winrate_response(hero_data, registered_user.telegram_handle)
