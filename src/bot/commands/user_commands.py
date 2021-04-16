@@ -1,7 +1,7 @@
 from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services, hero_services
-from src.bot.commands import helpers
+from src.bot.commands import helpers, match_helpers
 from src.lib.steamapi import resolve_steam_vanity_url
 from src.lib import endpoints
 from src import constants
@@ -102,7 +102,7 @@ def run_get_player_recents_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_recent_matches_message(response[:limit])
+    output_message = match_helpers.create_recent_matches_message(response[:limit])
     update.message.reply_text(output_message)
 
 
@@ -144,9 +144,9 @@ def run_get_player_hero_winrate_command(update, context):
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
     hero_name = " ".join(hero_name_parts)
-    hero = helpers.get_hero_by_name(hero_name)
+    hero_id = helpers.get_hero_id_by_name_or_alias(hero_name)
 
-    if not hero:
+    if not hero_id:
         update.message.reply_markdown_v2(
             "I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`\. If you tried to tag a user, they may not be registered\."
         )
@@ -156,7 +156,7 @@ def run_get_player_hero_winrate_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    hero_data = helpers.filter_hero_winrates(response, str(hero["id"]))
+    hero_data = helpers.filter_hero_winrates(response, hero_id)
 
     update.message.reply_text(
         helpers.format_winrate_response(hero_data, registered_user.telegram_handle)
