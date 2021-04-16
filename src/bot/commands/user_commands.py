@@ -1,6 +1,6 @@
 from src.bot.models.user import User
 from src.bot.models.sessions import create_session
-from src.bot.services import user_services
+from src.bot.services import user_services, hero_services
 from src.bot.commands import helpers
 from src.lib.steamapi import resolve_steam_vanity_url
 from src.lib import endpoints
@@ -59,14 +59,23 @@ def run_get_player_recents_command(update, context):
     )
     limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
 
+    hero_name_parts = context.args
+    parts_to_remove = []
+
     for arg in context.args:
         user = user_services.lookup_user_by_telegram_handle(arg)
         if user:
             registered_user = user
+            parts_to_remove.append(arg)
+
         try:
             limit = int(arg)
+            parts_to_remove.append(arg)
         except:
             pass
+
+    for arg in parts_to_remove:
+        hero_name_parts.remove(arg)
 
     if not registered_user:
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
@@ -76,9 +85,26 @@ def run_get_player_recents_command(update, context):
     if limit > 20:
         limit = 20
 
-    response, status_code = endpoints.get_player_recent_matches_by_account_id(
-        account_id
-    )
+    try:
+        hero_name = " ".join(hero_name_parts)
+        hero = hero_services.get_hero_by_name(hero_name)
+        hero_id = str(hero.id)
+    except:
+        try:
+            hero_name = " ".join(hero_name_parts)
+            hero_alias = hero_services.get_hero_alias_by_name(hero_name)
+            hero_id = str(hero_alias.hero_id)
+        except:
+            hero_id = None
+    
+    if hero_id:
+        response, status_code = endpoints.get_player_matches_by_hero_id(
+            account_id, hero_id
+        )
+    else:
+        response, status_code = endpoints.get_player_recent_matches_by_account_id(
+            account_id
+        )
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
