@@ -66,10 +66,12 @@ def run_get_player_recents_command(update, context):
         user = user_services.lookup_user_by_telegram_handle(arg)
         if user:
             registered_user = user
+            # If this argument is a user, remove it from hero name parts
             parts_to_remove.append(arg)
 
         try:
             limit = int(arg)
+            # If this argument is an int, treat it as a limit
             parts_to_remove.append(arg)
         except:
             pass
@@ -85,17 +87,8 @@ def run_get_player_recents_command(update, context):
     if limit > 20:
         limit = 20
 
-    try:
-        hero_name = " ".join(hero_name_parts)
-        hero = hero_services.get_hero_by_name(hero_name)
-        hero_id = str(hero.id)
-    except:
-        try:
-            hero_name = " ".join(hero_name_parts)
-            hero_alias = hero_services.get_hero_alias_by_name(hero_name)
-            hero_id = str(hero_alias.hero_id)
-        except:
-            hero_id = None
+    hero_name = " ".join(hero_name_parts)
+    hero_id = helpers.get_hero_id_by_name_or_alias(hero_name)
     
     if hero_id:
         response, status_code = endpoints.get_player_matches_by_hero_id(

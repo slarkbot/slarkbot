@@ -4,7 +4,7 @@ from src import constants
 from src.constants import JSON_CONSTANT_DATA_FILE_MAPPING, JSON_CONSTANT_DATA_FILE_DIR
 from src.lib.endpoints import get_player_by_account_id
 from telegram.utils.helpers import escape_markdown
-from src.bot.services import item_services
+from src.bot.services import item_services, hero_services
 
 
 class MatchDto:
@@ -32,27 +32,14 @@ def get_hero_data(hero_id):
         if hero["id"] == hero_id:
             return hero
 
+def get_hero_id_by_name_or_alias(name_or_alias):
+    hero = hero_services.get_hero_by_name(name_or_alias)
+    if hero:
+        return hero.id
 
-def get_hero_by_name(hero_name):
-    hero_name = hero_name.lower()
-
-    hero_data_file = (
-        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_DATA.value
-    )
-    hero_json = read_json_file(hero_data_file)
-    for hero in hero_json:
-        if hero["localized_name"].lower() == hero_name:
-            return hero
-
-    hero_alias_file = (
-        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_ALIASES.value
-    )
-    alias_json = read_json_file(hero_alias_file)
-    for hero in alias_json:
-        for alias in hero["aliases"]:
-            if alias.lower() == hero_name:
-                found_hero = get_hero_data(hero["id"])
-                return found_hero
+    hero_alias = hero_services.get_hero_alias_by_name(name_or_alias)
+    if hero_alias:
+        return hero_alias.hero_id
 
 
 def filter_hero_winrates(hero_data, hero_id):
