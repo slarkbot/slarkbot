@@ -32,6 +32,29 @@ def get_hero_data(hero_id):
         if hero["id"] == hero_id:
             return hero
 
+# Legacy method
+def get_hero_by_name(hero_name):
+    hero_name = hero_name.lower()
+
+    hero_data_file = (
+        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_DATA.value
+    )
+    hero_json = read_json_file(hero_data_file)
+    for hero in hero_json:
+        if hero["localized_name"].lower() == hero_name:
+            return hero
+
+    hero_alias_file = (
+        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_ALIASES.value
+    )
+    alias_json = read_json_file(hero_alias_file)
+    for hero in alias_json:
+        for alias in hero["aliases"]:
+            if alias.lower() == hero_name:
+                found_hero = get_hero_data(hero["id"])
+                return found_hero
+
+
 def get_hero_id_by_name_or_alias(name_or_alias):
     hero = hero_services.get_hero_by_name(name_or_alias)
     if hero:
