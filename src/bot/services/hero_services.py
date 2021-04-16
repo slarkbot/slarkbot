@@ -23,3 +23,13 @@ def get_hero_alias_by_name(hero_alias):
 def get_hero_aliases_by_hero_id(hero_id):
     session = create_session()
     return session.query(HeroAlias).filter(HeroAlias.hero_id == hero_id).all()
+
+def get_hero_id_by_name_or_alias(hero_name):
+    try:
+        hero = get_hero_by_name(hero_name)
+        hero_id = hero.id
+    except:
+        hero = get_hero_alias_by_name(hero_name)
+        hero_id = hero.hero_id
+    
+    return hero_id
