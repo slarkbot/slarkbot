@@ -3,7 +3,7 @@ from src import constants
 from src.bot.models.user import User
 from src.bot.models.sessions import create_session
 from src.bot.services import user_services
-from src.bot.commands import helpers, match_helpers
+from src.bot.commands import match_helpers
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 from src.bot.callback_handlers.match_callbacks import create_inline_keyboard
 from src.bot.decorators.require_registered_user_decorator import require_register
@@ -20,8 +20,7 @@ def run_last_match_command(update, user):
 
     output_message = match_helpers.create_match_message(response[0])
     button = InlineKeyboardButton(
-        "Full match details",
-        callback_data=("match " + str(response[0]["match_id"]))
+        "Full match details", callback_data=("match " + str(response[0]["match_id"]))
     )
     markup = InlineKeyboardMarkup.from_button(button)
     update.message.reply_markdown_v2(output_message, reply_markup=markup)

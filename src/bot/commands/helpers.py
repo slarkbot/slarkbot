@@ -17,44 +17,6 @@ class Player:
         [setattr(self, x, i) for x, i in kwargs.items()]
 
 
-def read_json_file(file_path):
-    with open(file_path) as data:
-        data = json.load(data)
-        return data
-
-
-def get_hero_data(hero_id):
-    hero_data_file = (
-        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_DATA.value
-    )
-    hero_json = read_json_file(hero_data_file)
-    for hero in hero_json:
-        if hero["id"] == hero_id:
-            return hero
-
-# Legacy method
-def get_hero_by_name(hero_name):
-    hero_name = hero_name.lower()
-
-    hero_data_file = (
-        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_DATA.value
-    )
-    hero_json = read_json_file(hero_data_file)
-    for hero in hero_json:
-        if hero["localized_name"].lower() == hero_name:
-            return hero
-
-    hero_alias_file = (
-        JSON_CONSTANT_DATA_FILE_DIR + JSON_CONSTANT_DATA_FILE_MAPPING.HERO_ALIASES.value
-    )
-    alias_json = read_json_file(hero_alias_file)
-    for hero in alias_json:
-        for alias in hero["aliases"]:
-            if alias.lower() == hero_name:
-                found_hero = get_hero_data(hero["id"])
-                return found_hero
-
-
 def get_hero_id_by_name_or_alias(name_or_alias):
     hero = hero_services.get_hero_by_name(name_or_alias)
     if hero:
@@ -73,7 +35,7 @@ def filter_hero_winrates(hero_data, hero_id):
 
 
 def format_winrate_response(hero_data, telegram_handle):
-    hero_by_id = get_hero_data(int(hero_data["hero_id"]))
+    hero_by_id = hero_services.get_hero_by_id(hero_data.hero_id)
     hero_name = hero_by_id["localized_name"]
     if hero_data["games"] == 0:
         return f"@{telegram_handle} has no games as {hero_name} recorded"
@@ -99,6 +61,7 @@ def get_match_result(player_slot, radiant_win):
         return "Win" if radiant_win else "Loss"
     else:  # on dire team
         return "Loss" if radiant_win else "Win"
+
 
 def map_rank_tier_to_string(rank):
     # ranks are two digit codes
@@ -178,9 +141,6 @@ def create_suggested_build_message(hero_name, item_data):
     mapped_late_game_items = map_item_ids_to_item_names(most_bought_late_game_items)
 
     output_message = f"Recommended items for {hero_name}\n"
-
-    # output_message += "**Start game items**\n"
-    # output_message += " -> ".join(mapped_start_game_items)
 
     output_message += create_build_section("Start game items", mapped_start_game_items)
     output_message += create_build_section("Early game items", mapped_early_game_items)
