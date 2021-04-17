@@ -4,7 +4,7 @@ from src.bot.models.sessions import create_session
 
 def get_item_by_id(item_id):
     session = create_session()
-    output session.query(Item).filter(Item.id == item_id).first()
+    output = session.query(Item).filter(Item.id == item_id).first()
     session.close()
     return output
 
