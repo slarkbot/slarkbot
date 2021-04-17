@@ -266,7 +266,7 @@ def build_pick_order_match_message(match, player_data):
 
     banned_heroes = []
     for ban in bans:
-        hero_data = hero_services.get_hero_by_id(player.hero_id)
+        hero_data = hero_services.get_hero_by_id(ban)
         hero_name = hero_data.localized_name
 
         banned_heroes.append(hero_name)
