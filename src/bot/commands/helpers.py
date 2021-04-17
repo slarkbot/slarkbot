@@ -35,9 +35,10 @@ def filter_hero_winrates(hero_data, hero_id):
 
 
 def format_winrate_response(hero_data, telegram_handle):
-    hero_by_id = hero_services.get_hero_by_id(hero_data.hero_id)
-    hero_name = hero_by_id["localized_name"]
-    if hero_data["games"] == 0:
+    print(hero_data)
+    hero_by_id = hero_services.get_hero_by_id(hero_data["hero_id"])
+    hero_name = hero_by_id.localized_name
+    if not hero_data["games"]:
         return f"@{telegram_handle} has no games as {hero_name} recorded"
 
     winrate = hero_data["win"] / hero_data["games"] * 100
