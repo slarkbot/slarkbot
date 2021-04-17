@@ -7,7 +7,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 def handle_match_details_callback(update, context):
     query = update.callback_query
-    
+
     query_args = query.data.split()
     query_args.pop(0)
     # Args list should now contain only two things, match id and format
@@ -32,9 +32,12 @@ def handle_match_details_callback(update, context):
     query.answer()
 
     markup = create_inline_keyboard(match_id, response_format)
-    
+
     query.message.edit_text(
-        output_message, parse_mode="MarkdownV2", reply_markup=markup, disable_web_page_preview=True
+        output_message,
+        parse_mode="MarkdownV2",
+        reply_markup=markup,
+        disable_web_page_preview=True,
     )
 
 
@@ -42,23 +45,19 @@ def create_inline_keyboard(match_id, response_format="default"):
     match_id = str(match_id)
 
     button_default = InlineKeyboardButton(
-        "Scoreboard",
-        callback_data=(f"match {match_id}")
+        "Scoreboard", callback_data=(f"match {match_id}")
     )
 
     button_players = InlineKeyboardButton(
-        "Players/Ranks",
-        callback_data=(f"match {match_id} players")
+        "Players/Ranks", callback_data=(f"match {match_id} players")
     )
 
     button_damage = InlineKeyboardButton(
-        "Damage/Heal",
-        callback_data=(f"match {match_id} damage")
+        "Damage/Heal", callback_data=(f"match {match_id} damage")
     )
 
     button_order = InlineKeyboardButton(
-        "Picks/Bans",
-        callback_data=(f"match {match_id} order")
+        "Picks/Bans", callback_data=(f"match {match_id} order")
     )
 
     # Exclude the current view from the inline keyboard
@@ -70,6 +69,6 @@ def create_inline_keyboard(match_id, response_format="default"):
         buttons = [button_default, button_players, button_damage]
     else:
         buttons = [button_players, button_damage, button_order]
-    
+
     markup = InlineKeyboardMarkup.from_row(buttons)
     return markup

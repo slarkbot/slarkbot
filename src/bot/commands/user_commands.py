@@ -89,7 +89,7 @@ def run_get_player_recents_command(update, context):
 
     hero_name = " ".join(hero_name_parts)
     hero_id = helpers.get_hero_id_by_name_or_alias(hero_name)
-    
+
     if hero_id:
         response, status_code = endpoints.get_player_matches_by_hero_id(
             account_id, hero_id
