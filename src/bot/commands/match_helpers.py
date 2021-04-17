@@ -49,7 +49,7 @@ def create_match_message(match_data):
     match_id = match.match_id
 
     hero_id = match.hero_id
-    hero_data = hero_services.get_hero_by_id
+    hero_data = hero_services.get_hero_by_id(hero_id)
     hero_name = hero_data.localized_name
 
     duration = str(datetime.timedelta(seconds=match.duration))
