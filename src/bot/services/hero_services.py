@@ -15,9 +15,7 @@ def get_hero_by_id(hero_id):
 
 def get_hero_alias_by_name(hero_alias):
     session = create_session()
-    return (
-        session.query(HeroAlias).filter(HeroAlias.alias.ilike(hero_alias)).first()
-    )
+    return session.query(HeroAlias).filter(HeroAlias.alias.ilike(hero_alias)).first()
 
 
 def get_hero_aliases_by_hero_id(hero_id):
