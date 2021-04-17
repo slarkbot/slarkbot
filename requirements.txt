@@ -53,7 +53,6 @@ tornado==6.0.4
 typed-ast==1.4.1
 typing-extensions==3.7.4.3
 tzlocal==2.1
-UNKNOWN==0.0.0
 urllib3==1.26.3
 vdf==3.3
 virtualenv==20.0.34

@@ -9,9 +9,9 @@ USER_NOT_REGISTERED_MESSAGE = "I couldn't find that Telegram username\! Please m
 
 BAD_RESPONSE_MESSAGE = "Something went wrong, I didn't get a good response :("
 
-MISSING_ARGUMENT_MESSAGE = "No arguments were given!\n Try %s"
+MISSING_HERO_ARGUMENT_MESSAGE = "No arguments were given\! Make sure to send a hero name after the command\. Use /help for help"
 
-HERO_NOT_FOUND_MESSAGE = "I couldn't find a hero by the name %s"
+HERO_NOT_FOUND_MESSAGE = "I couldn't find a hero by the name %s D:"
 
 
 HELP_TEXT = """
@@ -25,7 +25,7 @@ HELP_TEXT = """
     `\/rank <user:optional>` :: Gets a user's current medal\. Defaults to you if no argument is given\. User must be registered for this to work \n
     `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work\n
     `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
-    `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game\. Example :: `/build <hero name or alias>`\n
+    `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game\n
     `\/alias <hero name>` :: Get aliases for a hero\n
     `\/counters <hero name>` :: Get a list of heroes that counter the given hero\. Includes win rates and the percent disadvantage\n
     """
@@ -44,6 +44,7 @@ class API_URI_ENDPOINTS(Enum):
     HERO_STATS = "heroStats"
     CONSTANTS = "constants/%s"
     PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/recentMatches"
+    PLAYER_MATCHES_BY_HERO = "players/%s/matches?hero_id=%s"
     PLAYER_HERO_STATS = "players/%s/heroes"
     HERO_ITEM_POPULARITY = "heroes/%s/itemPopularity"
 
