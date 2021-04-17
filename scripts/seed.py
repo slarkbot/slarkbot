@@ -36,7 +36,7 @@ def main():
             {
                 "id": hero_obj["id"],
                 "name": hero_obj["name"],
-                "localized_name": hero_obj["localized_name"].lower(),
+                "localized_name": hero_obj["localized_name"],
                 "primary_attr": hero_obj["primary_attr"],
                 "roles": hero_obj["roles"],
             }

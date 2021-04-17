@@ -5,7 +5,7 @@ from src.bot.models.hero_alias import HeroAlias
 
 def get_hero_by_name(hero_name):
     session = create_session()
-    return session.query(Hero).filter(Hero.localized_name == hero_name.lower()).first()
+    return session.query(Hero).filter(Hero.localized_name.ilike(hero_name)).first()
 
 
 def get_hero_by_id(hero_id):
@@ -15,9 +15,7 @@ def get_hero_by_id(hero_id):
 
 def get_hero_alias_by_name(hero_alias):
     session = create_session()
-    return (
-        session.query(HeroAlias).filter(HeroAlias.alias == hero_alias.lower()).first()
-    )
+    return session.query(HeroAlias).filter(HeroAlias.alias.ilike(hero_alias)).first()
 
 
 def get_hero_aliases_by_hero_id(hero_id):

@@ -35,6 +35,12 @@ def get_player_recent_matches_by_account_id(id):
     return response.json(), response.status_code
 
 
+def get_player_matches_by_hero_id(id, hero_id):
+    uri = API_URI_ENDPOINTS.PLAYER_MATCHES_BY_HERO.value % (id, hero_id)
+    response = request.make_request(uri)
+    return response.json(), response.status_code
+
+
 def get_hero_stats():
     uri = API_URI_ENDPOINTS.HERO_STATS.value
     response = request.make_request(uri)

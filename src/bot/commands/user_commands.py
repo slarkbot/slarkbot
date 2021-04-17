@@ -1,11 +1,12 @@
 from src.bot.models.user import User
 from src.bot.models.sessions import create_session
-from src.bot.services import user_services
-from src.bot.commands import helpers
+from src.bot.services import user_services, hero_services
+from src.bot.commands import helpers, match_helpers
 from src.lib.steamapi import resolve_steam_vanity_url
 from src.lib import endpoints
 from src import constants
 from steam.steamid import SteamID
+from src.bot.decorators.require_registered_user_decorator import require_register
 
 
 def save_user(user):
@@ -58,14 +59,25 @@ def run_get_player_recents_command(update, context):
     )
     limit = constants.QUERY_PARAMETERS.RESPONSE_LIMIT.value
 
+    hero_name_parts = context.args
+    parts_to_remove = []
+
     for arg in context.args:
         user = user_services.lookup_user_by_telegram_handle(arg)
         if user:
             registered_user = user
+            # If this argument is a user, remove it from hero name parts
+            parts_to_remove.append(arg)
+
         try:
             limit = int(arg)
+            # If this argument is an int, treat it as a limit
+            parts_to_remove.append(arg)
         except:
             pass
+
+    for arg in parts_to_remove:
+        hero_name_parts.remove(arg)
 
     if not registered_user:
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
@@ -75,30 +87,28 @@ def run_get_player_recents_command(update, context):
     if limit > 20:
         limit = 20
 
-    response, status_code = endpoints.get_player_recent_matches_by_account_id(
-        account_id
-    )
+    hero_name = " ".join(hero_name_parts)
+    hero_id = helpers.get_hero_id_by_name_or_alias(hero_name)
+
+    if hero_id:
+        response, status_code = endpoints.get_player_matches_by_hero_id(
+            account_id, hero_id
+        )
+    else:
+        response, status_code = endpoints.get_player_recent_matches_by_account_id(
+            account_id
+        )
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    output_message = helpers.create_recent_matches_message(response[:limit])
+    output_message = match_helpers.create_recent_matches_message(response[:limit])
     update.message.reply_text(output_message)
 
 
-def run_get_player_rank_command(update, context):
-    try:
-        telegram_handle = context.args[0]
-    except (IndexError, ValueError):
-        telegram_handle = update.message.from_user.username
-
-    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
-
-    if not registered_user:
-        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
-
-    account_id = registered_user.account_id
-
+@require_register
+def run_get_player_rank_command(update, user):
+    account_id = user.account_id
     response, status_code = endpoints.get_player_rank_by_account_id(account_id)
 
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
@@ -109,7 +119,7 @@ def run_get_player_rank_command(update, context):
 
     rank = helpers.map_rank_tier_to_string(rank_tier)
 
-    output_message = f"{persona_name} (@{registered_user.telegram_handle}) is {rank}"
+    output_message = f"{persona_name} (@{user.telegram_handle}) is {rank}"
     update.message.reply_text(output_message)
 
 
@@ -134,9 +144,9 @@ def run_get_player_hero_winrate_command(update, context):
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
     hero_name = " ".join(hero_name_parts)
-    hero = helpers.get_hero_by_name(hero_name)
+    hero_id = helpers.get_hero_id_by_name_or_alias(hero_name)
 
-    if not hero:
+    if not hero_id:
         update.message.reply_markdown_v2(
             "I don't understand which hero you mean, sorry\! Try `/winrate <hero name>`\. If you tried to tag a user, they may not be registered\."
         )
@@ -146,25 +156,16 @@ def run_get_player_hero_winrate_command(update, context):
     if status_code != constants.HTTP_STATUS_CODES.OK.value:
         update.message.reply_text(constants.BAD_RESPONSE_MESSAGE)
 
-    hero_data = helpers.filter_hero_winrates(response, str(hero["id"]))
+    hero_data = helpers.filter_hero_winrates(response, hero_id)
 
     update.message.reply_text(
         helpers.format_winrate_response(hero_data, registered_user.telegram_handle)
     )
 
 
-def run_get_player_steam_profile_command(update, context):
-    try:
-        telegram_handle = context.args[0]
-    except (IndexError, ValueError):
-        telegram_handle = update.message.from_user.username
-
-    registered_user = user_services.lookup_user_by_telegram_handle(telegram_handle)
-
-    if not registered_user:
-        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
-
+@require_register
+def run_get_player_steam_profile_command(update, user):
     update.message.reply_text(
-        f"@{registered_user.telegram_handle}'s steam profile is "
-        + SteamID(registered_user.account_id).community_url
+        f"@{user.telegram_handle}'s steam profile is "
+        + SteamID(user.account_id).community_url
     )
