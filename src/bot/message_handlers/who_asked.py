@@ -1,4 +1,3 @@
-
 def who_asked(update, context):
     text = update.message.text
 
