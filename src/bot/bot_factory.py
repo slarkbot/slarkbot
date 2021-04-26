@@ -19,6 +19,7 @@ from src.bot.message_handlers.freedom_units import convert_to_freedom_units
 from src.bot.message_handlers.liberal_units import convert_to_liberal_units
 from src.bot.message_handlers.youre_welcome import say_youre_welcome
 from src.bot.message_handlers.nice import say_nice
+from src.bot.message_handlers.who_asked import who_asked
 
 from src.bot.callback_handlers import match_callbacks
 
@@ -74,6 +75,7 @@ def create_bot():
         MessageHandler(Filters.text & ~Filters.command, convert_to_liberal_units), 3
     )
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, say_nice), 4)
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, who_asked), 5)
 
     dp.add_handler(
         CallbackQueryHandler(
