@@ -9,5 +9,5 @@ CHANGELOG
 # Bugfixes
 
 # Features
-
+slarkbot now sends sticker when thanked
 # Commands
