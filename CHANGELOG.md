@@ -10,4 +10,5 @@ CHANGELOG
 
 # Features
 slarkbot now sends sticker when thanked
+slarkbot now feels bad when insulted
 # Commands
