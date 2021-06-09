@@ -2,13 +2,12 @@
 CHANGELOG
 
 
-# next [1.1.1]
+# next [1.1.2]
 
 # Env Vars
 
 # Bugfixes
 
 # Features
-slarkbot now sends sticker when thanked
-slarkbot now feels bad when insulted
+
 # Commands
