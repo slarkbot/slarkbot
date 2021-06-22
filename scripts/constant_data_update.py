@@ -15,8 +15,8 @@ rawItemsData = requests.get(itemsURL).json()
 # output file is just hardcoded here
 
 # this could also be formatted as a loop in case more API fetches need to be written
-with open("./src/constant_data/heroesTEST.json", "w") as outfile:
+with open("./src/constant_data/heroes.json", "w") as outfile:
     json.dump(rawHeroesData, outfile)
 
-with open("./src/constant_data/itemsTEST.json", "w") as outfile:
+with open("./src/constant_data/items.json", "w") as outfile:
     json.dump(rawItemsData, outfile)
