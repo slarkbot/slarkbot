@@ -10,7 +10,7 @@ from telegram.ext import (
 from src.bot import logger_factory
 from src.bot.commands import health_check_command
 from src.bot.commands import user_commands
-from src.bot.commands import help_command
+from src.bot.commands import help_commands
 from src.bot.commands import match_commands
 from src.bot.commands import changelog_command
 from src.bot.commands import hero_commands
@@ -45,7 +45,7 @@ def create_bot():
             ["recents", "matches"], user_commands.run_get_player_recents_command
         )
     )
-    dp.add_handler(CommandHandler(["help", "start"], help_command.run_help_command))
+    dp.add_handler(CommandHandler(["help", "start"], help_commands.run_help_command))
     dp.add_handler(CommandHandler("lastmatch", match_commands.run_last_match_command))
     dp.add_handler(CommandHandler("match", match_commands.run_get_match_by_match_id))
     dp.add_handler(
@@ -61,6 +61,11 @@ def create_bot():
     dp.add_handler(
         CommandHandler(
             ["counter", "counters"], hero_commands.run_get_hero_counters_command
+        )
+    )
+    dp.add_handler(
+        CommandHandler(
+            ["exposedata", "matchdata"], help_commands.run_expose_data_command
         )
     )
 
