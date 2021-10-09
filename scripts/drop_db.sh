@@ -2,4 +2,4 @@
 cd ./scripts
 source ../.env
 
-PGPASSWORD=$POSTGRES_PASSWORD dropdb -p $DATABASE_PORT -h localhost $POSTGRES_DB
+PGPASSWORD=$POSTGRES_PASSWORD dropdb -p $DATABASE_PORT -U $POSTGRES_USER -h localhost $POSTGRES_DB
