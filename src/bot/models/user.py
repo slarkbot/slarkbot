@@ -7,10 +7,6 @@ class User(Base):
 
     __tablename__ = "bot_users"
 
-    __mapper_args__ = {
-        "order_by":updated_at
-    }
-
     def __init__(self, telegram_handle, account_id, chat_id, updated_at):
         self.telegram_handle = telegram_handle
         self.account_id = account_id
