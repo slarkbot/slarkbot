@@ -3,7 +3,7 @@ source ./.env
 cd ./scripts
 
 CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
-BACKUP_DIR=/home/casper/sql_backups
+BACKUP_DIR=~/sql_backups
 
 mkdir $BACKUP_DIR
 
