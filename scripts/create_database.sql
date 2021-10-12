@@ -8,7 +8,7 @@ CREATE TABLE bot_users (
     telegram_handle TEXT NOT NULL UNIQUE,
     account_id BIGINT NOT NULL,
     chat_id BIGINT NOT NULL,
-    updated_at TIMESTAMP NOT NULL
+    updated_at TIMESTAMP
 );
 
 CREATE TABLE heroes (
