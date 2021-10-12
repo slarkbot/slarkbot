@@ -16,17 +16,19 @@ HERO_NOT_FOUND_MESSAGE = "I couldn't find a hero by the name %s D:"
 
 HELP_TEXT = """
     *Commands*
-    `\/register <your steam friend id here>` :: Register your telegram handle to your steam friend id for look ups\. Example :: `\/register 55678920`\n
+    `\/register <your id here>` :: Register your telegram handle to your steam id to use other commands\. Examples: `\/register 55678920`, `\/register tradeless`, `\/register https:\/\/steamcommunity\.com\/profiles\/76561198073221358`\n
     `\/help` :: Display this help message\n
+    `\/matchdata` :: Explains how to expose match data in the game and sync it to Opendota, where Slarkbot gets its data from\n
+    `\/changes` :: Shows recent updates and changes to Slarkbot\n
     `\/status` :: Check to see if services are running, `OK` means everything is good to go\n
     `\/recents <user:optional> <limit:optional>` :: Look up someone's most recent matches\. Defaults to 5 if limit is not defined and to you if user is not defined\. Must have account id registered using `/register`\. Example :: `\/recents`, `\/recents 10` for 10 most recent matches, `\/recents danvb` for Daniel's last games, `\/recents 20 KittyKirov` for Kirov's last 20 games\n
     `\/match <match_id>` :: Get detailed stats about the outcome of a match\n
-    `\/lastmatch <user:optional>` :: Gets the last match someone played\. Defaults to you if no argument is given\. User must be registered for this to work \n
+    `\/lastmatch <user:optional> <hero:optional>` :: Gets the last match someone played\. Defaults to you if no argument is given\. If a hero name is given, shows the last match that user played with that hero\. User must be registered for this to work \n
     `\/rank <user:optional>` :: Gets a user's current medal\. Defaults to you if no argument is given\. User must be registered for this to work \n
     `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work\n
-    `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
+    `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\. Defaults to you if no argument is given\n
     `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game\n
-    `\/alias <hero name>` :: Get aliases for a hero\n
+    `\/alias <hero name>` :: Get aliases for a hero that Slarkbot will recognize\. You can use these instead of the hero\'s full name where a hero argument is required\n
     `\/counters <hero name>` :: Get a list of heroes that counter the given hero\. Includes win rates and the percent disadvantage\n
     """
 
