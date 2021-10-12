@@ -33,3 +33,8 @@ def get_hero_counters(hero_name):
         hero_counters.append(hero)
 
     return hero_counters
+
+
+def get_hero_synergy(hero_name):
+    hero = hero_name.title().replace(" ", "_")
+    pass

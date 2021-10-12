@@ -52,3 +52,10 @@ def run_get_hero_counters_command(update, hero):
 
     output = escape_markdown(output, version=2)
     update.message.reply_markdown_v2(output)
+
+@require_hero_args
+def run_get_hero_synergy_command(update, hero):
+    works_well_with = web_scraper.get_hero_synergy(hero.localized_name)
+
+    if not works_well_with:
+        pass
