@@ -13,6 +13,8 @@ MISSING_HERO_ARGUMENT_MESSAGE = "No arguments were given\! Make sure to send a h
 
 HERO_NOT_FOUND_MESSAGE = "I couldn't find a hero by the name %s D:"
 
+USER_OR_HERO_NOT_FOUND_MESSAGE = "I don't understand which hero you mean, sorry\! If you tried to tag a user, they may not be registered\."
+
 
 HELP_TEXT = """
     *Commands*
@@ -39,14 +41,15 @@ WEBSCRAPER_USER_AGENT_HEADER = {
 
 class API_URI_ENDPOINTS(Enum):
     HEALTH_CHECK = "health"
+    MATCH_PROJECT = "project=match_id&project=player_slot&project=radiant_win&project=duration&project=game_mode&project=lobby_type&project=hero_id&project=start_time&project=version&project=kills&project=deaths&project=assists&project=skill&project=xp_per_min&project=gold_per_min&project=hero_damage&project=tower_damage&project=hero_healing&project=last_hits&project=lane&project=lane_role&project=is_roaming&project=cluster&project=leaver_status&project=party_size"
     MATCHES = "matches/%s"
     PLAYERS = "players/%s"
     PLAYERS_BY_RANK = "playersByRank"
     PLAYERS_BY_ACCOUNT_ID = "players/%s"
     HERO_STATS = "heroStats"
     CONSTANTS = "constants/%s"
-    PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/recentMatches"
-    PLAYER_MATCHES_BY_HERO = "players/%s/matches?hero_id=%s"
+    PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/matches?" + MATCH_PROJECT
+    PLAYER_MATCHES_BY_HERO = "players/%s/matches?hero_id=%s&" + MATCH_PROJECT
     PLAYER_HERO_STATS = "players/%s/heroes"
     HERO_ITEM_POPULARITY = "heroes/%s/itemPopularity"
 
