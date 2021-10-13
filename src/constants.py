@@ -34,6 +34,16 @@ HELP_TEXT = """
     `\/counters <hero name>` :: Get a list of heroes that counter the given hero\. Includes win rates and the percent disadvantage\n
     """
 
+EXPOSE_DATA_TEXT_PART_ONE = "If you have registered with Slarkbot but your matches are not showing up, check whether your match data is exposed and whether Opendota has synced up\. To do this, follow these steps:"
+EXPOSE_DATA_TEXT_PART_TWO = """
+*Step one:* Expose your match data in Dota\'s settings, under Social\.\n
+*Step two:* Go to opendota\.com in your browser and log in with your Steam account\.
+"""
+EXPOSE_DATA_TEXT_PART_THREE = """
+*Step three:* On your Opendota profile, click the \"Refresh\" button at the top of the page\. This will make Opendota index all the games it missed from when your match data was set to private\.\n\n
+It can sometimes take a while for Opendota to go over all your games, especially if other people are refreshing their history as well\. If it does not work right away, try again in ten minutes\!
+"""
+
 WEBSCRAPER_USER_AGENT_HEADER = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
 }
