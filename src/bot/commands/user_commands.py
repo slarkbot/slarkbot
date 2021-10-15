@@ -7,6 +7,7 @@ from src.lib import endpoints
 from src import constants
 from steam.steamid import SteamID
 from src.bot.decorators.require_registered_user_decorator import require_register
+from datetime import datetime
 
 
 def save_user(user):
@@ -24,7 +25,7 @@ def run_register_command(update, context):
         identifier = context.args[0]
 
         user = user_services.lookup_user_by_telegram_handle(telegram_handle) or User(
-            telegram_handle, "", chat_id
+            telegram_handle, "", chat_id, datetime.now()
         )
 
         if SteamID(identifier).is_valid():
@@ -40,6 +41,7 @@ def run_register_command(update, context):
                 account_id = account_id_from_vanity
 
         user.account_id = account_id
+        user.updated_at = datetime.now()
         save_user(user)
         update.message.reply_text(
             f"Successfully registered user {telegram_handle} as {SteamID(account_id).community_url}"
