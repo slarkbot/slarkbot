@@ -15,4 +15,4 @@ def feel_bad(update, context):
 
     if any(x in text.lower() for x in text_options):
         update.message.reply_text("I'm sorry :(")
-        update.message.reply_sticker("CAACAgUAAxkBAAMfYLf_RpX-kk6gSyxd0_2gj9t9V3YAAhYCAAJfDwsGTRekwVeT3LUfBA")
+        update.message.reply_sticker("CAACAgUAAxkBAAMfYLf_RpX-kk6gSyxd0_2gj9t9V3YAAhYCAAJfDwsGTRekwVeT3LUfBA", quote=False)

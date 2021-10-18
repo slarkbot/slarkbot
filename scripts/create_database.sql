@@ -6,8 +6,9 @@ CREATE DATABASE :db_name;
 CREATE TABLE bot_users (
     user_id SERIAL PRIMARY KEY,
     telegram_handle TEXT NOT NULL UNIQUE,
-    account_id BIGINT NOT NULL UNIQUE,
-    chat_id BIGINT NOT NULL
+    account_id BIGINT NOT NULL,
+    chat_id BIGINT NOT NULL,
+    updated_at TIMESTAMP
 );
 
 CREATE TABLE heroes (
