@@ -13,22 +13,36 @@ MISSING_HERO_ARGUMENT_MESSAGE = "No arguments were given\! Make sure to send a h
 
 HERO_NOT_FOUND_MESSAGE = "I couldn't find a hero by the name %s D:"
 
+USER_OR_HERO_NOT_FOUND_MESSAGE = "I don't understand which hero you mean, sorry\! If you tried to tag a user, they may not be registered\."
+
 
 HELP_TEXT = """
     *Commands*
-    `\/register <your steam friend id here>` :: Register your telegram handle to your steam friend id for look ups\. Example :: `\/register 55678920`\n
+    `\/register <your id here>` :: Register your telegram handle to your steam id to use other commands\. Examples: `\/register 55678920`, `\/register tradeless`, `\/register https:\/\/steamcommunity\.com\/profiles\/76561198073221358`\n
     `\/help` :: Display this help message\n
+    `\/matchdata` :: Explains how to expose match data in the game and sync it to Opendota, where Slarkbot gets its data from\n
+    `\/changes` :: Shows recent updates and changes to Slarkbot\n
     `\/status` :: Check to see if services are running, `OK` means everything is good to go\n
     `\/recents <user:optional> <limit:optional>` :: Look up someone's most recent matches\. Defaults to 5 if limit is not defined and to you if user is not defined\. Must have account id registered using `/register`\. Example :: `\/recents`, `\/recents 10` for 10 most recent matches, `\/recents danvb` for Daniel's last games, `\/recents 20 KittyKirov` for Kirov's last 20 games\n
     `\/match <match_id>` :: Get detailed stats about the outcome of a match\n
-    `\/lastmatch <user:optional>` :: Gets the last match someone played\. Defaults to you if no argument is given\. User must be registered for this to work \n
+    `\/lastmatch <user:optional> <hero:optional>` :: Gets the last match someone played\. Defaults to you if no argument is given\. If a hero name is given, shows the last match that user played with that hero\. User must be registered for this to work \n
     `\/rank <user:optional>` :: Gets a user's current medal\. Defaults to you if no argument is given\. User must be registered for this to work \n
     `\/winrate <user:optional> <hero name>` :: Gets your or someone else's winrate with the given hero\. User must be registered for this to work\n
-    `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\n
+    `\/profile <user:optional>` :: Get a link to your or someone else's steam profile\. Defaults to you if no argument is given\n
     `\/build <hero name or alias>` :: Get recommended items throughout different phases of the game\n
-    `\/alias <hero name>` :: Get aliases for a hero\n
+    `\/alias <hero name>` :: Get aliases for a hero that Slarkbot will recognize\. You can use these instead of the hero\'s full name where a hero argument is required\n
     `\/counters <hero name>` :: Get a list of heroes that counter the given hero\. Includes win rates and the percent disadvantage\n
     """
+
+EXPOSE_DATA_TEXT_PART_ONE = "If you have registered with Slarkbot but your matches are not showing up, check whether your match data is exposed and whether Opendota has synced up\. To do this, follow these steps:"
+EXPOSE_DATA_TEXT_PART_TWO = """
+*Step one:* Expose your match data in Dota\'s settings, under Social\.\n
+*Step two:* Go to opendota\.com in your browser and log in with your Steam account\.
+"""
+EXPOSE_DATA_TEXT_PART_THREE = """
+*Step three:* On your Opendota profile, click the \"Refresh\" button at the top of the page\. This will make Opendota index all the games it missed from when your match data was set to private\.\n\n
+It can sometimes take a while for Opendota to go over all your games, especially if other people are refreshing their history as well\. If it does not work right away, try again in ten minutes\!
+"""
 
 WEBSCRAPER_USER_AGENT_HEADER = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
@@ -37,14 +51,15 @@ WEBSCRAPER_USER_AGENT_HEADER = {
 
 class API_URI_ENDPOINTS(Enum):
     HEALTH_CHECK = "health"
+    MATCH_PROJECT = "project=match_id&project=player_slot&project=radiant_win&project=duration&project=game_mode&project=lobby_type&project=hero_id&project=start_time&project=version&project=kills&project=deaths&project=assists&project=skill&project=xp_per_min&project=gold_per_min&project=hero_damage&project=tower_damage&project=hero_healing&project=last_hits&project=lane&project=lane_role&project=is_roaming&project=cluster&project=leaver_status&project=party_size"
     MATCHES = "matches/%s"
     PLAYERS = "players/%s"
     PLAYERS_BY_RANK = "playersByRank"
     PLAYERS_BY_ACCOUNT_ID = "players/%s"
     HERO_STATS = "heroStats"
     CONSTANTS = "constants/%s"
-    PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/recentMatches"
-    PLAYER_MATCHES_BY_HERO = "players/%s/matches?hero_id=%s"
+    PLAYER_RECENTS_BY_ACCOUNT_ID = "players/%s/matches?" + MATCH_PROJECT
+    PLAYER_MATCHES_BY_HERO = "players/%s/matches?hero_id=%s&" + MATCH_PROJECT
     PLAYER_HERO_STATS = "players/%s/heroes"
     HERO_ITEM_POPULARITY = "heroes/%s/itemPopularity"
 
@@ -122,6 +137,7 @@ LOBBY_TYPE_MAP = {
     7: "Ranked",
     8: "1v1 Mid",
     9: "Battle Cup",
+    12: "Nemistice"
 }
 
 GAME_MODE_MAP = {
