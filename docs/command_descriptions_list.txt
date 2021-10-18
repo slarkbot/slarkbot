@@ -17,3 +17,4 @@ alias - Get aliases for a hero to use with commands relating to heros
 counters - Get heroes that counter the given hero. Example :: /counters <hero name or alias>
 match - Get details for a specific match ID. Example :: /match 6192388753
 matchdata - Step by step instructions on how to expose and sync match data
+
