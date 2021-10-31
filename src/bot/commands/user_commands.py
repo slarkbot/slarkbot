@@ -170,6 +170,42 @@ def run_get_player_steam_profile_command(update, user):
         + SteamID(user.account_id).community_url
     )
 
-@require_register
-def run_player_compare_command(update, user):
-    lookup_user = context.args[0]
+
+def run_player_compare_command(update, context):
+    telegram_handle = update.message.from_user.username
+
+    user = user_services.lookup_user_by_telegram_handle(telegram_handle)
+
+    if not user:
+        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
+
+    if not context.args:
+        update.message.reply_markdown_v2(
+        "No arguments given\! Try `/compare <username> <hero name>` or `/compare <username> <hero name>`"
+    )
+
+    hero_name_parts = context.args
+    queried_user = user_services.lookup_user_by_telegram_handle(context.args[0])
+
+    if queried_user:
+        # If there's a username in the args, remove it now
+        hero_name_parts.pop(0)
+    else:
+        update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
+
+    hero_name = " ".join(hero_name_parts)
+    hero_id = helpers.get_hero_id_by_name_or_alias(hero_name)
+
+    if not hero_id:
+        update.message.reply_markdown_v2(constants.USER_OR_HERO_NOT_FOUND_MESSAGE)
+
+    sent_user_response, sent_status_code = endpoints.get_player_hero_stats(user.account_id)
+
+    queried_user_response, queried_status_code = endpoints.get_player_hero_stats(queried_user.account_id)
+
+    if sent_status_code != constants.HTTP_STATUS_CODES.OK.value or queried_status_code != constants.HTTP_STATUS_CODES.OK.value:
+        update.message.reply_markdown_v2(constants.USER_OR_HERO_NOT_FOUND_MESSAGE)
+
+    update.message.reply_text(
+        helpers.format_compare_response(sent_user_response, queried_user_response)
+    )
