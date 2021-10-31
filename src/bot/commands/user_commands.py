@@ -181,8 +181,8 @@ def run_player_compare_command(update, context):
 
     if not context.args:
         update.message.reply_markdown_v2(
-        "No arguments given\! Try `/compare <username> <hero name>` or `/compare <username> <hero name>`"
-    )
+            "No arguments given\! Try `/compare <username> <hero name>` or `/compare <username> <hero name>`"
+        )
 
     hero_name_parts = context.args
     queried_user = user_services.lookup_user_by_telegram_handle(context.args[0])
@@ -199,11 +199,18 @@ def run_player_compare_command(update, context):
     if not hero_id:
         update.message.reply_markdown_v2(constants.USER_OR_HERO_NOT_FOUND_MESSAGE)
 
-    sent_user_response, sent_status_code = endpoints.get_player_hero_stats(user.account_id)
+    sent_user_response, sent_status_code = endpoints.get_player_hero_stats(
+        user.account_id
+    )
 
-    queried_user_response, queried_status_code = endpoints.get_player_hero_stats(queried_user.account_id)
+    queried_user_response, queried_status_code = endpoints.get_player_hero_stats(
+        queried_user.account_id
+    )
 
-    if sent_status_code != constants.HTTP_STATUS_CODES.OK.value or queried_status_code != constants.HTTP_STATUS_CODES.OK.value:
+    if (
+        sent_status_code != constants.HTTP_STATUS_CODES.OK.value
+        or queried_status_code != constants.HTTP_STATUS_CODES.OK.value
+    ):
         update.message.reply_markdown_v2(constants.USER_OR_HERO_NOT_FOUND_MESSAGE)
 
     update.message.reply_text(

@@ -137,7 +137,7 @@ LOBBY_TYPE_MAP = {
     7: "Ranked",
     8: "1v1 Mid",
     9: "Battle Cup",
-    12: "Nemistice"
+    12: "Nemistice",
 }
 
 GAME_MODE_MAP = {
