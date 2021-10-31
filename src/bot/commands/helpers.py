@@ -149,3 +149,7 @@ def create_suggested_build_message(hero_name, item_data):
     output_message += create_build_section("Late game items", mapped_late_game_items)
 
     return output_message
+
+
+def format_compare_response(first_user_data, second_user_data):
+    pass
