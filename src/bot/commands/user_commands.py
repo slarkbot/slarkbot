@@ -169,3 +169,7 @@ def run_get_player_steam_profile_command(update, user):
         f"@{user.telegram_handle}'s steam profile is "
         + SteamID(user.account_id).community_url
     )
+
+@require_register
+def run_player_compare_command(update, user):
+    lookup_user = context.args[0]
