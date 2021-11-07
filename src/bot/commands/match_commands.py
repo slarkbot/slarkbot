@@ -30,7 +30,7 @@ def run_last_match_command(update, context):
     if not registered_user:
         update.message.reply_markdown_v2(constants.USER_NOT_REGISTERED_MESSAGE)
 
-    if 'hero_id' in locals():
+    if "hero_id" in locals():
         response, status_code = endpoints.get_player_matches_by_hero_id(
             registered_user.account_id, hero_id
         )
@@ -45,12 +45,15 @@ def run_last_match_command(update, context):
     try:
         output_message = match_helpers.create_match_message(response[0])
         button = InlineKeyboardButton(
-            "Full match details", callback_data=("match " + str(response[0]["match_id"]))
+            "Full match details",
+            callback_data=("match " + str(response[0]["match_id"])),
         )
         markup = InlineKeyboardMarkup.from_button(button)
         update.message.reply_markdown_v2(output_message, reply_markup=markup)
     except IndexError:
-        update.message.reply_markdown_v2("I could not find a match by those criteria, sorry\!")
+        update.message.reply_markdown_v2(
+            "I could not find a match by those criteria, sorry\!"
+        )
 
 
 def run_get_match_by_match_id(update, context):
