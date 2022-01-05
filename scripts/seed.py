@@ -31,10 +31,10 @@ def main():
     items = read_json("src/constant_data/items.json")
 
     all_heroes = []
-    for hero_obj in heroes:
+    for hero_id, hero_obj in heroes.items():
         all_heroes.append(
             {
-                "id": hero_obj["id"],
+                "id": int(hero_id),
                 "name": hero_obj["name"],
                 "localized_name": hero_obj["localized_name"],
                 "primary_attr": hero_obj["primary_attr"],

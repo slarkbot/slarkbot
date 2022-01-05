@@ -21,6 +21,7 @@ from src.bot.message_handlers.youre_welcome import say_youre_welcome
 from src.bot.message_handlers.nice import say_nice
 from src.bot.message_handlers.who_asked import who_asked
 from src.bot.message_handlers.feel_bad import feel_bad
+from src.bot.message_handlers.dn import whats_dn
 
 from src.bot.callback_handlers import match_callbacks
 
@@ -83,6 +84,7 @@ def create_bot():
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, say_nice), 4)
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, who_asked), 5)
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, feel_bad), 6)
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, whats_dn), 7)
 
     dp.add_handler(
         CallbackQueryHandler(
