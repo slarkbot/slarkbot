@@ -18,6 +18,14 @@ class Player:
         [setattr(self, x, i) for x, i in kwargs.items()]
 
 
+def try_get_hero_name(hero):
+    try:
+        hero_name = hero.localized_name
+    except:
+        hero_name = "Unknown Hero"
+    return hero_name
+
+
 def create_recent_matches_message(json_api_data):
     output_message = "MatchID | Result | KDA | Duration | Hero\n"
 
@@ -28,10 +36,7 @@ def create_recent_matches_message(json_api_data):
 
         hero_id = match.hero_id
         hero_data = hero_services.get_hero_by_id(hero_id)
-        try:
-            hero_name = hero_data.localized_name
-        except:
-            hero_name = "Unknown Hero"
+        hero_name = try_get_hero_name(hero_data)
 
         kda = f"%s/%s/%s" % (match.kills, match.deaths, match.assists)
 
@@ -53,10 +58,7 @@ def create_match_message(match_data):
 
     hero_id = match.hero_id
     hero_data = hero_services.get_hero_by_id(hero_id)
-    try:
-        hero_name = hero_data.localized_name
-    except:
-        hero_name = "Unknown Hero"
+    hero_name = try_get_hero_name(hero_data)
 
     duration = str(datetime.timedelta(seconds=match.duration))
 
@@ -139,10 +141,7 @@ def build_default_match_message(match, player_data):
             bot_user = user_services.lookup_user_by_account_id(player.account_id)
             if bot_user:
                 hero_data = hero_services.get_hero_by_id(player.hero_id)
-                try:
-                    hero_name = hero_data.localized_name
-                except:
-                    hero_name = "Unknown Hero"
+                hero_name = try_get_hero_name(hero_data)
 
                 known_players.append(f"{bot_user.telegram_handle} ({hero_name})")
 
@@ -175,10 +174,7 @@ def build_default_player_string(player):
     gpm = player.gold_per_min
 
     hero_data = hero_services.get_hero_by_id(player.hero_id)
-    try:
-        hero_name = hero_data.localized_name
-    except:
-        hero_name = "Unknown Hero"
+    hero_name = try_get_hero_name(hero_data)
 
     return f"{kda} | L{level} | {cs} | {gpm} GPM | {xpm} XPM | {hero_name}\n"
 
@@ -208,10 +204,7 @@ def build_players_player_line(player):
         player_name = "Anonymous"
 
     hero_data = hero_services.get_hero_by_id(player.hero_id)
-    try:
-        hero_name = hero_data.localized_name
-    except:
-        hero_name = "Unknown Hero"
+    hero_name = try_get_hero_name(hero_data)
 
     if player.rank_tier:
         rank = f"| {helpers.map_rank_tier_to_string(player.rank_tier)}"
@@ -247,10 +240,7 @@ def build_damage_player_line(player):
     healing = player.hero_healing
 
     hero_data = hero_services.get_hero_by_id(player.hero_id)
-    try:
-        hero_name = hero_data.localized_name
-    except:
-        hero_name = "Unknown Hero"
+    hero_name = try_get_hero_name(hero_data)
 
     return f"{damage} DMG | {building_damage} TD | {healing} H | {hero_name}\n"
 
@@ -285,10 +275,7 @@ def build_pick_order_match_message(match, player_data):
     banned_heroes = []
     for ban in bans:
         hero_data = hero_services.get_hero_by_id(ban)
-        try:
-            hero_name = hero_data.localized_name
-        except:
-            hero_name = "Unknown Hero"
+        hero_name = try_get_hero_name(hero_data)
 
         banned_heroes.append(hero_name)
 
@@ -310,9 +297,6 @@ def build_pick_order_player_line(player, picks_ordered):
         pick_string = "Last pick"
 
     hero_data = hero_services.get_hero_by_id(player.hero_id)
-    try:
-        hero_name = hero_data.localized_name
-    except:
-        hero_name = "Unknown Hero"
+    hero_name = try_get_hero_name(hero_data)
 
     return f"{hero_name}: {pick_string}\n"
